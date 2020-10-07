@@ -10,6 +10,18 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./src/home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'composicion',
+    loadChildren: () => import('./composicion/composicion.module').then( m => m.ComposicionPageModule)
+  },
+  {
+    path: 'intercambio',
+    loadChildren: () => import('./intercambio/intercambio.module').then( m => m.IntercambioPageModule)
+  },
+  {
+    path: 'aboutus',
+    loadChildren: () => import('./aboutus/aboutus.module').then( m => m.AboutusPageModule)
   }
 ];
 

@@ -7,9 +7,21 @@
           <ion-note>Welcome app</ion-note>
 
           <ion-menu-toggle auto-hide="false" >
-            <ion-item lines="none" detail="false">
-              <ion-icon slot="start" name="add"></ion-icon>
-              <ion-label>Title menu</ion-label>
+            <ion-item routerLink="/home" lines="none" detail="false">
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+              <ion-label color="medium">Hogar</ion-label>
+            </ion-item>
+            <ion-item routerLink="/composicion" lines="none" detail="false">
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+              <ion-label color="medium">Composicion quimica de la tienda</ion-label>
+            </ion-item>
+            <ion-item routerLink="/intercambio" lines="none" detail="false">
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+              <ion-label color="medium">Intercambio de alimento</ion-label>
+            </ion-item>
+            <ion-item routerLink="/aboutus" lines="none" detail="false">
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+              <ion-label color="medium">Acerca de nosotros</ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>

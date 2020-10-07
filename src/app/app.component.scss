@@ -117,3 +117,6 @@ ion-note {
 ion-item.selected {
   --color: var(--ion-color-primary);
 }
+ion-label:hover {
+  opacity: 0.7;
+}

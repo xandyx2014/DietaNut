@@ -1,13 +1,78 @@
+<ion-content>
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="4">
+        <ion-img src="assets/img/home1.png"></ion-img>
 
-
-<ion-content class="ion-padding">
- <ion-card color="primary">
-   <ion-card-header>
-     <ion-card-subtitle>Awesome Subtitle</ion-card-subtitle>
-     <ion-card-title>Awesome Title</ion-card-title>
-   </ion-card-header>
-   <ion-card-content>
-     Awesome content
-   </ion-card-content>
- </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card color="light">
+          <ion-grid>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="3">
+                <ion-img src="assets/img/fruits.svg"></ion-img>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-card-header mode="md">
+            <ion-card-subtitle>Composicion quimica de la dieta</ion-card-subtitle>
+            <ion-card-title>Reliza tus dietas</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-grid fixed>
+              <ion-row>
+                <ion-col size="6">
+                  <ion-button routerLink="/composicion" color="medium" expand="block" fill="outline" shape="round">
+                    <ion-icon  name="eye-outline"></ion-icon>
+                    Ver tus recetas
+                  </ion-button>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-button color="medium" expand="block" fill="outline" shape="round">
+                    <ion-icon name="add-outline"></ion-icon>
+                    Crea tu receta
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card color="light">
+          <ion-grid>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="3">
+                <ion-img src="assets/img/fruits2.svg"></ion-img>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-card-header mode="md">
+            <ion-card-subtitle>Intercambio de alimento</ion-card-subtitle>
+            <ion-card-title>Reliza tus dietas</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-grid fixed>
+              <ion-row>
+                <ion-col size="6">
+                  <ion-button routerLink="/intercambio" color="medium" expand="block" fill="outline" shape="round">
+                    <ion-icon name="eye-outline"></ion-icon>
+                    Ver tus recetas
+                  </ion-button>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-button color="medium" expand="block" fill="outline" shape="round">
+                    <ion-icon name="add-outline"></ion-icon>
+                    Crea tu receta
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
