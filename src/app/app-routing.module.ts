@@ -13,15 +13,15 @@ const routes: Routes = [
   },
   {
     path: 'composicion',
-    loadChildren: () => import('./composicion/composicion.module').then( m => m.ComposicionPageModule)
+    loadChildren: () => import('./src/composicion/composicion.module').then( m => m.ComposicionPageModule)
   },
   {
     path: 'intercambio',
-    loadChildren: () => import('./intercambio/intercambio.module').then( m => m.IntercambioPageModule)
+    loadChildren: () => import('./src/intercambio/intercambio.module').then( m => m.IntercambioPageModule)
   },
   {
     path: 'aboutus',
-    loadChildren: () => import('./aboutus/aboutus.module').then( m => m.AboutusPageModule)
+    loadChildren: () => import('./src/aboutus/aboutus.module').then( m => m.AboutusPageModule)
   }
 ];
 

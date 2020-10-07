@@ -26,3 +26,6 @@
 @import "~@ionic/angular/css/flex-utils.css";
 /* width */
 
+ion-content {
+    --background: #fff url("assets/img/backgroundFruits.png");
+}
