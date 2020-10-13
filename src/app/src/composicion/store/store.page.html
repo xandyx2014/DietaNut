@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title color="primary">Creando una receta...</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/composicion" text="Atras"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card mode="md">
+    <ion-card-header>
+      <ion-card-subtitle>Crea tu dieta</ion-card-subtitle>
+      <ion-card-title>Composicion quimica de la dieta</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="myForm">
+        <ion-list>
+          <ion-item>
+            <ion-label position="stacked">Nombre de la dieta</ion-label>
+            <ion-input placeholder="Mi nombre de la dieta sera...."></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Descripcion de la dieta</ion-label>
+            <ion-textarea placeholder="Esta es una pequeña descripcion"></ion-textarea>
+          </ion-item>
+          <ion-list-header>
+            <ion-label color="primary">Desayuno</ion-label>
+            <ion-button (click)="presentModal()" fill="solid">Agregar <ion-icon name="add-circle-outline"></ion-icon>
+            </ion-button>
+          </ion-list-header>
+          <ion-item>
+            <div formArrayName="desayuno">
+              <div *ngFor="let item of controlForm('desayuno').controls;let i = index">
+                
+                <div [formGroupName]="i">
+                  <ion-input formControlName="nombre" type="text" placeholder="Awesome Input"></ion-input>
+                  <ion-input formControlName="edad" type="text" placeholder="Awesome Input"></ion-input>
+                </div>
+              </div>
+            </div>
+          </ion-item>
+        </ion-list>
+        <ion-button (click)="store()">
+          <ion-icon slot="start" name="add"></ion-icon>
+          Crear receta
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

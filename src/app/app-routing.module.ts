@@ -22,7 +22,7 @@ const routes: Routes = [
   {
     path: 'aboutus',
     loadChildren: () => import('./src/aboutus/aboutus.module').then( m => m.AboutusPageModule)
-  }
+  },
 ];
 
 @NgModule({

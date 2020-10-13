@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title color="medium">Composicion quimica de la dieta</ion-title>
+    <ion-title color="primary">Composicion quimica de la dieta</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="Atras"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -8,13 +11,13 @@
   <ion-card>
     <ion-card-header mode="md">
       <ion-card-subtitle>Lista de todas tus dietas</ion-card-subtitle>
-      <ion-card-title>Descripcion de las dietas</ion-card-title>
+      <ion-card-title color="primary">Descripcion de las dietas</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
         <ion-item>
           <ion-label>Dietas recientes</ion-label>
-          <ion-button >
+          <ion-button routerLink="store" >
             <ion-icon name="add-circle-outline"></ion-icon>
             Agregar nueva
           </ion-button>
@@ -46,7 +49,7 @@
     </ion-card-content>
   </ion-card>
   <ion-fab  vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="primary">
+    <ion-fab-button color="primary" routerLink="store">
       <ion-icon name="add-circle-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>

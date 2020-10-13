@@ -26,6 +26,11 @@
 @import "~@ionic/angular/css/flex-utils.css";
 /* width */
 
-ion-content {
+/* ion-content {
     --background: #fff url("assets/img/backgroundFruits.png");
-}
+} */
+.my-custom-modal-css {
+    --max-width: 35%;
+    --max-height: 35%;
+    --border-radius: 5px;
+  }
