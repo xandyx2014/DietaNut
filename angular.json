@@ -37,6 +37,9 @@
               },
               {
                 "input": "src/global.scss"
+              },
+              {
+                "input": "node_modules/angular2-multiselect-dropdown/themes/default.theme.css"
               }
             ],
             "scripts": []

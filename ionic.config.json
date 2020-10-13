@@ -1,5 +1,7 @@
 {
   "name": "dietaueb",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

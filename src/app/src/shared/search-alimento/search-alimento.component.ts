@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { DropdownSettings } from 'angular2-multiselect-dropdown/lib/multiselect.interface';
+
+import { ComposicionAlimentoService } from 'src/app/services/composicion-alimento.service';
 
 @Component({
   selector: 'app-search-alimento',
@@ -8,37 +12,43 @@ import { Component, OnInit } from '@angular/core';
 export class SearchAlimentoComponent implements OnInit {
     dropdownList = [];
     selectedItems = [];
+    itemSelect: object;
     dropdownSettings = {};
+    loading = false;
+    showLoading = true;
+    constructor(private modalCtrl: ModalController,
+                private composicionAlimnetoService: ComposicionAlimentoService) {}
     ngOnInit(){
-        this.dropdownList = [
-                              {id: 1 , itemName: 'India'},
-                              {id: 2 , itemName: 'Singapore'},
-                              {id: 3 , itemName: 'Australia'},
-                              {id: 4 , itemName: 'Canada'},
-                              {id: 5 , itemName: 'South Korea'},
-                              {id: 6 , itemName: 'Germany'},
-                              {id: 7 , itemName: 'France'},
-                              {id: 8 , itemName: 'Russia'},
-                              {id: 9 , itemName: 'Italy'},
-                              {id: 10 , itemName: 'Sweden'}
-                            ];
-        this.selectedItems = [
-                                {id: 2, itemName: 'Singapore'},
-                                {id: 3, itemName: 'Australia'},
-                                {id: 4, itemName: 'Canada'},
-                                {id: 5, itemName: 'South Korea'}
-                            ];
+        this.dropdownList = [];
+        this.selectedItems = [];
         this.dropdownSettings = {
-                                  singleSelection: false, 
-                                  text: 'Select Countries',
-                                  selectAllText: 'Select All',
-                                  unSelectAllText: 'UnSelect All',
+                                  singleSelection: false,
+                                  text: 'Seleciona los alimentos',
+                                  selectAllText: 'Seleciona todos',
+                                  unSelectAllText: 'Deselecionar todos',
                                   enableSearchFilter: true,
-                                  classes: 'myclass custom-class'
+                                  enableFilterSelectAll: false,
+                                  limitSelection: 20,
+                                  lazyLoading: true,
+                                  labelKey: 'nombre',
+                                  classes: 'myclass custom-class',
+                                  searchPlaceholderText: 'Buscar'
                                 };
+        this.loadDataFromJson();
+    }
+    loadDataFromJson() {
+        this.composicionAlimnetoService.getAll().subscribe((resp: any) => {
+            this.dropdownList = resp;
+            this.loading = false;
+            this.showLoading = false;
+        });
+    }
+    closeMultiselect() {
+        console.log('Evento enter');
     }
     onItemSelect(item: any){
-        console.log(item);
+        console.log('On item selected', item);
+        this.itemSelect = item;
         console.log(this.selectedItems);
     }
     OnItemDeSelect(item: any){
@@ -50,5 +60,8 @@ export class SearchAlimentoComponent implements OnInit {
     }
     onDeSelectAll(items: any){
         console.log(items);
+    }
+    selectItem() {
+        this.modalCtrl.dismiss(this.itemSelect);
     }
 }
