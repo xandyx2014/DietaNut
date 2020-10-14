@@ -26,11 +26,6 @@ export class StorePage implements OnInit {
     this.makeForm();
   }
   ionViewWillEnter() {
-    console.log('Entre');
-    this.unSubscribe.add(this.composicionService.getAll().subscribe(resp => {
-      console.log(resp);
-    })
-    );
   }
   makeForm() {
     return this.myForm = this.fb.group({
@@ -45,18 +40,16 @@ export class StorePage implements OnInit {
       created_at:  new Date()
     });
   }
-  changeValueFromControl(type, index) {
+  changeControlValue(type, index) {
     const controls = this.controlForm(type).controls[index];
     const currentValue = controls.value;
     const nameValue = controls.value.nombre;
     this.composicionService.searchByName(nameValue).subscribe(resp => {
-      console.log(resp);
       Object.keys(resp).map( e => {
         if (e !== 'nombre') {
-          currentValue[e] =  (resp[e] * currentValue.cantidad) / 100;
+          currentValue[e] =  ((resp[e] * currentValue.cantidad) / 100).toFixed(2);
         }
       });
-      console.log(currentValue);
       controls.patchValue({...currentValue});
     });
   }

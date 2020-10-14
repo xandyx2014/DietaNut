@@ -25,298 +25,211 @@
             <ion-textarea formControlName="descripcion" placeholder="Esta es una pequeña descripcion"></ion-textarea>
           </ion-item>
           <ion-list-header>
-            <ion-label color="primary">Desayuno</ion-label>
-            <ion-button (click)="addFormControl('desayuno')" fill="solid">Agregar <ion-icon name="add-circle-outline">
+            <ion-label color="dark"> <b>Desayuno</b> </ion-label>
+            <ion-button color="dark" fill="outline" (click)="addFormControl('desayuno')">Agregar <ion-icon
+                name="add-circle-outline">
               </ion-icon>
             </ion-button>
           </ion-list-header>
           <ion-item>
-            <div formArrayName="desayuno">
-              <div *ngFor="let item of controlForm('desayuno').controls;let i = index">
-                <div [formGroupName]="i">
-                  <ion-grid fixed>
-                    <!--  <ion-input formControlName="nombre" type="text" placeholder="Awesome Input"></ion-input>
-                      <ion-input formControlName="edad" type="text" placeholder="Awesome Input"></ion-input> -->
-                    <ion-row>
-                      <ion-col size="3">
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="5">Cantidad g. :</ion-col>
-                          <ion-col size="7">
-                            <ion-row>
-                              <ion-col size="6">
-                                <ion-input formControlName="cantidad" clearInput min="0" type="number" placeholder="0.00">
-                                </ion-input>
-                              </ion-col>
-                              <ion-col size="6">
-                                <ion-button (click)="changeValueFromControl('desayuno', i)">
-                                  <ion-icon slot="icon-only" name="add"></ion-icon>
-                                </ion-button>
-                              </ion-col>
-                            </ion-row>
-                            
-                            
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                    </ion-row>
-                    <ion-row>
-                      <ion-col size="12">Nombe:
-                        <ion-text color="primary">
-                          Lorem ipsum dolor sit amet.
-                        </ion-text>
-                      </ion-col>
-                    </ion-row>
-                    <ion-row>
-                      <ion-col>
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="12">Energia</ion-col>
-                          <ion-col size="12">
-                            <ion-text color="medium">
-                              5.4
-                            </ion-text>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                      <ion-col>
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="12">Humedad</ion-col>
-                          <ion-col size="12">
-                            <ion-text color="medium">
-                              5.4
-                            </ion-text>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                      <ion-col>
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="12">Proteina</ion-col>
-                          <ion-col size="12">
-                            <ion-text color="medium">
-                              5.4
-                            </ion-text>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                      <ion-col>
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="12">Grasa</ion-col>
-                          <ion-col size="12">
-                            <ion-text color="medium">
-                              5.4
-                            </ion-text>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                      <ion-col>
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="12">Hc</ion-col>
-                          <ion-col size="12">
-                            <ion-text color="medium">
-                              5.4
-                            </ion-text>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                      <ion-col>
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="12">Fibra cruda</ion-col>
-                          <ion-col size="12">
-                            <ion-text color="medium">
-                              5.4
-                            </ion-text>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                      <ion-col>
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="12">Ceniza</ion-col>
-                          <ion-col size="12">
-                            <ion-text color="medium">
-                              5.4
-                            </ion-text>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                      <ion-col>
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="12">Calcio</ion-col>
-                          <ion-col size="12">
-                            <ion-text color="medium">
-                              5.4
-                            </ion-text>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                      <ion-col>
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="12">Fosforo</ion-col>
-                          <ion-col size="12">
-                            <ion-text color="medium">
-                              5.4
-                            </ion-text>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                      <ion-col>
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="12">Hierro</ion-col>
-                          <ion-col size="12">
-                            <ion-text color="medium">
-                              5.4
-                            </ion-text>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                      <ion-col>
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="12">Vit A</ion-col>
-                          <ion-col size="12">
-                            <ion-text color="medium">
-                              5.4
-                            </ion-text>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                    </ion-row>
-                    <ion-row>
-                      <ion-col>
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="12">Tiamina</ion-col>
-                          <ion-col size="12">
-                            <ion-text color="medium">
-                              5.4
-                            </ion-text>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                      <ion-col>
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="12">Riboflavina</ion-col>
-                          <ion-col size="12">
-                            <ion-text color="medium">
-                              5.4
-                            </ion-text>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                      <ion-col>
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="12">Niacina</ion-col>
-                          <ion-col size="12">
-                            <ion-text color="medium">
-                              5.4
-                            </ion-text>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                      <ion-col>
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="12">Vit C</ion-col>
-                          <ion-col size="12">
-                            <ion-text color="medium">
-                              5.4
-                            </ion-text>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                      <ion-col>
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="12">Agm</ion-col>
-                          <ion-col size="12">
-                            <ion-text color="medium">
-                              5.4
-                            </ion-text>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                      <ion-col>
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="12">Agp</ion-col>
-                          <ion-col size="12">
-                            <ion-text color="medium">
-                              5.4
-                            </ion-text>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                      <ion-col>
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="12">Ags</ion-col>
-                          <ion-col size="12">
-                            <ion-text color="medium">
-                              5.4
-                            </ion-text>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                      <ion-col>
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="12">Col</ion-col>
-                          <ion-col size="12">
-                            <ion-text color="medium">
-                              5.4
-                            </ion-text>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                      <ion-col>
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="12">Potasio</ion-col>
-                          <ion-col size="12">
-                            <ion-text color="medium">
-                              5.4
-                            </ion-text>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                      <ion-col>
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="12">Sodio</ion-col>
-                          <ion-col size="12">
-                            <ion-text color="medium">
-                              5.4
-                            </ion-text>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                      <ion-col>
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="12">Zinc</ion-col>
-                          <ion-col size="12">
-                            <ion-text color="medium">
-                              5.4
-                            </ion-text>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                    </ion-row>
-                    <ion-row>
-                      <ion-col>
-                        <ion-row class="ion-justify-content-center ion-align-items-center">
-                          <ion-col size="12">Vit B12</ion-col>
-                          <ion-col size="12">
-                            <ion-text color="medium">
-                              5.4
-                            </ion-text>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                    </ion-row>
-                    <ion-row>
-                      <ion-col size="1">
-                        <ion-button (click)="removeControl('desayuno', i)" color="danger" expand="block">
-                          <ion-icon name="trash-outline"></ion-icon>
-                        </ion-button>
-                      </ion-col>
-                    </ion-row>
-                  </ion-grid>
-                </div>
-              </div>
-            </div>
+            <ion-grid fixed>
+              <ion-row>
+                <ion-col>
+                  <div id="table-scroll" class="table-scroll">
+                    <div class="table-wrap">
+                      <table class="main-table">
+                        <thead>
+                          <tr>
+                            <th scope="col" style="margin: 25px !important">Nombre</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Calcular</th>
+                            <th scope="col">Borrar</th>
+                            <th scope="col">Energia</th>
+                            <th scope="col">Humedad</th>
+                            <th scope="col">Proteina</th>
+                            <th scope="col">Grasa</th>
+                            <th scope="col">Hidrato C</th>
+                            <th scope="col">Fibra cruda</th>
+                            <th scope="col">Ceniza</th>
+                            <th scope="col">Fosforo</th>
+                            <th scope="col">Hierro</th>
+                            <th scope="col">Vit a</th>
+                            <th scope="col">Tiamina</th>
+                            <th scope="col">Riboflavina</th>
+                            <th scope="col">Niacina</th>
+                            <th scope="col">Vitamica C</th>
+                            <th scope="col">Agm</th>
+                            <th scope="col">Agp</th>
+                            <th scope="col">Ags</th>
+                            <th scope="col">Col</th>
+                            <th scope="col">Potasio</th>
+                            <th scope="col">Sodio</th>
+                            <th scope="col">Zinc</th>
+                            <th scope="col">Vit b12</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <ng-container formArrayName="desayuno">
+                            <ng-container *ngFor="let item of controlForm('desayuno').controls;let i = index">
+                              <tr [formGroupName]="i">
+
+                                <td style="margin: 25px !important">
+                                  <ion-input formControlName="nombre" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input color="dark" formControlName="cantidad" clearInput min="0"
+                                    inputmode="numeric" placeholder="0.00">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-button color="success" (click)="changeControlValue('desayuno', i)" fill="solid">
+                                    <ion-icon name="calculator-outline"></ion-icon>
+                                  </ion-button>
+                                </td>
+                                <td>
+                                  <ion-button color="danger" (click)="removeControl('desayuno', i)" fill="solid">
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                  </ion-button>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="energia" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="humedad" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="proteina" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="grasa" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="hc" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="fibra_cruda" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="ceniza" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="fosforo" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="hierro" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="vit_a" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="tiamina" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="riboflavina" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="niacina" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="vit_c" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="agm" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="agp" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="ags" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="col" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="potasio" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="sodio" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="zinc" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="vit_b12" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                              </tr>
+                            </ng-container>
+                          </ng-container>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-card mode="md" class="ion-no-margin ion-no-padding">
+                    <ion-card-content>
+                     <ion-list>
+                       <ion-list-header>
+                         <ion-label>SubTotal</ion-label>
+                         <ion-button>Desayuno</ion-button>
+                       </ion-list-header>
+                       <ion-item>
+                         <ion-label>Energia : 5.984</ion-label>
+                         <ion-label>Energia : 5.984</ion-label>
+                         <ion-label>Energia : 5.984</ion-label>
+                         <ion-label>Energia : 5.984</ion-label>
+                       </ion-item>
+                       <ion-item>
+                         <ion-label>Energia : 5.984</ion-label>
+                         <ion-label>Energia : 5.984</ion-label>
+                         <ion-label>Energia : 5.984</ion-label>
+                         <ion-label>Energia : 5.984</ion-label>
+                       </ion-item>
+                       <ion-item>
+                         <ion-label>Energia : 5.984</ion-label>
+                         <ion-label>Energia : 5.984</ion-label>
+                         <ion-label>Energia : 5.984</ion-label>
+                         <ion-label>Energia : 5.984</ion-label>
+                       </ion-item>
+                     </ion-list>
+                    </ion-card-content>
+                  </ion-card>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+
+
           </ion-item>
           <ion-list-header>
-            <ion-label color="primary">Merienda</ion-label>
-            <ion-button (click)="addFormControl('merienda')" fill="solid">Agregar <ion-icon name="add-circle-outline">
+            <ion-label color="dark"><b>Merienda</b></ion-label>
+            <ion-button (click)="addFormControl('merienda')" color="dark" fill="outline">Agregar <ion-icon
+                name="add-circle-outline">
               </ion-icon>
             </ion-button>
           </ion-list-header>
@@ -331,8 +244,9 @@
             </div>
           </ion-item>
           <ion-list-header>
-            <ion-label color="primary">Almuerzo</ion-label>
-            <ion-button (click)="addFormControl('almuerzo')" fill="solid">Agregar <ion-icon name="add-circle-outline">
+            <ion-label color="dark"><b>Almuerzo</b></ion-label>
+            <ion-button (click)="addFormControl('almuerzo')" color="dark" fill="outline">Agregar <ion-icon
+                name="add-circle-outline">
               </ion-icon>
             </ion-button>
           </ion-list-header>
@@ -347,8 +261,9 @@
             </div>
           </ion-item>
           <ion-list-header>
-            <ion-label color="primary">Té</ion-label>
-            <ion-button (click)="addFormControl('te')" fill="solid">Agregar <ion-icon name="add-circle-outline">
+            <ion-label color="dark"><b>Té</b></ion-label>
+            <ion-button (click)="addFormControl('te')" color="dark" fill="outline">Agregar <ion-icon
+                name="add-circle-outline">
               </ion-icon>
             </ion-button>
           </ion-list-header>
@@ -363,8 +278,9 @@
             </div>
           </ion-item>
           <ion-list-header>
-            <ion-label color="primary">Cena</ion-label>
-            <ion-button (click)="addFormControl('cena')" fill="solid">Agregar <ion-icon name="add-circle-outline">
+            <ion-label color="dark"><b>Cena</b></ion-label>
+            <ion-button (click)="addFormControl('cena')" color="dark" fill="outline">Agregar <ion-icon
+                name="add-circle-outline">
               </ion-icon>
             </ion-button>
           </ion-list-header>
