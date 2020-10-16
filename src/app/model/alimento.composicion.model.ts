@@ -1,6 +1,7 @@
 
 export interface Compocision {
     nombre: string;
+    cantidad?: string;
     energia: string;
     humedad: string;
     proteina: string;

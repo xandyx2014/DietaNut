@@ -1,0 +1,145 @@
+<ion-col class="ion-margin-top">
+  <ion-card mode="md" class="ion-no-margin ion-no-padding">
+    <ion-card-header>
+      <ion-card-subtitle><b>Sub Total:</b></ion-card-subtitle>
+      <ion-card-title><ion-badge color="dark">{{ type | titlecase}}</ion-badge></ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+       <ion-grid fixed>
+         <ion-row>
+           <ion-col size="3">                          
+              <ion-text >
+                Cantidad: {{ value | subTotal:type:'cantidad'}}
+              </ion-text>
+           </ion-col>
+           <ion-col size="3">
+              <ion-text >
+                Energia: {{ value | subTotal:type:'energia'}}
+              </ion-text>
+           </ion-col>
+           <ion-col size="3">
+              <ion-text >
+                Humedad: {{ value | subTotal:type:'humedad'}}
+              </ion-text>
+           </ion-col>
+           <ion-col size="3">
+              <ion-text >
+                Proteina: {{ value | subTotal:type:'proteina'}}
+              </ion-text>
+           </ion-col>
+         </ion-row>
+         <ion-row>
+          <ion-col size="3">                          
+             <ion-text >
+               Grasa: {{ value | subTotal:type:'grasa'}}
+             </ion-text>
+          </ion-col>
+          <ion-col size="3">
+             <ion-text >
+               Hc: {{ value | subTotal:type:'hc'}}
+             </ion-text>
+          </ion-col>
+          <ion-col size="3">
+             <ion-text >
+               Fibra cruda:  {{ value | subTotal:type:'fibra_cruda'}}
+             </ion-text>
+          </ion-col>
+          <ion-col size="3">
+             <ion-text >
+               Ceniza:  {{ value | subTotal:type:'ceniza'}}
+             </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="3">                          
+             <ion-text >
+               Calcio: {{ value | subTotal:type:'calcio'}}
+             </ion-text>
+          </ion-col>
+          <ion-col size="3">
+             <ion-text >
+               Fosforo: {{ value | subTotal:type:'fosforo'}}
+             </ion-text>
+          </ion-col>
+          <ion-col size="3">
+             <ion-text >
+               Hierro: {{ value | subTotal:type:'hierro'}}
+             </ion-text>
+          </ion-col>
+          <ion-col size="3">
+             <ion-text >
+               Vit a: {{ value | subTotal:type:'vit_a'}}
+             </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="3">                          
+             <ion-text >
+               Tiamina: {{ value | subTotal:type:'tiamina'}}
+             </ion-text>
+          </ion-col>
+          <ion-col size="3">
+             <ion-text >
+               Riboflavina {{value | subTotal:type:'riboflavina'}}
+             </ion-text>
+          </ion-col>
+          <ion-col size="3">
+             <ion-text >
+               Nianica: {{ value | subTotal:type:'niacina'}}
+             </ion-text>
+          </ion-col>
+          <ion-col size="3">
+             <ion-text >
+               Vit c: {{ value | subTotal:type:'vit_c'}}
+             </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="3">                          
+             <ion-text >
+               Agm: {{ value | subTotal:type:'agm'}}
+             </ion-text>
+          </ion-col>
+          <ion-col size="3">
+             <ion-text >
+               Agp {{value | subTotal:type:'agp'}}
+             </ion-text>
+          </ion-col>
+          <ion-col size="3">
+             <ion-text >
+              Ags: {{ value | subTotal:type:'ags'}}
+             </ion-text>
+          </ion-col>
+          <ion-col size="3">
+             <ion-text >
+              Col: {{ value | subTotal:type:'col'}}
+             </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="3">                          
+             <ion-text >
+               Potasio: {{ value | subTotal:type:'potasio'}}
+             </ion-text>
+          </ion-col>
+          <ion-col size="3">
+             <ion-text >
+               Sodio {{value | subTotal:type:'sodio'}}
+             </ion-text>
+          </ion-col>
+          <ion-col size="3">
+             <ion-text >
+              Zinc: {{ value | subTotal:type:'zinc'}}
+             </ion-text>
+          </ion-col>
+          <ion-col size="3">
+             <ion-text >
+              Vit b12: {{ value | subTotal:type:'vit_b12'}}
+             </ion-text>
+          </ion-col>
+        </ion-row>
+       </ion-grid>
+  
+    </ion-card-content>
+  </ion-card>
+</ion-col>

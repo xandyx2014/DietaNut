@@ -47,19 +47,14 @@ export class SearchAlimentoComponent implements OnInit {
         console.log('Evento enter');
     }
     onItemSelect(item: any){
-        console.log('On item selected', item);
         this.itemSelect = item;
-        console.log(this.selectedItems);
     }
     OnItemDeSelect(item: any){
-        console.log(item);
         console.log(this.selectedItems);
     }
     onSelectAll(items: any){
-        console.log(items);
     }
     onDeSelectAll(items: any){
-        console.log(items);
     }
     selectItem() {
         this.modalCtrl.dismiss(this.itemSelect);

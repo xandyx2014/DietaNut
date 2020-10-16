@@ -4,12 +4,14 @@ import { SearchAlimentoComponent } from './search-alimento/search-alimento.compo
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
+import { SubTotalComponent } from './sub-total/sub-total.component';
+import { SubTotalPipe } from './pipe/sub-total.pipe';
 
 @NgModule({
-    declarations: [SearchAlimentoComponent],
+    declarations: [SearchAlimentoComponent, SubTotalComponent, SubTotalPipe],
     imports: [ CommonModule, AngularMultiSelectModule, IonicModule, FormsModule ],
     exports: [
-        SearchAlimentoComponent,
+        SearchAlimentoComponent, SubTotalComponent, SubTotalPipe
     ],
     providers: [],
 })

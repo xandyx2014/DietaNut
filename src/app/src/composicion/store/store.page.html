@@ -190,35 +190,8 @@
                 </ion-col>
               </ion-row>
               <ion-row>
-                <ion-col>
-                  <ion-card mode="md" class="ion-no-margin ion-no-padding">
-                    <ion-card-content>
-                     <ion-list>
-                       <ion-list-header>
-                         <ion-label>SubTotal</ion-label>
-                         <ion-button>Desayuno</ion-button>
-                       </ion-list-header>
-                       <ion-item>
-                         <ion-label>Energia : 5.984</ion-label>
-                         <ion-label>Energia : 5.984</ion-label>
-                         <ion-label>Energia : 5.984</ion-label>
-                         <ion-label>Energia : 5.984</ion-label>
-                       </ion-item>
-                       <ion-item>
-                         <ion-label>Energia : 5.984</ion-label>
-                         <ion-label>Energia : 5.984</ion-label>
-                         <ion-label>Energia : 5.984</ion-label>
-                         <ion-label>Energia : 5.984</ion-label>
-                       </ion-item>
-                       <ion-item>
-                         <ion-label>Energia : 5.984</ion-label>
-                         <ion-label>Energia : 5.984</ion-label>
-                         <ion-label>Energia : 5.984</ion-label>
-                         <ion-label>Energia : 5.984</ion-label>
-                       </ion-item>
-                     </ion-list>
-                    </ion-card-content>
-                  </ion-card>
+                <ion-col class="ion-margin-top">
+                  <app-sub-total [value]="myForm.value" type="desayuno"></app-sub-total>
                 </ion-col>
               </ion-row>
             </ion-grid>
