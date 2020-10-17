@@ -21,8 +21,10 @@ export class StorageService {
       });
     } );
   }
-  obtenerDatos<T>(referencia): Promise<T> {
-    return this.storage.get(referencia);
+  async obtenerDatos<T>(referencia): Promise<T> {
+    const dataStorage = await this.storage.get(referencia);
+    const valueStorage = dataStorage ?? [];
+    return valueStorage;
   }
   private verificarDato({dato, referencia}) {
     return new Promise( ( resolve, reject ) => {

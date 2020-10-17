@@ -14,11 +14,14 @@
       <ion-card-title>Composicion quimica de la dieta</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <form [formGroup]="myForm">
+      <form [formGroup]="myForm"  #title>
         <ion-list>
           <ion-item>
             <ion-label position="stacked">Nombre de la dieta</ion-label>
             <ion-input formControlName="titulo" placeholder="Mi nombre de la dieta sera...."></ion-input>
+              <ion-text *ngIf="myForm.get('titulo').invalid && myForm.get('titulo').touched" lines="none" color="danger" class="form-error">
+                Por favor coloca un nombre a la dieta
+              </ion-text>
           </ion-item>
           <ion-item>
             <ion-label position="stacked">Descripcion de la dieta</ion-label>
@@ -207,14 +210,169 @@
             </ion-button>
           </ion-list-header>
           <ion-item>
-            <div formArrayName="merienda">
-              <div *ngFor="let item of controlForm('merienda').controls;let i = index">
-                <div [formGroupName]="i">
-                  <ion-input formControlName="nombre" type="text" placeholder="Awesome Input"></ion-input>
-                  <ion-input formControlName="edad" type="text" placeholder="Awesome Input"></ion-input>
-                </div>
-              </div>
-            </div>
+            <ion-grid fixed>
+              <ion-row>
+                <ion-col>
+                  <div id="table-scroll" class="table-scroll">
+                    <div class="table-wrap">
+                      <table class="main-table">
+                        <thead>
+                          <tr>
+                            <th scope="col" style="margin: 25px !important">Nombre</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Calcular</th>
+                            <th scope="col">Borrar</th>
+                            <th scope="col">Energia</th>
+                            <th scope="col">Humedad</th>
+                            <th scope="col">Proteina</th>
+                            <th scope="col">Grasa</th>
+                            <th scope="col">Hidrato C</th>
+                            <th scope="col">Fibra cruda</th>
+                            <th scope="col">Ceniza</th>
+                            <th scope="col">Fosforo</th>
+                            <th scope="col">Hierro</th>
+                            <th scope="col">Vit a</th>
+                            <th scope="col">Tiamina</th>
+                            <th scope="col">Riboflavina</th>
+                            <th scope="col">Niacina</th>
+                            <th scope="col">Vitamica C</th>
+                            <th scope="col">Agm</th>
+                            <th scope="col">Agp</th>
+                            <th scope="col">Ags</th>
+                            <th scope="col">Col</th>
+                            <th scope="col">Potasio</th>
+                            <th scope="col">Sodio</th>
+                            <th scope="col">Zinc</th>
+                            <th scope="col">Vit b12</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <ng-container formArrayName="merienda">
+                            <ng-container *ngFor="let item of controlForm('merienda').controls;let i = index">
+                              <tr [formGroupName]="i">
+
+                                <td style="margin: 25px !important">
+                                  <ion-input formControlName="nombre" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input color="dark" formControlName="cantidad" clearInput min="0"
+                                    inputmode="numeric" placeholder="0.00">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-button color="success" (click)="changeControlValue('merienda', i)" fill="solid">
+                                    <ion-icon name="calculator-outline"></ion-icon>
+                                  </ion-button>
+                                </td>
+                                <td>
+                                  <ion-button color="danger" (click)="removeControl('merienda', i)" fill="solid">
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                  </ion-button>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="energia" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="humedad" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="proteina" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="grasa" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="hc" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="fibra_cruda" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="ceniza" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="fosforo" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="hierro" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="vit_a" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="tiamina" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="riboflavina" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="niacina" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="vit_c" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="agm" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="agp" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="ags" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="col" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="potasio" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="sodio" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="zinc" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="vit_b12" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                              </tr>
+                            </ng-container>
+                          </ng-container>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="ion-margin-top">
+                  <app-sub-total [value]="myForm.value" type="merienda"></app-sub-total>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
           </ion-item>
           <ion-list-header>
             <ion-label color="dark"><b>Almuerzo</b></ion-label>
@@ -224,14 +382,169 @@
             </ion-button>
           </ion-list-header>
           <ion-item>
-            <div formArrayName="almuerzo">
-              <div *ngFor="let item of controlForm('almuerzo').controls;let i = index">
-                <div [formGroupName]="i">
-                  <ion-input formControlName="nombre" type="text" placeholder="Awesome Input"></ion-input>
-                  <ion-input formControlName="edad" type="text" placeholder="Awesome Input"></ion-input>
-                </div>
-              </div>
-            </div>
+            <ion-grid fixed>
+              <ion-row>
+                <ion-col>
+                  <div id="table-scroll" class="table-scroll">
+                    <div class="table-wrap">
+                      <table class="main-table">
+                        <thead>
+                          <tr>
+                            <th scope="col" style="margin: 25px !important">Nombre</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Calcular</th>
+                            <th scope="col">Borrar</th>
+                            <th scope="col">Energia</th>
+                            <th scope="col">Humedad</th>
+                            <th scope="col">Proteina</th>
+                            <th scope="col">Grasa</th>
+                            <th scope="col">Hidrato C</th>
+                            <th scope="col">Fibra cruda</th>
+                            <th scope="col">Ceniza</th>
+                            <th scope="col">Fosforo</th>
+                            <th scope="col">Hierro</th>
+                            <th scope="col">Vit a</th>
+                            <th scope="col">Tiamina</th>
+                            <th scope="col">Riboflavina</th>
+                            <th scope="col">Niacina</th>
+                            <th scope="col">Vitamica C</th>
+                            <th scope="col">Agm</th>
+                            <th scope="col">Agp</th>
+                            <th scope="col">Ags</th>
+                            <th scope="col">Col</th>
+                            <th scope="col">Potasio</th>
+                            <th scope="col">Sodio</th>
+                            <th scope="col">Zinc</th>
+                            <th scope="col">Vit b12</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <ng-container formArrayName="almuerzo">
+                            <ng-container *ngFor="let item of controlForm('almuerzo').controls;let i = index">
+                              <tr [formGroupName]="i">
+
+                                <td style="margin: 25px !important">
+                                  <ion-input formControlName="nombre" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input color="dark" formControlName="cantidad" clearInput min="0"
+                                    inputmode="numeric" placeholder="0.00">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-button color="success" (click)="changeControlValue('almuerzo', i)" fill="solid">
+                                    <ion-icon name="calculator-outline"></ion-icon>
+                                  </ion-button>
+                                </td>
+                                <td>
+                                  <ion-button color="danger" (click)="removeControl('almuerzo', i)" fill="solid">
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                  </ion-button>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="energia" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="humedad" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="proteina" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="grasa" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="hc" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="fibra_cruda" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="ceniza" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="fosforo" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="hierro" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="vit_a" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="tiamina" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="riboflavina" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="niacina" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="vit_c" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="agm" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="agp" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="ags" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="col" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="potasio" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="sodio" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="zinc" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="vit_b12" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                              </tr>
+                            </ng-container>
+                          </ng-container>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="ion-margin-top">
+                  <app-sub-total [value]="myForm.value" type="almuerzo"></app-sub-total>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
           </ion-item>
           <ion-list-header>
             <ion-label color="dark"><b>Té</b></ion-label>
@@ -241,14 +554,169 @@
             </ion-button>
           </ion-list-header>
           <ion-item>
-            <div formArrayName="te">
-              <div *ngFor="let item of controlForm('te').controls;let i = index">
-                <div [formGroupName]="i">
-                  <ion-input formControlName="nombre" type="text" placeholder="Awesome Input"></ion-input>
-                  <ion-input formControlName="edad" type="text" placeholder="Awesome Input"></ion-input>
-                </div>
-              </div>
-            </div>
+            <ion-grid fixed>
+              <ion-row>
+                <ion-col>
+                  <div id="table-scroll" class="table-scroll">
+                    <div class="table-wrap">
+                      <table class="main-table">
+                        <thead>
+                          <tr>
+                            <th scope="col" style="margin: 25px !important">Nombre</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Calcular</th>
+                            <th scope="col">Borrar</th>
+                            <th scope="col">Energia</th>
+                            <th scope="col">Humedad</th>
+                            <th scope="col">Proteina</th>
+                            <th scope="col">Grasa</th>
+                            <th scope="col">Hidrato C</th>
+                            <th scope="col">Fibra cruda</th>
+                            <th scope="col">Ceniza</th>
+                            <th scope="col">Fosforo</th>
+                            <th scope="col">Hierro</th>
+                            <th scope="col">Vit a</th>
+                            <th scope="col">Tiamina</th>
+                            <th scope="col">Riboflavina</th>
+                            <th scope="col">Niacina</th>
+                            <th scope="col">Vitamica C</th>
+                            <th scope="col">Agm</th>
+                            <th scope="col">Agp</th>
+                            <th scope="col">Ags</th>
+                            <th scope="col">Col</th>
+                            <th scope="col">Potasio</th>
+                            <th scope="col">Sodio</th>
+                            <th scope="col">Zinc</th>
+                            <th scope="col">Vit b12</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <ng-container formArrayName="te">
+                            <ng-container *ngFor="let item of controlForm('te').controls;let i = index">
+                              <tr [formGroupName]="i">
+
+                                <td style="margin: 25px !important">
+                                  <ion-input formControlName="nombre" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input color="dark" formControlName="cantidad" clearInput min="0"
+                                    inputmode="numeric" placeholder="0.00">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-button color="success" (click)="changeControlValue('te', i)" fill="solid">
+                                    <ion-icon name="calculator-outline"></ion-icon>
+                                  </ion-button>
+                                </td>
+                                <td>
+                                  <ion-button color="danger" (click)="removeControl('te', i)" fill="solid">
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                  </ion-button>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="energia" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="humedad" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="proteina" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="grasa" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="hc" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="fibra_cruda" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="ceniza" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="fosforo" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="hierro" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="vit_a" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="tiamina" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="riboflavina" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="niacina" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="vit_c" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="agm" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="agp" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="ags" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="col" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="potasio" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="sodio" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="zinc" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="vit_b12" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                              </tr>
+                            </ng-container>
+                          </ng-container>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="ion-margin-top">
+                  <app-sub-total [value]="myForm.value" type="te"></app-sub-total>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
           </ion-item>
           <ion-list-header>
             <ion-label color="dark"><b>Cena</b></ion-label>
@@ -258,18 +726,173 @@
             </ion-button>
           </ion-list-header>
           <ion-item>
-            <div formArrayName="cena">
-              <div *ngFor="let item of controlForm('cena').controls;let i = index">
-                <div [formGroupName]="i">
-                  <ion-input formControlName="nombre" type="text" placeholder="Awesome Input"></ion-input>
-                  <ion-input formControlName="edad" type="text" placeholder="Awesome Input"></ion-input>
-                </div>
-              </div>
-            </div>
+            <ion-grid fixed>
+              <ion-row>
+                <ion-col>
+                  <div id="table-scroll" class="table-scroll">
+                    <div class="table-wrap">
+                      <table class="main-table">
+                        <thead>
+                          <tr>
+                            <th scope="col" style="margin: 25px !important">Nombre</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Calcular</th>
+                            <th scope="col">Borrar</th>
+                            <th scope="col">Energia</th>
+                            <th scope="col">Humedad</th>
+                            <th scope="col">Proteina</th>
+                            <th scope="col">Grasa</th>
+                            <th scope="col">Hidrato C</th>
+                            <th scope="col">Fibra cruda</th>
+                            <th scope="col">Ceniza</th>
+                            <th scope="col">Fosforo</th>
+                            <th scope="col">Hierro</th>
+                            <th scope="col">Vit a</th>
+                            <th scope="col">Tiamina</th>
+                            <th scope="col">Riboflavina</th>
+                            <th scope="col">Niacina</th>
+                            <th scope="col">Vitamica C</th>
+                            <th scope="col">Agm</th>
+                            <th scope="col">Agp</th>
+                            <th scope="col">Ags</th>
+                            <th scope="col">Col</th>
+                            <th scope="col">Potasio</th>
+                            <th scope="col">Sodio</th>
+                            <th scope="col">Zinc</th>
+                            <th scope="col">Vit b12</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <ng-container formArrayName="cena">
+                            <ng-container *ngFor="let item of controlForm('cena').controls;let i = index">
+                              <tr [formGroupName]="i">
+
+                                <td style="margin: 25px !important">
+                                  <ion-input formControlName="nombre" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input color="dark" formControlName="cantidad" clearInput min="0"
+                                    inputmode="numeric" placeholder="0.00">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-button color="success" (click)="changeControlValue('cena', i)" fill="solid">
+                                    <ion-icon name="calculator-outline"></ion-icon>
+                                  </ion-button>
+                                </td>
+                                <td>
+                                  <ion-button color="danger" (click)="removeControl('cena', i)" fill="solid">
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                  </ion-button>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="energia" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="humedad" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="proteina" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="grasa" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="hc" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="fibra_cruda" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="ceniza" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="fosforo" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="hierro" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="vit_a" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="tiamina" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="riboflavina" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="niacina" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="vit_c" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="agm" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="agp" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="ags" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="col" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="potasio" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="sodio" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="zinc" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                                <td>
+                                  <ion-input formControlName="vit_b12" clearInput readonly="true">
+                                  </ion-input>
+                                </td>
+                              </tr>
+                            </ng-container>
+                          </ng-container>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="ion-margin-top">
+                  <app-sub-total [value]="myForm.value" type="cena"></app-sub-total>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
           </ion-item>
         </ion-list>
-        <ion-button (click)="store()">
-          <ion-icon slot="start" name="add"></ion-icon>
+        <ion-button (click)="store(title)" expand="full" >
+          <ion-icon name="save-outline"></ion-icon>
           Crear receta
         </ion-button>
       </form>
