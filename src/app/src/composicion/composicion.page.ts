@@ -54,7 +54,7 @@ export class ComposicionPage implements OnInit {
         text: 'Share',
         icon: 'book-outline',
         handler: async () => {
-          this.router.navigate(['/composicion/store'], { queryParams: { edit: true}});
+          this.router.navigate(['/composicion/store'], { queryParams: { edit: true, uid: dieta.uid}});
           const valueStorage = await this.storageService.buscarPorUid('composicion', dieta.uid);
         }
       }, {

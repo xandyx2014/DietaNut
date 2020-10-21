@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { ComposicionAlimentoService } from 'src/app/services/composicion-alimento.service';
@@ -14,7 +14,9 @@ import { SearchAlimentoComponent } from '../../shared/search-alimento/search-ali
 })
 export class StorePage implements OnInit {
   private unSubscribe = new Subscription();
+  private valueUpdate: any = {};
   public myForm: FormGroup;
+  public ok = false;
   constructor(
     private modalController: ModalController,
     private composicionService: ComposicionAlimentoService,
@@ -22,13 +24,26 @@ export class StorePage implements OnInit {
     private storageLocal: StorageService,
     public toastController: ToastController,
     public alertController: AlertController,
-    private router: Router
+    private router: Router,
+    private activatedRouter: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.makeForm();
   }
-  ionViewWillEnter() {
+  ionViewWillEnter()  {
+    this.getQueryParams();
+  }
+  private getQueryParams() {
+    this.ok = false;
+    this.activatedRouter.queryParams.subscribe( async resp => {
+      if (Object.keys(resp).length) {
+        this.valueUpdate = await this.storageLocal.buscarPorUid('composicion', resp.uid);
+        console.log(this.valueUpdate);
+        this.ok = true;
+      }
+      this.ok = true;
+      this.makeForm();
+    });
   }
   makeForm() {
     return this.myForm = this.fb.group({
@@ -111,6 +126,13 @@ export class StorePage implements OnInit {
     this.unSubscribe.unsubscribe();
   }
   async store(el: HTMLElement) {
+   if (Object.keys(this.valueUpdate).length) {
+     console.log(this.valueUpdate);
+     return;
+   }
+   this.storeValue(el);
+  }
+  async storeValue(el: HTMLElement) {
     if (this.myForm.invalid) {
       this.myForm.markAsDirty();
       this.myForm.markAllAsTouched();
