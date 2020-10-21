@@ -40,7 +40,32 @@ export class StorePage implements OnInit {
       almuerzo: this.fb.array([]),
       te: this.fb.array([]),
       cena: this.fb.array([]),
-      created_at:  new Date().toString()
+      created_at:  new Date().toString(),
+      req: this.fb.group({
+        energia: 0,
+        humedad: 0,
+        proteina: 0,
+        grasa: 0,
+        hc: 0,
+        fibra_cruda: 0,
+        ceniza: 0,
+        calcio: 0,
+        fosforo: 0,
+        hierro: 0,
+        vit_a: 0,
+        tiamina: 0,
+        riboflavina: 0,
+        niacina: 0,
+        vit_c: 0,
+        agm: 0,
+        agp: 0,
+        ags: 0,
+        col: 0,
+        potasio: 0,
+        sodio: 0,
+        zinc: 0,
+        vit_b12: 0
+      }),
     });
   }
   async changeControlValue(type, index) {

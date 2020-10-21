@@ -14,14 +14,15 @@
       <ion-card-title>Composicion quimica de la dieta</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <form [formGroup]="myForm"  #title>
+      <form [formGroup]="myForm" #title>
         <ion-list>
           <ion-item>
             <ion-label position="stacked">Nombre de la dieta</ion-label>
             <ion-input formControlName="titulo" placeholder="Mi nombre de la dieta sera...."></ion-input>
-              <ion-text *ngIf="myForm.get('titulo').invalid && myForm.get('titulo').touched" lines="none" color="danger" class="form-error">
-                Por favor coloca un nombre a la dieta
-              </ion-text>
+            <ion-text *ngIf="myForm.get('titulo').invalid && myForm.get('titulo').touched" lines="none" color="danger"
+              class="form-error">
+              Por favor coloca un nombre a la dieta
+            </ion-text>
           </ion-item>
           <ion-item>
             <ion-label position="stacked">Descripcion de la dieta</ion-label>
@@ -888,10 +889,189 @@
                   <app-sub-total [value]="myForm.value" type="cena"></app-sub-total>
                 </ion-col>
               </ion-row>
+              <ion-row>
+                <ion-col size="12">´
+                  <ion-card>
+                    <ion-card-header>
+                      <ion-card-subtitle>Requerimiento</ion-card-subtitle>
+
+                    </ion-card-header>
+                    <ion-card-content formGroupName="req">
+                      <ion-row >
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="stacked">Energia</ion-label>
+                            <ion-input formControlName="energia" color="dark" inputmode="numeric" min="0" clearInput="true"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="stacked">Humedad</ion-label>
+                            <ion-input formControlName="humedad" color="dark" inputmode="numeric" min="0" clearInput="true"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="stacked">Proteina</ion-label>
+                            <ion-input formControlName="proteina" color="dark" inputmode="numeric" min="0" clearInput="true"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row >
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="stacked">Grasa</ion-label>
+                            <ion-input formControlName="grasa" color="dark" inputmode="numeric" min="0" clearInput="true"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="stacked">Hc</ion-label>
+                            <ion-input formControlName="hc" color="dark" inputmode="numeric" min="0" clearInput="true"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="stacked">Fibra cruda</ion-label>
+                            <ion-input formControlName="fibra_cruda" color="dark" inputmode="numeric" min="0" clearInput="true"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row >
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="stacked">Ceniza</ion-label>
+                            <ion-input formControlName="ceniza" color="dark" inputmode="numeric" min="0" clearInput="true"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="stacked">Calcio</ion-label>
+                            <ion-input formControlName="calcio" color="dark" inputmode="numeric" min="0" clearInput="true"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="stacked">Fosforo</ion-label>
+                            <ion-input formControlName="fosforo" color="dark" inputmode="numeric" min="0" clearInput="true"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row >
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="stacked">Hierro</ion-label>
+                            <ion-input formControlName="hierro" color="dark" inputmode="numeric" min="0" clearInput="true"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="stacked">Vit a</ion-label>
+                            <ion-input formControlName="vit_a" color="dark" inputmode="numeric" min="0" clearInput="true"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="stacked">Tiamina</ion-label>
+                            <ion-input formControlName="tiamina" color="dark" inputmode="numeric" min="0" clearInput="true"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row >
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="stacked">Riboflavina</ion-label>
+                            <ion-input formControlName="riboflavina" color="dark" inputmode="numeric" min="0" clearInput="true"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="stacked">Niacina</ion-label>
+                            <ion-input formControlName="niacina" color="dark" inputmode="numeric" min="0" clearInput="true"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="stacked">Vit c</ion-label>
+                            <ion-input formControlName="vit_c" color="dark" inputmode="numeric" min="0" clearInput="true"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row >
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="stacked">Agm</ion-label>
+                            <ion-input formControlName="agm" color="dark" inputmode="numeric" min="0" clearInput="true"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="stacked">Agp</ion-label>
+                            <ion-input formControlName="agp" color="dark" inputmode="numeric" min="0" clearInput="true"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="stacked">ags</ion-label>
+                            <ion-input formControlName="ags" color="dark" inputmode="numeric" min="0" clearInput="true"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row >
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="stacked">Col</ion-label>
+                            <ion-input formControlName="col" color="dark" inputmode="numeric" min="0" clearInput="true"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="stacked">Potasio</ion-label>
+                            <ion-input formControlName="potasio" color="dark" inputmode="numeric" min="0" clearInput="true"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="stacked">Sodio</ion-label>
+                            <ion-input formControlName="sodio" color="dark" inputmode="numeric" min="0" clearInput="true"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row >
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="stacked">Zinc</ion-label>
+                            <ion-input formControlName="zinc" color="dark" inputmode="numeric" min="0" clearInput="true"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="stacked">Vit b12</ion-label>
+                            <ion-input formControlName="vit_b12" color="dark" inputmode="numeric" min="0" clearInput="true"></ion-input>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size="4">
+                          
+                        </ion-col>
+                      </ion-row>
+                    </ion-card-content>
+                  </ion-card>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="12">
+                  <app-sub-total [value]="myForm.value" [total]="false"></app-sub-total>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="ion-margin-top">
+                  <app-adec [value]="myForm.value"></app-adec>
+                </ion-col>
+              </ion-row>
             </ion-grid>
           </ion-item>
         </ion-list>
-        <ion-button (click)="store(title)" expand="full" >
+        <ion-button (click)="store(title)" expand="full">
           <ion-icon name="save-outline"></ion-icon>
           Crear receta
         </ion-button>

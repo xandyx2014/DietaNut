@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Compocision } from 'src/app/model/alimento.composicion.model';
 
 @Component({
   selector: 'app-sub-total',
@@ -8,6 +9,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class SubTotalComponent implements OnInit {
  @Input() value;
  @Input() type;
+ @Input() total = true;
   constructor() { }
   ngOnInit() {}
 

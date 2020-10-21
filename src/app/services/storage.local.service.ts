@@ -21,10 +21,15 @@ export class StorageService {
       });
     } );
   }
-  async obtenerDatos<T>(referencia): Promise<T> {
+  async obtenerDatos<T>(referencia) {
     const dataStorage = await this.storage.get(referencia);
     const valueStorage = dataStorage ?? [];
     return valueStorage;
+  }
+  async buscarPorUid<T>(referencia, uid): Promise<T> {
+    const dataStorage = await this.storage.get(referencia);
+    const valueStorage: any[] = dataStorage ?? [];
+    return valueStorage.find(e => e.uid === uid);
   }
   private verificarDato({dato, referencia}) {
     return new Promise( ( resolve, reject ) => {
