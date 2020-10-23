@@ -1073,7 +1073,14 @@
         </ion-list>
         <ion-button (click)="store(title)" expand="full">
           <ion-icon name="save-outline"></ion-icon>
-          Crear receta
+          <ng-container *ngIf="valueUpdateLenght(); else elseTemplate">
+            Actualizar
+          </ng-container>
+          <ng-template #elseTemplate>
+            Crear
+          </ng-template>
+          
+          
         </ion-button>
       </form>
     </ion-card-content>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ActionSheetController, ToastController } from '@ionic/angular';
+import { ActionSheetController, AlertController, ToastController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { DietaService } from 'src/app/services/dieta.service';
 import { StorageService } from 'src/app/services/storage.local.service';
@@ -15,6 +15,7 @@ export class ComposicionPage implements OnInit {
   constructor(
     private dietaService: DietaService,
     public actionSheetController: ActionSheetController,
+    public alertController: AlertController,
     private storageService: StorageService,
     private toastController: ToastController,
     private router: Router
@@ -46,30 +47,23 @@ export class ComposicionPage implements OnInit {
         role: 'destructive',
         icon: 'trash',
         handler: async () => {
-          await this.storageService.eliminarDato(dieta.uid, 'composicion');
-          this.getAllDietas();
-          await this.presentToast(`Eliminado ${dieta.titulo}`);
+          this.presentAlertConfirm(dieta);
         }
       }, {
-        text: 'Share',
+        text: 'Ver o Editar',
         icon: 'book-outline',
         handler: async () => {
           this.router.navigate(['/composicion/store'], { queryParams: { edit: true, uid: dieta.uid}});
           const valueStorage = await this.storageService.buscarPorUid('composicion', dieta.uid);
         }
       }, {
-        text: 'Play (open modal)',
-        icon: 'caret-forward-circle',
+        text: 'Exportar',
+        icon: 'share-social-outline',
         handler: () => {
           console.log('Play clicked');
         }
-      }, {
-        text: 'Favorite',
-        icon: 'heart',
-        handler: () => {
-          console.log('Favorite clicked');
-        }
-      }, {
+      },
+      {
         text: 'Cancel',
         icon: 'close',
         role: 'cancel',
@@ -79,6 +73,31 @@ export class ComposicionPage implements OnInit {
       }]
     });
     await actionSheet.present();
+  }
+  async presentAlertConfirm(dieta) {
+    const alert = await this.alertController.create({
+      header: 'Confirmar!',
+      message: 'Estas seguro de <strong>eliminar</strong> esta receta!!!',
+      mode: 'md',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+          }
+        }, {
+          text: 'Aceptar',
+          handler: async () => {
+            await this.storageService.eliminarDato(dieta.uid, 'composicion');
+            this.getAllDietas();
+            await this.presentToast(`Eliminado ${dieta.titulo}`);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }

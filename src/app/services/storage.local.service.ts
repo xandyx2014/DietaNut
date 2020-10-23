@@ -57,18 +57,11 @@ export class StorageService {
       });
     } );
   }
-  actualizarDato(uid, dato, referencia) {
-    return new Promise( ( resolve, reject ) => {
-      this.storage.get(referencia).then( (resp: any[]) => {
-        resp.map( (item, i) => {
-          if (item.uid === uid) {
-            resp[i] = {...dato};
-            this.storage.set(referencia, resp).then(() => {
-              resolve();
-            });
-          }
-        });
-      });
+  async actualizarDato(uid, dato, referencia) {
+    await this.eliminarDato(uid, referencia);
+    await this.guardarDatos({
+      dato,
+      referencia
     });
   }
 }

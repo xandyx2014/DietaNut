@@ -7,9 +7,10 @@ import { FormsModule } from '@angular/forms';
 import { SubTotalComponent } from './sub-total/sub-total.component';
 import { SubTotalPipe } from './pipe/sub-total.pipe';
 import { AdecComponent } from './adec/adec.component';
+import { ReqPipe } from './pipe/req.pipe';
 
 @NgModule({
-    declarations: [SearchAlimentoComponent, SubTotalComponent, SubTotalPipe, AdecComponent],
+    declarations: [SearchAlimentoComponent, SubTotalComponent, SubTotalPipe, AdecComponent, ReqPipe],
     imports: [ CommonModule, AngularMultiSelectModule, IonicModule, FormsModule ],
     exports: [
         SearchAlimentoComponent, SubTotalComponent, SubTotalPipe, AdecComponent

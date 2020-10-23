@@ -18,127 +18,127 @@
            </ion-col>
            <ion-col size="3">
               <ion-text >
-                Energia: {{ (getTotal(value, 'energia') / value.req.energia) * 100  }} %
+                Energia: {{ getTotal(value, 'energia') | req:value.req.energia }} %
               </ion-text>
            </ion-col>
            <ion-col size="3">
               <ion-text >
-                Humedad: {{ (getTotal(value, 'humedad') / value.req.energia) * 100  }} %
+                Humedad: {{ getTotal(value, 'humedad') | req:value.req.humedad  }} %
               </ion-text>
            </ion-col>
            <ion-col size="3">
               <ion-text >
-                Proteina: {{ (getTotal(value, 'proteina') / value.req.energia) * 100  }} %
+                Proteina: {{ getTotal(value, 'proteina') | req:value.req.proteina }} %
               </ion-text>
            </ion-col>
          </ion-row>
          <ion-row>
           <ion-col size="3">                          
              <ion-text >
-               Grasa: {{ (getTotal(value, 'grasa') / value.req.energia) * 100  }} %
+               Grasa: {{ getTotal(value, 'grasa') | req:value.req.grasa }} %
              </ion-text>
           </ion-col>
           <ion-col size="3">
              <ion-text >
-               Hc: {{ (getTotal(value, 'hc') / value.req.energia) * 100  }} %
+               Hc: {{ getTotal(value, 'hc') | req:value.req.hc }} %
              </ion-text>
           </ion-col>
           <ion-col size="3">
              <ion-text >
-               Fibra cruda:  {{ (getTotal(value, 'fibra_cruda') / value.req.energia) * 100  }} %
+               Fibra cruda:  {{ getTotal(value, 'fibra_cruda') | req:value.req.fibra_cruda  }} %
              </ion-text>
           </ion-col>
           <ion-col size="3">
              <ion-text >
-               Ceniza:  {{ (getTotal(value, 'ceniza') / value.req.energia) * 100  }} %
+               Ceniza:  {{ getTotal(value, 'ceniza') | req:value.req.ceniza  }} %
              </ion-text>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col size="3">                          
              <ion-text >
-               Calcio: {{ (getTotal(value, 'calcio') / value.req.energia) * 100  }} %
+               Calcio: {{ getTotal(value, 'calcio') | req:value.req.calcio  }} %
              </ion-text>
           </ion-col>
           <ion-col size="3">
              <ion-text >
-               Fosforo: {{ (getTotal(value, 'fosforo') / value.req.energia) * 100  }} %
+               Fosforo: {{ getTotal(value, 'fosforo') | req:value.req.fosforo  }} %
              </ion-text>
           </ion-col>
           <ion-col size="3">
              <ion-text >
-               Hierro: {{ (getTotal(value, 'hierro') / value.req.energia) * 100  }} %
+               Hierro: {{ getTotal(value, 'hierro') | req:value.req.hierro  }} %
              </ion-text>
           </ion-col>
           <ion-col size="3">
              <ion-text >
-               Vit a: {{ (getTotal(value, 'vit_a') / value.req.energia) * 100  }} %
+               Vit a: {{ getTotal(value, 'vit_a') | req:value.req.vit_a  }} %
              </ion-text>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col size="3">                          
              <ion-text >
-               Tiamina: {{ (getTotal(value, 'tiamina') / value.req.energia) * 100  }} %
+               Tiamina: {{ getTotal(value, 'tiamina') | req:value.req.tiamina }} %
              </ion-text>
           </ion-col>
           <ion-col size="3">
              <ion-text >
-               Riboflavina {{ (getTotal(value, 'riboflavina') / value.req.energia) * 100  }} %
+               Riboflavina {{ getTotal(value, 'riboflavina') | req:value.req.riboflavina }} %
              </ion-text>
           </ion-col>
           <ion-col size="3">
              <ion-text >
-               Nianica: {{ (getTotal(value, 'niacina') / value.req.energia) * 100  }} %
+               Nianica: {{ getTotal(value, 'niacina') | req:value.req.niacina }} %
              </ion-text>
           </ion-col>
           <ion-col size="3">
              <ion-text >
-               Vit c: {{ (getTotal(value, 'vit_c') / value.req.energia) * 100  }} %
+               Vit c: {{ getTotal(value, 'vit_c') | req:value.req.vit_c  }} %
              </ion-text>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col size="3">                          
              <ion-text >
-               Agm: {{ (getTotal(value, 'agm') / value.req.energia) * 100  }} %
+               Agm: {{ getTotal(value, 'agm') | req:value.req.agm  }} %
              </ion-text>
           </ion-col>
           <ion-col size="3">
              <ion-text >
-               Agp {{ (getTotal(value, 'agp') / value.req.energia) * 100  }} %
+               Agp {{ getTotal(value, 'agp') | req:value.req.agp }} %
              </ion-text>
           </ion-col>
           <ion-col size="3">
              <ion-text >
-              Ags: {{ (getTotal(value, 'ags') / value.req.energia) * 100  }} %
+              Ags: {{ getTotal(value, 'ags') | req:value.req.ags  }} %
              </ion-text>
           </ion-col>
           <ion-col size="3">
              <ion-text >
-              Col: {{ (getTotal(value, 'col') / value.req.energia) * 100  }} %
+              Col: {{ getTotal(value, 'col')| req:value.req.col  }} %
              </ion-text>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col size="3">                          
              <ion-text >
-               Potasio: {{ (getTotal(value, 'potasio') / value.req.energia) * 100  }} %
+               Potasio: {{ getTotal(value, 'potasio') | req:value.req.potasio  }} %
              </ion-text>
           </ion-col>
           <ion-col size="3">
              <ion-text >
-               Sodio: {{ (getTotal(value, 'sodio') / value.req.energia) * 100  }} %
+               Sodio: {{ getTotal(value, 'sodio') | req:value.req.sodio  }} %
              </ion-text>
           </ion-col>
           <ion-col size="3">
              <ion-text >
-              Zinc: {{ (getTotal(value, 'zinc') / value.req.energia) * 100  }} %
+              Zinc: {{ getTotal(value, 'zinc') | req:value.req.zinc  }} %
              </ion-text>
           </ion-col>
           <ion-col size="3">
              <ion-text >
-              Vit b12: {{ (getTotal(value, 'vit_b12') / value.req.energia) * 100  }} %
+              Vit b12: {{ getTotal(value, 'vit_b12') | req:value.req.vit_b12  }} %
              </ion-text>
           </ion-col>
         </ion-row>
