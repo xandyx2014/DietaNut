@@ -42,7 +42,6 @@ export class StorePage implements OnInit {
     this.activatedRouter.queryParams.subscribe( async resp => {
       if (Object.keys(resp).length) {
         this.valueUpdate = await this.storageLocal.buscarPorUid('composicion', resp.uid);
-        console.log(this.valueUpdate);
         this.ok = true;
       }
       this.ok = true;
@@ -158,7 +157,10 @@ export class StorePage implements OnInit {
    this.storeValue(el);
   }
   async updateValue(el) {
-    await this.alertMessage(el);
+    const respMessage = await this.alertMessage(el);
+    if (respMessage) {
+      return;
+    }
     const value = this.myForm.value;
     await this.storageLocal.actualizarDato(value.uid, this.myForm.value, 'composicion');
     await this.successTask({
@@ -170,7 +172,10 @@ export class StorePage implements OnInit {
     });
   }
   async storeValue(el: HTMLElement) {
-    await this.alertMessage(el);
+    const respMessage = await this.alertMessage(el);
+    if (respMessage) {
+      return;
+    }
     const value = this.myForm.value;
     await this.storageLocal.guardarDatos({
       dato: value,
@@ -201,8 +206,10 @@ export class StorePage implements OnInit {
         subHeader: 'Falta un titulo a la dieta',
         buttons: ['Aceptar']
       });
-      return await alertError.present();
+      await alertError.present();
+      return true;
     }
+    return false;
   }
   async presentModal() {
     const modal = await this.modalController.create({
