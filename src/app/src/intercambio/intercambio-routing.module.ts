@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: IntercambioPage
+  },
+  {
+    path: 'store',
+    loadChildren: () => import('./store/store.module').then( m => m.StorePageModule)
   }
 ];
 

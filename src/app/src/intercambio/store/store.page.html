@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title color="primary">Creando una dieta...</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/composicion" text="Atras"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="isRender; else elseTemplate">
+    <form [formGroup]="myForm">
+      <ion-item>
+        <ion-label position="stacked">Nombre de la dieta</ion-label>
+        <ion-input formControlName="titulo" placeholder="Mi nombre de la dieta sera...."></ion-input>
+        <ion-text *ngIf="myForm.get('titulo').invalid && myForm.get('titulo').touched" lines="none" color="danger"
+          class="form-error">
+          Por favor coloca un nombre a la dieta
+        </ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Descripcion de la dieta</ion-label>
+        <ion-input formControlName="descripcion" placeholder="Descripcion de la dieta...."></ion-input>
+      </ion-item>
+      <div formGroupName="calorias">
+        <ion-text color="dark">
+          <h3 style="margin-left: 15px;">Calorias y distribucion</h3>
+        </ion-text>
+        <ion-item>
+          <ion-label position="stacked">Gasto energetico diario kcal</ion-label>
+          <ion-input formControlName="gastoEnergetico" placeholder="Gasto energetico"></ion-input>
+        </ion-item>
+        <table>
+          <thead>
+            <tr>
+              <th>Macronutrientes</th>
+              <th>%</th>
+              <th>Calorias</th>
+              <th>Gramos</th>
+            </tr>
+          </thead>
+          <tr>
+            <td>Carbohidrato</td>
+            <td style="width: 25%;">
+              <ion-input formControlName="carbohidrato" placeholder="Gasto energetico"></ion-input>
+            </td>
+            <td>
+              <ion-input formControlName="carbohidratoCaloria" placeholder="Gasto energetico"></ion-input>
+            </td>
+            <td>
+              <ion-input formControlName="carbohidratoGramo" placeholder="Gasto energetico"></ion-input>
+            </td>
+          </tr>
+          <tr>
+            <td>Proteina</td>
+            <td style="width: 25%;">
+              <ion-input formControlName="proteina" placeholder="Gasto energetico"></ion-input>
+            </td>
+            <td>
+              <ion-input formControlName="proteinaCaloria" placeholder="Gasto energetico"></ion-input>
+            </td>
+            <td>
+              <ion-input formControlName="proteinaGramo" placeholder="Gasto energetico"></ion-input>
+            </td>
+          </tr>
+          <tr>
+            <td>Grasas</td>
+            <td style="width: 25%;">
+              <ion-input formControlName="grasas" placeholder="Gasto energetico"></ion-input>
+            </td>
+            <td>
+              <ion-input formControlName="grasasCaloria" placeholder="Gasto energetico"></ion-input>
+            </td>
+            <td>
+              <ion-input formControlName="grasasGramo" placeholder="Gasto energetico"></ion-input>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <ion-button (click)="store()" expand="full" class="ion-margin-top">
+        <ion-icon name="save-outline"></ion-icon>
+        Guardar
+        </ion-button>
+    </form>
+  </ng-container>
+  <ng-template #elseTemplate>
+    
+  </ng-template>
+  
+</ion-content>
