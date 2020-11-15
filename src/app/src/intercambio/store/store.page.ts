@@ -29,13 +29,30 @@ export class StorePage implements OnInit {
         grasasGramo: this.fb.control({ value: 0, disabled: true }),
         total: 0,
         totalCaloria: 0,
-        totalGramos: 0
+        totalGramo: 0
       })
     });
     this.setValueFromValue('carbohidrato');
     this.setValueFromValue('proteina');
     this.setValueFromValue('grasas');
+    this.getTotal();
     this.isRender = true;
+  }
+  getTotal() {
+    this.controlForm('calorias').valueChanges.subscribe(e => {
+      const total = Number(e.carbohidrato) + Number(e.proteina) + Number(e.grasas);
+      const totalCaloria = this.getTotalFromType('Caloria');
+      const totalGramo = this.getTotalFromType('Gramo');
+      this.controlForm('calorias').get(`total`).patchValue(total, { emitEvent: false });
+      this.controlForm('calorias').get(`totalCaloria`).patchValue(totalCaloria, { emitEvent: false });
+      this.controlForm('calorias').get(`totalGramo`).patchValue(totalGramo, { emitEvent: false });
+    });
+  }
+  getTotalFromType(type) {
+    const carbohidratoCaloria = this.controlForm('calorias').get(`carbohidrato${type}`).value;
+    const proteinaCaloria = this.controlForm('calorias').get(`proteina${type}`).value;
+    const grasasCaloria = this.controlForm('calorias').get(`grasas${type}`).value;
+    return Number(carbohidratoCaloria) + Number(proteinaCaloria) + Number(grasasCaloria);
   }
   setValueFromValue(type: string) {
     this.controlForm('calorias').get('gastoEnergetico').valueChanges.subscribe(e => {
@@ -49,8 +66,12 @@ export class StorePage implements OnInit {
     const gastoEnergetico = this.controlForm('calorias').get('gastoEnergetico').value;
     const value = this.controlForm('calorias').get(type).value;
     const total = ((value * gastoEnergetico) / 100);
-    this.controlForm('calorias').get(`${type}Caloria`).patchValue(total.toFixed(3));
-    this.controlForm('calorias').get(`${type}Gramo`).patchValue((total / 4).toFixed(3));
+    let totalGramo = (total / 4).toFixed(2);
+    if (type === 'grasas') {
+      totalGramo = (total / 9).toFixed(2);
+    }
+    this.controlForm('calorias').get(`${type}Caloria`).patchValue(total.toFixed(2));
+    this.controlForm('calorias').get(`${type}Gramo`).patchValue(totalGramo);
   }
   controlForm(type: string) {
     return this.myForm.get(type) as FormGroup;

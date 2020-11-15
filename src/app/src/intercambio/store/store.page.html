@@ -75,7 +75,20 @@
               <ion-input formControlName="grasasGramo" placeholder="Gasto energetico"></ion-input>
             </td>
           </tr>
+          <tr>
+            <td>SubTotal</td>
+            <td style="width: 25%;">
+              {{ controlForm('calorias').get('total').value }}
+            </td>
+            <td>
+              {{  controlForm('calorias').get('totalCaloria').value }}
+            </td>
+            <td>
+              {{  controlForm('calorias').get('totalGramo').value }}
+            </td>
+          </tr>
         </table>
+      
       </div>
       <ion-button (click)="store()" expand="full" class="ion-margin-top">
         <ion-icon name="save-outline"></ion-icon>
