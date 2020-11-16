@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RacionService } from 'src/app/services/racion.service';
 
 @Component({
   selector: 'app-store',
@@ -10,7 +11,8 @@ export class StorePage implements OnInit {
   public myForm: FormGroup;
   public isRender = false;
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private racionService: RacionService
   ) { }
   ionViewWillEnter() {
     this.myForm = this.fb.group({
@@ -19,7 +21,7 @@ export class StorePage implements OnInit {
       calorias: this.fb.group({
         gastoEnergetico: this.fb.control(0, [Validators.required]),
         carbohidrato: 0,
-        carbohidratoCaloria: this.fb.control({ value: 0, disabled: true }),
+        carbohidratoCaloria: this.fb.control({ value: 0, disabled: true}),
         carbohidratoGramo: this.fb.control({ value: 0, disabled: true }),
         proteina: 0,
         proteinaCaloria: this.fb.control({ value: 0, disabled: true }),
@@ -38,8 +40,14 @@ export class StorePage implements OnInit {
     this.getTotal();
     this.isRender = true;
   }
+  searchByCaloria(gastoEnergetico: number) {
+    this.racionService.searchByCaloria(gastoEnergetico).subscribe( resp => {
+      console.log(resp);
+    });
+  }
   getTotal() {
     this.controlForm('calorias').valueChanges.subscribe(e => {
+      this.searchByCaloria(e.gastoEnergetico);
       const total = Number(e.carbohidrato) + Number(e.proteina) + Number(e.grasas);
       const totalCaloria = this.getTotalFromType('Caloria');
       const totalGramo = this.getTotalFromType('Gramo');
@@ -70,8 +78,8 @@ export class StorePage implements OnInit {
     if (type === 'grasas') {
       totalGramo = (total / 9).toFixed(2);
     }
-    this.controlForm('calorias').get(`${type}Caloria`).patchValue(total.toFixed(2));
-    this.controlForm('calorias').get(`${type}Gramo`).patchValue(totalGramo);
+    this.controlForm('calorias').get(`${type}Caloria`).patchValue(total.toFixed(2), { emitEvent: false });
+    this.controlForm('calorias').get(`${type}Gramo`).patchValue(totalGramo, { emitEvent: false });
   }
   controlForm(type: string) {
     return this.myForm.get(type) as FormGroup;
