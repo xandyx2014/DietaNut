@@ -17,6 +17,7 @@ export class RacionService {
     return this.http.get<Racion[]>('assets/data/raciones.json');
   }
   searchByCaloria(caloria: string | number) {
+    console.log(caloria);
     return this.getAll().pipe(
       map(arr => arr.filter(e => e.calorias === caloria)[0]),
       map( (e) => {
