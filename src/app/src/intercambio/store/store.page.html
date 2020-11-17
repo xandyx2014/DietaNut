@@ -156,6 +156,30 @@
               <td><ion-input formControlName="carbohidrato" placeholder="Racion"></ion-input></td>
               <td><ion-input formControlName="lipido" placeholder="Racion"></ion-input></td>
             </tr>
+            <tr >
+              <td>Total</td>
+              <td>{{ this.controlForm('ingesta').get('totalRacion').value }}</td>
+              <td>{{ this.controlForm('ingesta').get('totalEnergia').value }}</td>
+              <td>{{ this.controlForm('ingesta').get('totalProteina').value }}</td>
+              <td>{{ this.controlForm('ingesta').get('totalLipido').value }}</td>
+              <td>{{ this.controlForm('ingesta').get('totalCarbohidrato').value }}</td>
+            </tr>
+            <tr formGroupName="requerimiento">
+              <td>Requerimiento</td>
+              <td><ion-input formControlName="racion" placeholder="Racion"></ion-input></td>
+              <td><ion-input formControlName="energia" placeholder="Racion"></ion-input></td>
+              <td><ion-input formControlName="proteina" placeholder="Racion"></ion-input></td>
+              <td><ion-input formControlName="lipido" placeholder="Racion"></ion-input></td>
+              <td><ion-input formControlName="carbohidrato" placeholder="Racion"></ion-input></td>
+            </tr>
+            <tr formGroupName="adecuacion">
+              <td>% adecuacion</td>
+              <td>{{ controlForm('ingesta').get('adecuacion').value.racion }} %</td>
+              <td>{{ controlForm('ingesta').get('adecuacion').value.energia }} %</td>
+              <td>{{ controlForm('ingesta').get('adecuacion').value.proteina }} %</td>
+              <td>{{ controlForm('ingesta').get('adecuacion').value.lipido }} %</td>
+              <td>{{ controlForm('ingesta').get('adecuacion').value.carbohidrato }} %</td>
+            </tr>
           </tbody>
         </table>
       </div>

@@ -46,6 +46,25 @@ export class StorePage implements OnInit {
         carne: this.createIngestaControl(),
         azucarados: this.createIngestaControl(),
         grasas: this.createIngestaControl(),
+        totalRacion: 0,
+        totalEnergia: 0,
+        totalProteina: 0,
+        totalLipido: 0,
+        totalCarbohidrato: 0,
+        requerimiento: this.fb.group({
+          racion: 0,
+          energia: 0,
+          proteina: 0,
+          lipido: 0,
+          carbohidrato: 0,
+        }),
+        adecuacion: this.fb.group({
+          racion: 0,
+          energia: 0,
+          proteina: 0,
+          lipido: 0,
+          carbohidrato: 0,
+        }),
       })
     });
     this.setValueFromValue('carbohidrato');
@@ -54,26 +73,71 @@ export class StorePage implements OnInit {
     this.setValueIngestaGroupControl();
     this.searchGroupByCaloria();
     this.getTotal();
+    this.getTotalAdecuacion();
     this.isRender = true;
   }
+  getTotalAdecuacion() {
+    this.controlForm('ingesta').get('requerimiento').valueChanges.subscribe(e => {
+      this.setTotalAdecuacion();
+    });
+  }
+  setTotalAdecuacion() {
+    const totalRacion = this.controlForm('ingesta').get('totalRacion').value;
+    const totalEnergia = this.controlForm('ingesta').get('totalEnergia').value;
+    const totalProteina = this.controlForm('ingesta').get('totalProteina').value;
+    const totalLipido = this.controlForm('ingesta').get('totalLipido').value;
+    const totalCarbohidrato = this.controlForm('ingesta').get('totalCarbohidrato').value;
+    this.controlForm('ingesta').get('adecuacion').patchValue({
+      racion:  ((this.controlForm('ingesta').get('requerimiento').value.racion / totalRacion) * 100 ).toFixed(2),
+      energia: ((this.controlForm('ingesta').get('requerimiento').value.energia / totalEnergia) * 100 ).toFixed(2),
+      proteina: ((this.controlForm('ingesta').get('requerimiento').value.proteina / totalProteina) * 100 ).toFixed(2),
+      lipido: ((this.controlForm('ingesta').get('requerimiento').value.lipido / totalLipido) * 100 ).toFixed(2),
+      carbohidrato: ((this.controlForm('ingesta').get('requerimiento').value.carbohidrato / totalCarbohidrato) * 100 ).toFixed(2),
+    }, { emitEvent: false });
+  }
   searchGroupByCaloria() {
-    this.controlForm('calorias').get('gastoEnergetico').valueChanges.subscribe( e => {
+    this.controlForm('calorias').get('gastoEnergetico').valueChanges.subscribe(e => {
       this.searchByCaloria(e);
     });
   }
-  /* */
+  getTotalIngesta() {
+    let totalRacion = 0;
+    let totalEnergia = 0;
+    let totalProteina = 0;
+    let totalLipido = 0;
+    let totalCarbohidrato = 0;
+    this.ingesta.forEach(ingesta => {
+      totalRacion = Number(totalRacion) + Number(this.controlForm('ingesta').get(ingesta).value.racion);
+      totalEnergia = Number(totalEnergia) + Number(this.controlForm('ingesta').get(ingesta).value.energia);
+      console.log(totalEnergia);
+      totalProteina = Number(totalProteina) + Number(this.controlForm('ingesta').get(ingesta).value.proteina);
+      totalLipido = Number(totalLipido) + Number(this.controlForm('ingesta').get(ingesta).value.lipido);
+      totalCarbohidrato = Number(totalCarbohidrato) + Number(this.controlForm('ingesta').get(ingesta).value.carbohidrato);
+    });
+    this.controlForm('ingesta').patchValue({
+      totalRacion,
+      totalEnergia,
+      totalProteina,
+      totalLipido,
+      totalCarbohidrato,
+    }, { emitEvent: false });
+    this.setTotalAdecuacion();
+  }
   setValueIngestaGroupControl() {
     this.ingesta.forEach(type => {
       this.controlForm('ingesta').get(type).valueChanges.subscribe(e => {
         const racion = e.racion;
-        this.intercambioService.searchByGrupo(type).subscribe( grupo => {
-          this.controlForm('ingesta').get(type).patchValue({
+        this.intercambioService.searchByGrupo(type).subscribe(grupo => {
+          const value = {
             racion,
-            energia:  Number(racion) * Number(grupo.energia),
-            proteina:  Number(racion) * Number(grupo.proteina),
-            carbohidrato:  Number(racion) * Number(grupo.carbohidrato),
-            lipido:  Number(racion) * Number(grupo.lipido),
-          }, { emitEvent: false });
+            energia: Number(racion) * Number(grupo.energia),
+            proteina: Number(racion) * Number(grupo.proteina),
+            carbohidrato: Number(racion) * Number(grupo.carbohidrato),
+            lipido: Number(racion) * Number(grupo.lipido),
+          };
+          console.log(value);
+          this.controlForm('ingesta').get(type).patchValue(value, { emitEvent: false });
+          this.getTotalIngesta();
         });
       });
     });
@@ -99,10 +163,10 @@ export class StorePage implements OnInit {
     this.intercambioService.searchByGrupo(type).subscribe(e => {
       this.controlForm('ingesta').get(type).patchValue({
         racion,
-        energia:  Number(racion) * Number(e.energia),
-        proteina:  Number(racion) * Number(e.proteina),
-        carbohidrato:  Number(racion) * Number(e.carbohidrato),
-        lipido:  Number(racion) * Number(e.lipido),
+        energia: Number(racion) * Number(e.energia),
+        proteina: Number(racion) * Number(e.proteina),
+        carbohidrato: Number(racion) * Number(e.carbohidrato),
+        lipido: Number(racion) * Number(e.lipido),
       }, { emitEvent: false });
     });
   }
@@ -115,6 +179,7 @@ export class StorePage implements OnInit {
       this.controlForm('calorias').get(`totalCaloria`).patchValue(totalCaloria, { emitEvent: false });
       this.controlForm('calorias').get(`totalGramo`).patchValue(totalGramo, { emitEvent: false });
     });
+    this.getTotalIngesta();
   }
   getTotalFromType(type) {
     const carbohidratoCaloria = this.controlForm('calorias').get(`carbohidrato${type}`).value;
