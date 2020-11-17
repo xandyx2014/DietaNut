@@ -168,6 +168,7 @@ export class StorePage implements OnInit {
         carbohidrato: Number(racion) * Number(e.carbohidrato),
         lipido: Number(racion) * Number(e.lipido),
       }, { emitEvent: false });
+      this.getTotalIngesta();
     });
   }
   getTotal() {
