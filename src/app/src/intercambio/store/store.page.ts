@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { zipAll } from 'rxjs/operators';
+import { IntercambioService } from 'src/app/services/intercambio.service';
 import { RacionService } from 'src/app/services/racion.service';
 
 @Component({
@@ -12,7 +14,8 @@ export class StorePage implements OnInit {
   public isRender = false;
   constructor(
     private fb: FormBuilder,
-    private racionService: RacionService
+    private racionService: RacionService,
+    private intercambioService: IntercambioService
   ) { }
   ionViewWillEnter() {
     this.myForm = this.fb.group({
@@ -29,9 +32,60 @@ export class StorePage implements OnInit {
         grasas: 0,
         grasasCaloria: this.fb.control({ value: 0, disabled: true }),
         grasasGramo: this.fb.control({ value: 0, disabled: true }),
-        total: 0,
-        totalCaloria: 0,
-        totalGramo: 0
+        total: this.fb.control({ value: 0, disabled: true }),
+        totalCaloria: this.fb.control({ value: 0, disabled: true }),
+        totalGramo: this.fb.control({ value: 0, disabled: true }),
+      }),
+      ingesta: this.fb.group({
+        cereales: this.fb.group({
+          racion: this.fb.control(0),
+          energia: this.fb.control({ value: 0, disabled: true }),
+          proteina: this.fb.control({ value: 0, disabled: true }),
+          carbohidrato: this.fb.control({ value: 0, disabled: true }),
+          lipido: this.fb.control({ value: 0, disabled: true }),
+        }),
+        verduras: this.fb.group({
+          racion: this.fb.control(0),
+          energia: this.fb.control({ value: 0, disabled: true }),
+          proteina: this.fb.control({ value: 0, disabled: true }),
+          carbohidrato: this.fb.control({ value: 0, disabled: true }),
+          lipido: this.fb.control({ value: 0, disabled: true }),
+        }),
+        frutas: this.fb.group({
+          racion: this.fb.control(0),
+          energia: this.fb.control({ value: 0, disabled: true }),
+          proteina: this.fb.control({ value: 0, disabled: true }),
+          carbohidrato: this.fb.control({ value: 0, disabled: true }),
+          lipido: this.fb.control({ value: 0, disabled: true }),
+        }),
+        leche: this.fb.group({
+          racion: this.fb.control(0),
+          energia: this.fb.control({ value: 0, disabled: true }),
+          proteina: this.fb.control({ value: 0, disabled: true }),
+          carbohidrato: this.fb.control({ value: 0, disabled: true }),
+          lipido: this.fb.control({ value: 0, disabled: true }),
+        }),
+        carne: this.fb.group({
+          racion: this.fb.control(0),
+          energia: this.fb.control({ value: 0, disabled: true }),
+          proteina: this.fb.control({ value: 0, disabled: true }),
+          carbohidrato: this.fb.control({ value: 0, disabled: true }),
+          lipido: this.fb.control({ value: 0, disabled: true }),
+        }),
+        azucarados: this.fb.group({
+          racion: this.fb.control(0),
+          energia: this.fb.control({ value: 0, disabled: true }),
+          proteina: this.fb.control({ value: 0, disabled: true }),
+          carbohidrato: this.fb.control({ value: 0, disabled: true }),
+          lipido: this.fb.control({ value: 0, disabled: true }),
+        }),
+        grasas: this.fb.group({
+          racion: this.fb.control(0),
+          energia: this.fb.control({ value: 0, disabled: true }),
+          proteina: this.fb.control({ value: 0, disabled: true }),
+          carbohidrato: this.fb.control({ value: 0, disabled: true }),
+          lipido: this.fb.control({ value: 0, disabled: true }),
+        }),
       })
     });
     this.setValueFromValue('carbohidrato');
@@ -42,15 +96,44 @@ export class StorePage implements OnInit {
   }
   searchByCaloria(gastoEnergetico: number) {
     this.racionService.searchByCaloria(gastoEnergetico).subscribe( resp => {
-      console.log(resp);
+      this.controlForm('ingesta').get('cereales').get('racion').patchValue(resp.cereales, { emitEvent: false });
+      this.controlForm('ingesta').get('verduras').get('racion').patchValue(resp.verduras, { emitEvent: false });
+      this.controlForm('ingesta').get('frutas').get('racion').patchValue(resp.frutas, { emitEvent: false });
+      this.controlForm('ingesta').get('leche').get('racion').patchValue(resp.leche, { emitEvent: false });
+      this.controlForm('ingesta').get('carne').get('racion').patchValue(resp.carne, { emitEvent: false });
+      this.controlForm('ingesta').get('azucarados').get('racion').patchValue(resp.azucarados, { emitEvent: false });
+      this.controlForm('ingesta').get('grasas').get('racion').patchValue(resp.grasas, { emitEvent: false });
+      this.addIntercambioValue('cereales');
+      this.addIntercambioValue('verduras');
+      this.addIntercambioValue('frutas');
+      this.addIntercambioValue('leche');
+      this.addIntercambioValue('carne');
+      this.addIntercambioValue('azucarados');
+      this.addIntercambioValue('grasas');
+    });
+  }
+  addIntercambioValue(type) {
+    this.intercambioService.searchByGrupo(type).subscribe( e => {
+      this.controlForm('ingesta')
+      .get(type)
+      .get('energia').patchValue(e.energia, { emitEvent: false });
+      this.controlForm('ingesta')
+      .get(type)
+      .get('proteina').patchValue(e.proteina, { emitEvent: false });
+      this.controlForm('ingesta')
+      .get(type)
+      .get('carbohidrato').patchValue(e.carbohidrato, { emitEvent: false });
+      this.controlForm('ingesta')
+      .get(type)
+      .get('lipido').patchValue(e.lipido, { emitEvent: false });
     });
   }
   getTotal() {
     this.controlForm('calorias').valueChanges.subscribe(e => {
       this.searchByCaloria(e.gastoEnergetico);
       const total = Number(e.carbohidrato) + Number(e.proteina) + Number(e.grasas);
-      const totalCaloria = this.getTotalFromType('Caloria');
-      const totalGramo = this.getTotalFromType('Gramo');
+      const totalCaloria = this.getTotalFromType('Caloria').toFixed(2);
+      const totalGramo = this.getTotalFromType('Gramo').toFixed(2);
       this.controlForm('calorias').get(`total`).patchValue(total, { emitEvent: false });
       this.controlForm('calorias').get(`totalCaloria`).patchValue(totalCaloria, { emitEvent: false });
       this.controlForm('calorias').get(`totalGramo`).patchValue(totalGramo, { emitEvent: false });

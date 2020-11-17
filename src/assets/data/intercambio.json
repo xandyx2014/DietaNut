@@ -1,0 +1,58 @@
+[
+    {
+        "grupo": "cereales",
+        "racion": "0",
+        "energia": "132",
+        "proteina": "5",
+        "lipido": "1",
+        "carbohidrato": "24"
+    },
+    {
+        "grupo": "verduras",
+        "racion": "0",
+        "energia": "30",
+        "proteina": "1",
+        "lipido": "0",
+        "carbohidrato": "5"
+    },
+    {
+        "grupo": "frutas",
+        "racion": "0",
+        "energia": "60",
+        "proteina": "1",
+        "lipido": "0",
+        "carbohidrato": "14"
+    },
+    {
+        "grupo": "leche",
+        "racion": "0",
+        "energia": "118",
+        "proteina": "8.33",
+        "lipido": "5",
+        "carbohidrato": "9"
+    },
+    {
+        "grupo": "carne",
+        "racion": "0",
+        "energia": "93.5",
+        "proteina": "8",
+        "lipido": "4.67",
+        "carbohidrato": "2"
+    },
+    {
+        "grupo": "azucarados",
+        "racion": "0",
+        "energia": "24",
+        "proteina": "0",
+        "lipido": "0",
+        "carbohidrato": "5"
+    },
+    {
+        "grupo": "grasas",
+        "racion": "0",
+        "energia": "102.5",
+        "proteina": "2",
+        "lipido": "9.5",
+        "carbohidrato": "2.5"
+    }
+]
