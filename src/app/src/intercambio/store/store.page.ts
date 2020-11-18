@@ -13,6 +13,7 @@ export class StorePage implements OnInit {
   public myForm: FormGroup;
   public isRender = false;
   private ingesta = ['cereales', 'verduras', 'frutas', 'leche', 'carne', 'azucarados', 'grasas'];
+  private distribucion = ['desayuno', 'merianda', 'almuerzo', 'meriendaTwo', 'cena' ];
   constructor(
     private fb: FormBuilder,
     private racionService: RacionService,
@@ -37,6 +38,15 @@ export class StorePage implements OnInit {
         total: this.fb.control({ value: 0, disabled: true }),
         totalCaloria: this.fb.control({ value: 0, disabled: true }),
         totalGramo: this.fb.control({ value: 0, disabled: true }),
+      }),
+      distribucion: this.fb.group({
+        cereales: this.createDistribucionControl(),
+        verduras: this.createDistribucionControl(),
+        frutas: this.createDistribucionControl(),
+        leche: this.createDistribucionControl(),
+        carne: this.createDistribucionControl(),
+        azucarados: this.createDistribucionControl(),
+        grasas: this.createDistribucionControl(),
       }),
       ingesta: this.fb.group({
         cereales: this.createIngestaControl(),
@@ -109,7 +119,6 @@ export class StorePage implements OnInit {
     this.ingesta.forEach(ingesta => {
       totalRacion = Number(totalRacion) + Number(this.controlForm('ingesta').get(ingesta).value.racion);
       totalEnergia = Number(totalEnergia) + Number(this.controlForm('ingesta').get(ingesta).value.energia);
-      console.log(totalEnergia);
       totalProteina = Number(totalProteina) + Number(this.controlForm('ingesta').get(ingesta).value.proteina);
       totalLipido = Number(totalLipido) + Number(this.controlForm('ingesta').get(ingesta).value.lipido);
       totalCarbohidrato = Number(totalCarbohidrato) + Number(this.controlForm('ingesta').get(ingesta).value.carbohidrato);
@@ -135,7 +144,6 @@ export class StorePage implements OnInit {
             carbohidrato: Number(racion) * Number(grupo.carbohidrato),
             lipido: Number(racion) * Number(grupo.lipido),
           };
-          console.log(value);
           this.controlForm('ingesta').get(type).patchValue(value, { emitEvent: false });
           this.getTotalIngesta();
         });
@@ -149,18 +157,33 @@ export class StorePage implements OnInit {
       proteina: 0,
       carbohidrato: 0,
       lipido: 0,
+      grasas: 0
+    });
+  }
+  createDistribucionControl(): FormGroup {
+    return this.fb.group({
+      racion: 0,
+      desayuno: 0,
+      merienda: 0,
+      almuerzo: 0,
+      meriendaTwo: 0,
+      cena: 0
     });
   }
   searchByCaloria(gastoEnergetico: number) {
     this.racionService.searchByCaloria(gastoEnergetico).subscribe(resp => {
       this.ingesta.forEach(e => {
+        // cambia la racion del grupo
         this.controlForm('ingesta').get(e).get('racion').patchValue(resp[e], { emitEvent: false });
+        /* console.log( this.controlForm('distribucion').get(e)); */
+        this.controlForm('distribucion').get(e).get('racion').patchValue(resp[e], { emitEvent: false });
         this.addIntercambioValue(e, resp[e]);
       });
     });
   }
   addIntercambioValue(type, racion) {
     this.intercambioService.searchByGrupo(type).subscribe(e => {
+      // Se agregado la ingesta de alimentos para cereales, verduras, frutas
       this.controlForm('ingesta').get(type).patchValue({
         racion,
         energia: Number(racion) * Number(e.energia),

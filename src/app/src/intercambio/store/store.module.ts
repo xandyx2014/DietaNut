@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { StorePageRoutingModule } from './store-routing.module';
 
 import { StorePage } from './store.page';
+import { DistribucionPipe } from './total.pipe';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { StorePage } from './store.page';
     IonicModule,
     StorePageRoutingModule
   ],
-  declarations: [StorePage]
+  declarations: [StorePage, DistribucionPipe]
 })
 export class StorePageModule {}
