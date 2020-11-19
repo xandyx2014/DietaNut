@@ -4,7 +4,8 @@ import { ActionSheetController, AlertController, ToastController } from '@ionic/
 import { Observable } from 'rxjs';
 import { DietaService } from 'src/app/services/dieta.service';
 import { StorageService } from 'src/app/services/storage.local.service';
-
+import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable';
 @Component({
   selector: 'app-intercambio',
   templateUrl: './intercambio.page.html',
@@ -28,6 +29,205 @@ export class IntercambioPage implements OnInit {
   }
   getAllDietas() {
     this.dietas$ = this.dietaService.getAll('intercambio');
+  }
+  public async downloadAsPDF(resp) {
+    const doc = new jsPDF();
+    const valueStorage: any = await this.storageService.buscarPorUid('intercambio', resp.uid);
+    console.log(valueStorage);
+    doc.setFontSize(16).text(valueStorage.titulo, 15, 10);
+    doc.setFontSize(12).text('Distribucion de macronutriente', 15, 20);
+    doc.text(`Gasto energetico: ${valueStorage.calorias.gastoEnergetico}`, 15, 28);
+    autoTable(doc, {
+      theme: 'striped',
+      margin: { top: 30 },
+      head: [['Macronutrientes', '%', 'Calorias', 'Gramos']],
+      body: [
+        [
+          'Carbohidrato',
+          valueStorage.calorias.carbohidrato,
+          valueStorage.calorias.carbohidratoCaloria,
+          valueStorage.calorias.carbohidratoGramo
+        ],
+        [
+          'Proteina',
+          valueStorage.calorias.proteina,
+          valueStorage.calorias.proteinaCaloria,
+          valueStorage.calorias.proteinaGramo
+        ],
+        [
+          'Grasas',
+          valueStorage.calorias.grasas,
+          valueStorage.calorias.grasasCaloria,
+          valueStorage.calorias.grasasGramo
+        ],
+        [
+          'Total',
+          valueStorage.calorias.total,
+          valueStorage.calorias.totalCaloria,
+          valueStorage.calorias.totalGramo
+        ],
+      ],
+    }
+    );
+    autoTable(doc, {
+      theme: 'grid',
+      head: [['Grupo de alimentos', 'Raciones', 'Energia', 'Proteinas', 'Lipidos', 'Carbohidratos']],
+      body: [
+        [
+          'Cereales y derivados',
+          valueStorage.ingesta.cereales.racion,
+          valueStorage.ingesta.cereales.energia,
+          valueStorage.ingesta.cereales.proteina,
+          valueStorage.ingesta.cereales.lipido,
+          valueStorage.ingesta.cereales.carbohidrato,
+        ],
+        [
+          'Verduras',
+          valueStorage.ingesta.verduras.racion,
+          valueStorage.ingesta.verduras.energia,
+          valueStorage.ingesta.verduras.proteina,
+          valueStorage.ingesta.verduras.lipido,
+          valueStorage.ingesta.verduras.carbohidrato,
+        ],
+        [
+          'Frutas',
+          valueStorage.ingesta.frutas.racion,
+          valueStorage.ingesta.frutas.energia,
+          valueStorage.ingesta.frutas.proteina,
+          valueStorage.ingesta.frutas.lipido,
+          valueStorage.ingesta.frutas.carbohidrato,
+        ],
+        [
+          'Leche y derivados',
+          valueStorage.ingesta.leche.racion,
+          valueStorage.ingesta.leche.energia,
+          valueStorage.ingesta.leche.proteina,
+          valueStorage.ingesta.leche.lipido,
+          valueStorage.ingesta.leche.carbohidrato,
+        ],
+        [
+          'Carne, pesecado y huevos',
+          valueStorage.ingesta.carne.racion,
+          valueStorage.ingesta.carne.energia,
+          valueStorage.ingesta.carne.proteina,
+          valueStorage.ingesta.carne.lipido,
+          valueStorage.ingesta.carne.carbohidrato,
+        ],
+        [
+          'Producto azucarados',
+          valueStorage.ingesta.azucarados.racion,
+          valueStorage.ingesta.azucarados.energia,
+          valueStorage.ingesta.azucarados.proteina,
+          valueStorage.ingesta.azucarados.lipido,
+          valueStorage.ingesta.azucarados.carbohidrato,
+        ],
+        [
+          'Grasas',
+          valueStorage.ingesta.grasas.racion,
+          valueStorage.ingesta.grasas.energia,
+          valueStorage.ingesta.grasas.proteina,
+          valueStorage.ingesta.grasas.lipido,
+          valueStorage.ingesta.grasas.carbohidrato,
+        ],
+        [
+          'Total',
+          valueStorage.ingesta.totalRacion,
+          valueStorage.ingesta.totalEnergia,
+          valueStorage.ingesta.totalProteina,
+          valueStorage.ingesta.totalLipido,
+          valueStorage.ingesta.totalCarbohidrato,
+        ],
+        [
+          'Requerimiento',
+          valueStorage.ingesta.requerimiento.racion,
+          valueStorage.ingesta.requerimiento.energia,
+          valueStorage.ingesta.requerimiento.proteina,
+          valueStorage.ingesta.requerimiento.lipido,
+          valueStorage.ingesta.requerimiento.carbohidrato,
+        ],
+        [
+          '% Adecuacion',
+          `${valueStorage.ingesta.adecuacion.racion} %`,
+          `${valueStorage.ingesta.adecuacion.energia} %`,
+          `${valueStorage.ingesta.adecuacion.proteina} %`,
+          `${valueStorage.ingesta.adecuacion.lipido} %`,
+          `${valueStorage.ingesta.adecuacion.carbohidrato} %`,
+        ],
+      ],
+    }
+    );
+    autoTable(doc, {
+      theme: 'striped',
+      margin: { top: 30 },
+      head: [['Grupo de alimentos', 'Raciones', 'Desayuno', 'Merienda', 'Almuerzo', 'Merienda', 'Cena']],
+      body: [
+        [
+          'Cereales y derivados',
+          `${valueStorage.distribucion.cereales.racion}`,
+          `${valueStorage.distribucion.cereales.desayuno}`,
+          `${valueStorage.distribucion.cereales.merienda}`,
+          `${valueStorage.distribucion.cereales.almuerzo}`,
+          `${valueStorage.distribucion.cereales.merienda}`,
+          `${valueStorage.distribucion.cereales.cena}`,
+        ],
+        [
+          'Verduras',
+          `${valueStorage.distribucion.verduras.racion}`,
+          `${valueStorage.distribucion.verduras.desayuno}`,
+          `${valueStorage.distribucion.verduras.merienda}`,
+          `${valueStorage.distribucion.verduras.almuerzo}`,
+          `${valueStorage.distribucion.verduras.merienda}`,
+          `${valueStorage.distribucion.verduras.cena}`,
+        ],
+        [
+          'Frutas',
+          `${valueStorage.distribucion.frutas.racion}`,
+          `${valueStorage.distribucion.frutas.desayuno}`,
+          `${valueStorage.distribucion.frutas.merienda}`,
+          `${valueStorage.distribucion.frutas.almuerzo}`,
+          `${valueStorage.distribucion.frutas.merienda}`,
+          `${valueStorage.distribucion.frutas.cena}`,
+        ],
+        [
+          'Leche y derivados',
+          `${valueStorage.distribucion.leche.racion}`,
+          `${valueStorage.distribucion.leche.desayuno}`,
+          `${valueStorage.distribucion.leche.merienda}`,
+          `${valueStorage.distribucion.leche.almuerzo}`,
+          `${valueStorage.distribucion.leche.merienda}`,
+          `${valueStorage.distribucion.leche.cena}`,
+        ],
+        [
+          'Carne, pescado y huevos',
+          `${valueStorage.distribucion.carne.racion}`,
+          `${valueStorage.distribucion.carne.desayuno}`,
+          `${valueStorage.distribucion.carne.merienda}`,
+          `${valueStorage.distribucion.carne.almuerzo}`,
+          `${valueStorage.distribucion.carne.merienda}`,
+          `${valueStorage.distribucion.carne.cena}`,
+        ],
+        [
+          'Productos azucarados',
+          `${valueStorage.distribucion.azucarados.racion}`,
+          `${valueStorage.distribucion.azucarados.desayuno}`,
+          `${valueStorage.distribucion.azucarados.merienda}`,
+          `${valueStorage.distribucion.azucarados.almuerzo}`,
+          `${valueStorage.distribucion.azucarados.merienda}`,
+          `${valueStorage.distribucion.azucarados.cena}`,
+        ],
+        [
+          'Grasas',
+          `${valueStorage.distribucion.grasas.racion}`,
+          `${valueStorage.distribucion.grasas.desayuno}`,
+          `${valueStorage.distribucion.grasas.merienda}`,
+          `${valueStorage.distribucion.grasas.almuerzo}`,
+          `${valueStorage.distribucion.grasas.merienda}`,
+          `${valueStorage.distribucion.grasas.cena}`,
+        ]
+      ],
+    }
+    );
+    doc.save('distribucion_dieta.pdf');
   }
   async presentToast(message: string) {
     const toast = await this.toastController.create({
@@ -53,14 +253,14 @@ export class IntercambioPage implements OnInit {
         text: 'Ver o Editar',
         icon: 'book-outline',
         handler: async () => {
-          this.router.navigate(['/intercambio/store'], { queryParams: { edit: true, uid: dieta.uid}});
+          this.router.navigate(['/intercambio/store'], { queryParams: { edit: true, uid: dieta.uid } });
           const valueStorage = await this.storageService.buscarPorUid('composicion', dieta.uid);
         }
       }, {
         text: 'Exportar',
         icon: 'share-social-outline',
         handler: () => {
-          console.log('Play clicked');
+          this.downloadAsPDF(dieta);
         }
       },
       {

@@ -29,7 +29,12 @@
             <ion-textarea formControlName="descripcion" placeholder="Esta es una pequeña descripcion"></ion-textarea>
           </ion-item>
           <ion-list-header>
-            <ion-label color="dark"> <b>Desayuno</b> </ion-label>
+            <ion-label color="dark"> 
+              <b>Desayuno</b> 
+              <ion-button (click)="exportexcel()">
+                <ion-icon name="document-attach-outline"></ion-icon>
+              </ion-button>
+            </ion-label>
             <ion-button color="dark" fill="outline" (click)="addFormControl('desayuno')">Agregar <ion-icon
                 name="add-circle-outline">
               </ion-icon>
@@ -41,7 +46,7 @@
                 <ion-col>
                   <div id="table-scroll" class="table-scroll">
                     <div class="table-wrap">
-                      <table class="main-table">
+                      <table class="main-table" id="excel-table">
                         <thead>
                           <tr>
                             <th scope="col" style="margin: 25px !important">Nombre</th>
@@ -78,13 +83,15 @@
                               <tr [formGroupName]="i">
 
                                 <td style="margin: 25px !important">
-                                  <ion-input formControlName="nombre" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.nombre }}
                                 </td>
                                 <td>
                                   <ion-input color="dark" formControlName="cantidad" clearInput min="0"
                                     inputmode="numeric" placeholder="0.00">
                                   </ion-input>
+                                  <div style="display: none;">
+                                    {{ item.value.cantidad }}
+                                  </div>
                                 </td>
                                 <td>
                                   <ion-button color="success" (click)="changeControlValue('desayuno', i)" fill="solid">
@@ -97,92 +104,75 @@
                                   </ion-button>
                                 </td>
                                 <td>
-                                  <ion-input formControlName="energia" clearInput readonly="true">
-                                  </ion-input>
+                                  <!-- <ion-input formControlName="energia" clearInput readonly="true">
+                                  </ion-input> -->
+                                  {{ item.value.energia }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="humedad" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.humedad }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="proteina" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.proteina }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="grasa" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.grasa }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="hc" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.hc }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="fibra_cruda" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.fibra_cruda }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="ceniza" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.ceniza }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="fosforo" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.fosforo }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="hierro" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.hierro }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="vit_a" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.vit_a }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="tiamina" clearInput readonly="true">
-                                  </ion-input>
+                                
+                                  {{ item.value.tiamina }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="riboflavina" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.riboflavina }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="niacina" clearInput readonly="true">
-                                  </ion-input>
+                                
+                                  {{ item.value.niacina }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="vit_c" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.vit_c }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="agm" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.agm }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="agp" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.agp }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="ags" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.ags }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="col" clearInput readonly="true">
-                                  </ion-input>
+                                
+                                  {{ item.value.col }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="potasio" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.potasio }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="sodio" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.sodio }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="zinc" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.zinc }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="vit_b12" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.vit_b12 }}
                                 </td>
                               </tr>
                             </ng-container>
@@ -253,13 +243,15 @@
                               <tr [formGroupName]="i">
 
                                 <td style="margin: 25px !important">
-                                  <ion-input formControlName="nombre" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.nombre }}
                                 </td>
                                 <td>
                                   <ion-input color="dark" formControlName="cantidad" clearInput min="0"
                                     inputmode="numeric" placeholder="0.00">
                                   </ion-input>
+                                  <div style="display: none;">
+                                    {{ item.value.cantidad }}
+                                  </div>
                                 </td>
                                 <td>
                                   <ion-button color="success" (click)="changeControlValue('merienda', i)" fill="solid">
@@ -272,92 +264,75 @@
                                   </ion-button>
                                 </td>
                                 <td>
-                                  <ion-input formControlName="energia" clearInput readonly="true">
-                                  </ion-input>
+                                  <!-- <ion-input formControlName="energia" clearInput readonly="true">
+                                  </ion-input> -->
+                                  {{ item.value.energia }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="humedad" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.humedad }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="proteina" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.proteina }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="grasa" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.grasa }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="hc" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.hc }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="fibra_cruda" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.fibra_cruda }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="ceniza" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.ceniza }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="fosforo" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.fosforo }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="hierro" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.hierro }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="vit_a" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.vit_a }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="tiamina" clearInput readonly="true">
-                                  </ion-input>
+                                
+                                  {{ item.value.tiamina }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="riboflavina" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.riboflavina }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="niacina" clearInput readonly="true">
-                                  </ion-input>
+                                
+                                  {{ item.value.niacina }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="vit_c" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.vit_c }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="agm" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.agm }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="agp" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.agp }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="ags" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.ags }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="col" clearInput readonly="true">
-                                  </ion-input>
+                                
+                                  {{ item.value.col }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="potasio" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.potasio }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="sodio" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.sodio }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="zinc" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.zinc }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="vit_b12" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.vit_b12 }}
                                 </td>
                               </tr>
                             </ng-container>
@@ -425,13 +400,15 @@
                               <tr [formGroupName]="i">
 
                                 <td style="margin: 25px !important">
-                                  <ion-input formControlName="nombre" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.nombre }}
                                 </td>
                                 <td>
                                   <ion-input color="dark" formControlName="cantidad" clearInput min="0"
                                     inputmode="numeric" placeholder="0.00">
                                   </ion-input>
+                                  <div style="display: none;">
+                                    {{ item.value.cantidad }}
+                                  </div>
                                 </td>
                                 <td>
                                   <ion-button color="success" (click)="changeControlValue('almuerzo', i)" fill="solid">
@@ -444,92 +421,75 @@
                                   </ion-button>
                                 </td>
                                 <td>
-                                  <ion-input formControlName="energia" clearInput readonly="true">
-                                  </ion-input>
+                                  <!-- <ion-input formControlName="energia" clearInput readonly="true">
+                                  </ion-input> -->
+                                  {{ item.value.energia }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="humedad" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.humedad }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="proteina" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.proteina }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="grasa" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.grasa }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="hc" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.hc }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="fibra_cruda" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.fibra_cruda }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="ceniza" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.ceniza }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="fosforo" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.fosforo }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="hierro" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.hierro }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="vit_a" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.vit_a }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="tiamina" clearInput readonly="true">
-                                  </ion-input>
+                                
+                                  {{ item.value.tiamina }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="riboflavina" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.riboflavina }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="niacina" clearInput readonly="true">
-                                  </ion-input>
+                                
+                                  {{ item.value.niacina }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="vit_c" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.vit_c }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="agm" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.agm }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="agp" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.agp }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="ags" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.ags }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="col" clearInput readonly="true">
-                                  </ion-input>
+                                
+                                  {{ item.value.col }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="potasio" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.potasio }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="sodio" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.sodio }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="zinc" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.zinc }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="vit_b12" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.vit_b12 }}
                                 </td>
                               </tr>
                             </ng-container>
@@ -597,13 +557,15 @@
                               <tr [formGroupName]="i">
 
                                 <td style="margin: 25px !important">
-                                  <ion-input formControlName="nombre" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.nombre }}
                                 </td>
                                 <td>
                                   <ion-input color="dark" formControlName="cantidad" clearInput min="0"
                                     inputmode="numeric" placeholder="0.00">
                                   </ion-input>
+                                  <div style="display: none;">
+                                    {{ item.value.cantidad }}
+                                  </div>
                                 </td>
                                 <td>
                                   <ion-button color="success" (click)="changeControlValue('te', i)" fill="solid">
@@ -616,92 +578,75 @@
                                   </ion-button>
                                 </td>
                                 <td>
-                                  <ion-input formControlName="energia" clearInput readonly="true">
-                                  </ion-input>
+                                  <!-- <ion-input formControlName="energia" clearInput readonly="true">
+                                  </ion-input> -->
+                                  {{ item.value.energia }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="humedad" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.humedad }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="proteina" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.proteina }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="grasa" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.grasa }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="hc" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.hc }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="fibra_cruda" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.fibra_cruda }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="ceniza" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.ceniza }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="fosforo" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.fosforo }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="hierro" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.hierro }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="vit_a" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.vit_a }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="tiamina" clearInput readonly="true">
-                                  </ion-input>
+                                
+                                  {{ item.value.tiamina }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="riboflavina" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.riboflavina }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="niacina" clearInput readonly="true">
-                                  </ion-input>
+                                
+                                  {{ item.value.niacina }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="vit_c" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.vit_c }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="agm" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.agm }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="agp" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.agp }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="ags" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.ags }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="col" clearInput readonly="true">
-                                  </ion-input>
+                                
+                                  {{ item.value.col }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="potasio" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.potasio }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="sodio" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.sodio }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="zinc" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.zinc }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="vit_b12" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.vit_b12 }}
                                 </td>
                               </tr>
                             </ng-container>
@@ -769,13 +714,15 @@
                               <tr [formGroupName]="i">
 
                                 <td style="margin: 25px !important">
-                                  <ion-input formControlName="nombre" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.nombre }}
                                 </td>
                                 <td>
                                   <ion-input color="dark" formControlName="cantidad" clearInput min="0"
                                     inputmode="numeric" placeholder="0.00">
                                   </ion-input>
+                                  <div style="display: none;">
+                                    {{ item.value.cantidad }}
+                                  </div>
                                 </td>
                                 <td>
                                   <ion-button color="success" (click)="changeControlValue('cena', i)" fill="solid">
@@ -788,92 +735,75 @@
                                   </ion-button>
                                 </td>
                                 <td>
-                                  <ion-input formControlName="energia" clearInput readonly="true">
-                                  </ion-input>
+                                  <!-- <ion-input formControlName="energia" clearInput readonly="true">
+                                  </ion-input> -->
+                                  {{ item.value.energia }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="humedad" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.humedad }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="proteina" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.proteina }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="grasa" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.grasa }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="hc" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.hc }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="fibra_cruda" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.fibra_cruda }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="ceniza" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.ceniza }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="fosforo" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.fosforo }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="hierro" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.hierro }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="vit_a" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.vit_a }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="tiamina" clearInput readonly="true">
-                                  </ion-input>
+                                
+                                  {{ item.value.tiamina }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="riboflavina" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.riboflavina }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="niacina" clearInput readonly="true">
-                                  </ion-input>
+                                
+                                  {{ item.value.niacina }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="vit_c" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.vit_c }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="agm" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.agm }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="agp" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.agp }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="ags" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.ags }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="col" clearInput readonly="true">
-                                  </ion-input>
+                                
+                                  {{ item.value.col }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="potasio" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.potasio }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="sodio" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.sodio }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="zinc" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.zinc }}
                                 </td>
                                 <td>
-                                  <ion-input formControlName="vit_b12" clearInput readonly="true">
-                                  </ion-input>
+                                  {{ item.value.vit_b12 }}
                                 </td>
                               </tr>
                             </ng-container>

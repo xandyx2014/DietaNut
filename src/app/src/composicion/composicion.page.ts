@@ -4,7 +4,6 @@ import { ActionSheetController, AlertController, ToastController } from '@ionic/
 import { Observable } from 'rxjs';
 import { DietaService } from 'src/app/services/dieta.service';
 import { StorageService } from 'src/app/services/storage.local.service';
-
 @Component({
   selector: 'app-composicion',
   templateUrl: './composicion.page.html',
@@ -53,14 +52,13 @@ export class ComposicionPage implements OnInit {
         text: 'Ver o Editar',
         icon: 'book-outline',
         handler: async () => {
-          this.router.navigate(['/composicion/store'], { queryParams: { edit: true, uid: dieta.uid}});
+          this.router.navigate(['/composicion/store'], { queryParams: { edit: true, uid: dieta.uid } });
           const valueStorage = await this.storageService.buscarPorUid('composicion', dieta.uid);
         }
       }, {
         text: 'Exportar',
         icon: 'share-social-outline',
         handler: () => {
-          console.log('Play clicked');
         }
       },
       {
