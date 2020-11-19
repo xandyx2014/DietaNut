@@ -9,7 +9,7 @@
 
 <ion-content>
   <ng-container *ngIf="isRender; else elseTemplate">
-    <form [formGroup]="myForm">
+    <form [formGroup]="myForm" #title>
       <ion-item>
         <ion-label position="stacked">Nombre de la dieta</ion-label>
         <ion-input formControlName="titulo" placeholder="Mi nombre de la dieta sera...."></ion-input>
@@ -265,7 +265,7 @@
           </tbody>
           </table>
       </div>
-      <ion-button (click)="store()" expand="full" class="ion-margin-top">
+      <ion-button (click)="store(title)" expand="full" class="ion-margin-top">
         <ion-icon name="save-outline"></ion-icon>
         Guardar
       </ion-button>

@@ -85,14 +85,16 @@ export class StorePage implements OnInit {
         vit_b12: 0
       }),
     });
-    return this.updateForm();
+    if (Object.keys(this.valueUpdate).length) {
+      return this.updateForm();
+    }
   }
   private updateForm() {
     this.addValueControl('desayuno', this.valueUpdate.desayuno);
-    this.addValueControl('merienda', this.valueUpdate.desayuno);
-    this.addValueControl('almuerzo', this.valueUpdate.desayuno);
-    this.addValueControl('te', this.valueUpdate.desayuno);
-    this.addValueControl('cena', this.valueUpdate.desayuno);
+    this.addValueControl('merienda', this.valueUpdate.merienda);
+    this.addValueControl('almuerzo', this.valueUpdate.almuerzo);
+    this.addValueControl('te', this.valueUpdate.te);
+    this.addValueControl('cena', this.valueUpdate.cena);
     this.addValueControl('req', this.valueUpdate.req);
   }
   async changeControlValue(type, index) {

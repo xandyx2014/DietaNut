@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { zipAll } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { IntercambioService } from 'src/app/services/intercambio.service';
 import { RacionService } from 'src/app/services/racion.service';
+import { StorageService } from 'src/app/services/storage.local.service';
 
 @Component({
   selector: 'app-store',
@@ -13,31 +15,50 @@ export class StorePage implements OnInit {
   public myForm: FormGroup;
   public isRender = false;
   private ingesta = ['cereales', 'verduras', 'frutas', 'leche', 'carne', 'azucarados', 'grasas'];
-  private distribucion = ['desayuno', 'merianda', 'almuerzo', 'meriendaTwo', 'cena' ];
+  private valueUpdate: any = {};
+  private edit = false;
   constructor(
     private fb: FormBuilder,
     private racionService: RacionService,
-    private intercambioService: IntercambioService
+    private storageLocal: StorageService,
+    private intercambioService: IntercambioService,
+    public router: Router,
+    public activatedRouter: ActivatedRoute,
+    public alertController: AlertController,
   ) { }
   ngOnInit() { }
   ionViewWillEnter() {
+    this.getQueryParams();
+  }
+  private getQueryParams() {
+    this.activatedRouter.queryParams.subscribe(async resp => {
+      if (Object.keys(resp).length) {
+        this.valueUpdate = await this.storageLocal.buscarPorUid('intercambio', resp.uid);
+        this.edit = resp.edit;
+      }
+      this.makeForm();
+    });
+  }
+  makeForm() {
     this.myForm = this.fb.group({
+      uid: this.uuid(),
       titulo: this.fb.control('', [Validators.required]),
       descripcion: '',
+      created_at: new Date().toString(),
       calorias: this.fb.group({
-        gastoEnergetico: this.fb.control(0, [Validators.required]),
+        gastoEnergetico: 0,
         carbohidrato: 0,
-        carbohidratoCaloria: this.fb.control({ value: 0, disabled: true }),
-        carbohidratoGramo: this.fb.control({ value: 0, disabled: true }),
+        carbohidratoCaloria: 0,
+        carbohidratoGramo: 0,
         proteina: 0,
-        proteinaCaloria: this.fb.control({ value: 0, disabled: true }),
-        proteinaGramo: this.fb.control({ value: 0, disabled: true }),
+        proteinaCaloria: 0,
+        proteinaGramo: 0,
         grasas: 0,
-        grasasCaloria: this.fb.control({ value: 0, disabled: true }),
-        grasasGramo: this.fb.control({ value: 0, disabled: true }),
-        total: this.fb.control({ value: 0, disabled: true }),
-        totalCaloria: this.fb.control({ value: 0, disabled: true }),
-        totalGramo: this.fb.control({ value: 0, disabled: true }),
+        grasasCaloria: 0,
+        grasasGramo: 0,
+        total: 0,
+        totalCaloria: 0,
+        totalGramo: 0,
       }),
       distribucion: this.fb.group({
         cereales: this.createDistribucionControl(),
@@ -85,6 +106,70 @@ export class StorePage implements OnInit {
     this.getTotal();
     this.getTotalAdecuacion();
     this.isRender = true;
+    if (Object.keys(this.valueUpdate).length) {
+      this.updateForm();
+    }
+  }
+  updateForm() {
+    this.myForm.patchValue({
+      uid: this.valueUpdate.uid,
+      titulo: this.valueUpdate.titulo,
+      descripcion: this.valueUpdate.descripcion,
+    }, { emitEvent: false });
+    this.controlForm('calorias').patchValue({
+      gastoEnergetico: this.valueUpdate.calorias.gastoEnergetico,
+      carbohidrato: this.valueUpdate.calorias.carbohidrato,
+      carbohidratoCaloria: this.valueUpdate.calorias.carbohidratoCaloria,
+      carbohidratoGramo: this.valueUpdate.calorias.carbohidratoGramo,
+      proteina: this.valueUpdate.calorias.proteina,
+      proteinaCaloria: this.valueUpdate.calorias.proteinaCaloria,
+      proteinaGramo: this.valueUpdate.calorias.proteinaGramo,
+      grasas: this.valueUpdate.calorias.grasas,
+      grasasCaloria: this.valueUpdate.calorias.grasasCaloria,
+      grasasGramo: this.valueUpdate.calorias.grasasGramo,
+      total: this.valueUpdate.calorias.total,
+      totalCaloria: this.valueUpdate.calorias.totalCaloria,
+      totalGramo: this.valueUpdate.calorias.totalGramo,
+    }, { emitEvent: false });
+    this.ingesta.forEach(ingesta => {
+      this.controlForm('distribucion').get(ingesta).patchValue({
+        racion: this.valueUpdate.distribucion[ingesta].racion,
+        desayuno: this.valueUpdate.distribucion[ingesta].desayuno,
+        merienda: this.valueUpdate.distribucion[ingesta].merienda,
+        almuerzo: this.valueUpdate.distribucion[ingesta].almuerzo,
+        meriendaTwo: this.valueUpdate.distribucion[ingesta].meriendaTwo,
+        cena: this.valueUpdate.distribucion[ingesta].cena
+      }, { emitEvent: false });
+      this.controlForm('ingesta').get(ingesta).patchValue({
+        racion: this.valueUpdate.ingesta[ingesta].racion,
+        energia: this.valueUpdate.ingesta[ingesta].energia,
+        proteina: this.valueUpdate.ingesta[ingesta].proteina,
+        carbohidrato: this.valueUpdate.ingesta[ingesta].carbohidrato,
+        lipido: this.valueUpdate.ingesta[ingesta].lipido,
+        grasas: this.valueUpdate.ingesta[ingesta].grasas
+      }, { emitEvent: false });
+    });
+    this.controlForm('ingesta').patchValue({
+      totalRacion: this.valueUpdate.ingesta.totalRacion,
+      totalEnergia: this.valueUpdate.ingesta.totalEnergia,
+      totalProteina: this.valueUpdate.ingesta.totalProteina,
+      totalLipido: this.valueUpdate.ingesta.totalLipido,
+      totalCarbohidrato: this.valueUpdate.ingesta.totalCarbohidrato,
+    }, { emitEvent: false });
+    this.controlForm('ingesta').get('requerimiento').patchValue({
+      racion: this.valueUpdate.ingesta.requerimiento.racion,
+      energia: this.valueUpdate.ingesta.requerimiento.energia,
+      proteina: this.valueUpdate.ingesta.requerimiento.proteina,
+      lipido: this.valueUpdate.ingesta.requerimiento.lipido,
+      carbohidrato: this.valueUpdate.ingesta.requerimiento.carbohidrato,
+    }, { emitEvent: false });
+    this.controlForm('ingesta').get('adecuacion').patchValue({
+      racion: this.valueUpdate.ingesta.adecuacion.racion,
+      energia: this.valueUpdate.ingesta.adecuacion.energia,
+      proteina: this.valueUpdate.ingesta.adecuacion.proteina,
+      lipido: this.valueUpdate.ingesta.adecuacion.lipido,
+      carbohidrato: this.valueUpdate.ingesta.adecuacion.carbohidrato,
+    }, { emitEvent: false });
   }
   getTotalAdecuacion() {
     this.controlForm('ingesta').get('requerimiento').valueChanges.subscribe(e => {
@@ -98,11 +183,11 @@ export class StorePage implements OnInit {
     const totalLipido = this.controlForm('ingesta').get('totalLipido').value;
     const totalCarbohidrato = this.controlForm('ingesta').get('totalCarbohidrato').value;
     this.controlForm('ingesta').get('adecuacion').patchValue({
-      racion:  ((this.controlForm('ingesta').get('requerimiento').value.racion / totalRacion) * 100 ).toFixed(2),
-      energia: ((this.controlForm('ingesta').get('requerimiento').value.energia / totalEnergia) * 100 ).toFixed(2),
-      proteina: ((this.controlForm('ingesta').get('requerimiento').value.proteina / totalProteina) * 100 ).toFixed(2),
-      lipido: ((this.controlForm('ingesta').get('requerimiento').value.lipido / totalLipido) * 100 ).toFixed(2),
-      carbohidrato: ((this.controlForm('ingesta').get('requerimiento').value.carbohidrato / totalCarbohidrato) * 100 ).toFixed(2),
+      racion: ((this.controlForm('ingesta').get('requerimiento').value.racion / totalRacion) * 100).toFixed(2),
+      energia: ((this.controlForm('ingesta').get('requerimiento').value.energia / totalEnergia) * 100).toFixed(2),
+      proteina: ((this.controlForm('ingesta').get('requerimiento').value.proteina / totalProteina) * 100).toFixed(2),
+      lipido: ((this.controlForm('ingesta').get('requerimiento').value.lipido / totalLipido) * 100).toFixed(2),
+      carbohidrato: ((this.controlForm('ingesta').get('requerimiento').value.carbohidrato / totalCarbohidrato) * 100).toFixed(2),
     }, { emitEvent: false });
   }
   searchGroupByCaloria() {
@@ -139,10 +224,10 @@ export class StorePage implements OnInit {
         this.intercambioService.searchByGrupo(type).subscribe(grupo => {
           const value = {
             racion,
-            energia: Number(racion) * Number(grupo.energia),
-            proteina: Number(racion) * Number(grupo.proteina),
-            carbohidrato: Number(racion) * Number(grupo.carbohidrato),
-            lipido: Number(racion) * Number(grupo.lipido),
+            energia: (Number(racion) * Number(grupo.energia)).toFixed(2),
+            proteina: (Number(racion) * Number(grupo.proteina)).toFixed(2),
+            carbohidrato: (Number(racion) * Number(grupo.carbohidrato)).toFixed(2),
+            lipido: (Number(racion) * Number(grupo.lipido)).toFixed(2),
           };
           this.controlForm('ingesta').get(type).patchValue(value, { emitEvent: false });
           this.getTotalIngesta();
@@ -186,17 +271,17 @@ export class StorePage implements OnInit {
       // Se agregado la ingesta de alimentos para cereales, verduras, frutas
       this.controlForm('ingesta').get(type).patchValue({
         racion,
-        energia: Number(racion) * Number(e.energia),
-        proteina: Number(racion) * Number(e.proteina),
-        carbohidrato: Number(racion) * Number(e.carbohidrato),
-        lipido: Number(racion) * Number(e.lipido),
+        energia: (Number(racion) * Number(e.energia)).toFixed(2),
+        proteina: (Number(racion) * Number(e.proteina)).toFixed(2),
+        carbohidrato: (Number(racion) * Number(e.carbohidrato)).toFixed(2),
+        lipido: (Number(racion) * Number(e.lipido)).toFixed(2),
       }, { emitEvent: false });
       this.getTotalIngesta();
     });
   }
   getTotal() {
     this.controlForm('calorias').valueChanges.subscribe(e => {
-      const total = Number(e.carbohidrato) + Number(e.proteina) + Number(e.grasas);
+      const total = (Number(e.carbohidrato) + Number(e.proteina) + Number(e.grasas)).toFixed(2);
       const totalCaloria = this.getTotalFromType('Caloria').toFixed(2);
       const totalGramo = this.getTotalFromType('Gramo').toFixed(2);
       this.controlForm('calorias').get(`total`).patchValue(total, { emitEvent: false });
@@ -233,9 +318,66 @@ export class StorePage implements OnInit {
   controlForm(type: string) {
     return this.myForm.get(type) as FormGroup;
   }
-
-  store() {
-    console.log(this.myForm.value);
+  private uuid() {
+    return `${Date.now()}-${new Date().getMilliseconds()}-${new Date().getSeconds()}`;
+  }
+  async store(el) {
+    const resport = await this.alertMessage(el);
+    if (resport) {
+      return;
+    }
+    if (Object.keys(this.valueUpdate).length) {
+      return await this.updateValue();
+    }
+    await this.storeValue();
+  }
+  async updateValue() {
+    const value = this.myForm.value;
+    console.log('update');
+    await this.storageLocal.actualizarDato(value.uid, this.myForm.value, 'intercambio');
+    this.router.navigate(['/home']);
+    const alertSuccesStorage = await this.alertController.create({
+      header: 'Exito',
+      mode: 'md',
+      subHeader: 'Se ha actualizado tu dieta correctamente',
+      message: 'Puedes revisarlo en tu lista de tus dietas',
+      buttons: ['Aceptar']
+    });
+    return await alertSuccesStorage.present();
+  }
+  async storeValue() {
+    const value = this.myForm.value;
+    console.log('store');
+    await this.storageLocal.guardarDatos({
+      dato: value,
+      referencia: 'intercambio'
+    });
+    this.router.navigate(['/home']);
+    const alertSuccesStorage = await this.alertController.create({
+      header: 'Exito',
+      mode: 'md',
+      subHeader: 'Se ha guardado tu dieta correctamente',
+      message: 'Puedes revisarlo en tu lista de tus dietas',
+      buttons: ['Aceptar']
+    });
+    return await alertSuccesStorage.present();
+  }
+  private async alertMessage(el) {
+    if (this.myForm.invalid) {
+      this.myForm.markAsDirty();
+      this.myForm.markAllAsTouched();
+      window.scroll(0, 0);
+      el.scrollIntoView();
+      const alertError = await this.alertController.create({
+        header: 'Alerta',
+        mode: 'md',
+        subHeader: 'Falta un titulo a la dieta',
+        buttons: ['Aceptar']
+      });
+      await alertError.present();
+      return true;
+    }
+    return false;
   }
 
 }
