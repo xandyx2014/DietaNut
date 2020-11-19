@@ -7,7 +7,6 @@ import { Subscription } from 'rxjs';
 import { ComposicionAlimentoService } from 'src/app/services/composicion-alimento.service';
 import { StorageService } from 'src/app/services/storage.local.service';
 import { SearchAlimentoComponent } from '../../shared/search-alimento/search-alimento.component';
-import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-store',
   templateUrl: './store.page.html',
@@ -174,18 +173,6 @@ export class StorePage implements OnInit {
       message: 'Puedes revisarlo en tu lista de tus dietas',
       buttons: ['Aceptar']
     });
-  }
-  public async exportexcel() {
-    /* table id is passed over here */
-    const element = document.getElementById('excel-table');
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
-
-    /* generate workbook and add the worksheet */
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'hoja1');
-
-    /* save to file */
-    XLSX.writeFile(wb, this.fileName);
   }
   async storeValue(el: HTMLElement) {
     const respMessage = await this.alertMessage(el);
