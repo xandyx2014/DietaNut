@@ -221,6 +221,10 @@ export class StorePage implements OnInit {
     this.ingesta.forEach(type => {
       this.controlForm('ingesta').get(type).valueChanges.subscribe(e => {
         const racion = e.racion;
+        this.controlForm('distribucion').get(type).patchValue({
+          racion
+        }, { emitEvent: false });
+        console.log(racion, type);
         this.intercambioService.searchByGrupo(type).subscribe(grupo => {
           const value = {
             racion,
@@ -287,6 +291,15 @@ export class StorePage implements OnInit {
       this.controlForm('calorias').get(`total`).patchValue(total, { emitEvent: false });
       this.controlForm('calorias').get(`totalCaloria`).patchValue(totalCaloria, { emitEvent: false });
       this.controlForm('calorias').get(`totalGramo`).patchValue(totalGramo, { emitEvent: false });
+      const carbohidrato = this.controlForm('calorias').get(`carbohidratoGramo`).value;
+      const proteina = this.controlForm('calorias').get(`proteinaGramo`).value;
+      const grasas = this.controlForm('calorias').get(`grasasGramo`).value;
+      this.controlForm('ingesta').get('requerimiento').patchValue({
+        energia: totalCaloria,
+        proteina,
+        lipido: grasas,
+        carbohidrato
+      }, { emitEvent: false });
     });
     this.getTotalIngesta();
   }

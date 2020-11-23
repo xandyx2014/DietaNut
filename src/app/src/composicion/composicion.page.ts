@@ -160,7 +160,7 @@ export class ComposicionPage implements OnInit {
       headStyles: {
         fontSize: 6,
         fontStyle: 'bold',
-        fillColor: '#b5baf7'
+        fillColor: '#ffc409'
       },
       bodyStyles: {
         fontSize: 6,
@@ -173,13 +173,8 @@ export class ComposicionPage implements OnInit {
         this.setTotalAdec(valueStorage),
         this.setTotalReq(valueStorage),
       ],
-      footStyles: {
-        fontSize: 6,
-        fillColor: '#3880ff'
-      },
     });
     const energiaTotal = this.getTotalGral(valueStorage, 'energia');
-    console.log(energiaTotal);
     doc.save('composicion.pdf');
   }
   setTotalAdec(valueStorage: any) {
