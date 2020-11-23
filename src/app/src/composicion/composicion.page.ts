@@ -7,6 +7,7 @@ import { StorageService } from 'src/app/services/storage.local.service';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import * as sumBy from 'lodash.sumby';
+import { format, parseISO } from 'date-fns';
 @Component({
   selector: 'app-composicion',
   templateUrl: './composicion.page.html',
@@ -30,10 +31,12 @@ export class ComposicionPage implements OnInit {
     const valueStorage: any = await this.storageService.buscarPorUid('composicion', resp.uid);
     console.log(valueStorage);
     doc.setFontSize(16).text('Reporte de dieta: ' + valueStorage.titulo, 15, 10);
-    doc.setFontSize(12).text('Distribucion de macronutriente', 15, 20);
+    doc.setFontSize(8).text('Creado en: ' + format(
+      new Date(valueStorage.created_at), 'dd/MM/yyyy') , 15, 15);
+    doc.setFontSize(8).text('Descripcion: ' + valueStorage.descripcion, 15, 22);
     autoTable(doc, {
       theme: 'grid',
-      margin: { top: 30 },
+      margin: { top: 35 },
       headStyles: {
         fontSize: 6,
         fontStyle: 'bold'
@@ -152,11 +155,12 @@ export class ComposicionPage implements OnInit {
       ]
     });
     autoTable(doc, {
-      theme: 'striped',
+      theme: 'grid',
       margin: { top: 30 },
       headStyles: {
         fontSize: 6,
-        fontStyle: 'bold'
+        fontStyle: 'bold',
+        fillColor: '#b5baf7'
       },
       bodyStyles: {
         fontSize: 6,
@@ -168,17 +172,11 @@ export class ComposicionPage implements OnInit {
         this.setTotalValueRow(valueStorage),
         this.setTotalReq(valueStorage),
         this.setTotalAdec(valueStorage),
-        this.setTotalReq(valueStorage),
       ],
       footStyles: {
         fontSize: 6,
+        fillColor: '#3880ff'
       },
-      foot: [
-        /* this.setFootSubTotal(valueStorage, 'cena'), */
-        [
-          'Total Gral'
-        ],
-      ]
     });
     const energiaTotal = this.getTotalGral(valueStorage, 'energia');
     console.log(energiaTotal);
@@ -274,7 +272,7 @@ export class ComposicionPage implements OnInit {
     ];
   }
   getTotalGral(valueStorage, type): number {
-    const value = 
+    const value =
     this.setTotal(valueStorage, 'desayuno', type) +
     this.setTotal(valueStorage, 'merienda', type) +
     this.setTotal(valueStorage, 'almuerzo', type) +

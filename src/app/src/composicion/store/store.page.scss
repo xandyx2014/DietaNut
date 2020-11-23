@@ -19,12 +19,11 @@ ion-col, ion-row  {
 .table-scroll th, .table-scroll td {
 	padding:5px 10px;
 	border:1px solid #000;
-	background:#fff;
 	white-space:nowrap;
 	vertical-align:top;
 }
-.table-scroll thead, .table-scroll tfoot {
-	background:#f9f9f9;
+th {
+	background-color: var(--ion-color-success);
 }
 .clone {
 	// position:absolute;
@@ -38,13 +37,3 @@ ion-col, ion-row  {
 .clone td, .clone th {
 	border-color:transparent
 }
-.clone tbody th {
-	visibility:visible;
-	color:red;
-}
-.clone .fixed-side {
-	border:1px solid #000;
-	background:#eee;
-	visibility:visible;
-}
-.clone thead, .clone tfoot{background:transparent;}

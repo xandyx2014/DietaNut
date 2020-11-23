@@ -6,6 +6,7 @@ import { DietaService } from 'src/app/services/dieta.service';
 import { StorageService } from 'src/app/services/storage.local.service';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { format } from 'date-fns';
 @Component({
   selector: 'app-intercambio',
   templateUrl: './intercambio.page.html',
@@ -34,12 +35,14 @@ export class IntercambioPage implements OnInit {
     const doc = new jsPDF();
     const valueStorage: any = await this.storageService.buscarPorUid('intercambio', resp.uid);
     console.log(valueStorage);
-    doc.setFontSize(16).text(valueStorage.titulo, 15, 10);
-    doc.setFontSize(12).text('Distribucion de macronutriente', 15, 20);
-    doc.text(`Gasto energetico: ${valueStorage.calorias.gastoEnergetico}`, 15, 28);
+    doc.setFontSize(16).text('Reporte de dieta: ' + valueStorage.titulo, 15, 10);
+    doc.setFontSize(8).text('Creado en: ' + format(
+      new Date(valueStorage.created_at), 'dd/MM/yyyy') , 15, 15);
+    doc.setFontSize(8).text('Descripcion: ' + valueStorage.descripcion, 15, 20);
+    doc.text(`Gasto energetico: ${valueStorage.calorias.gastoEnergetico}`, 15, 34);
     autoTable(doc, {
       theme: 'striped',
-      margin: { top: 30 },
+      margin: { top: 35 },
       head: [['Macronutrientes', '%', 'Calorias', 'Gramos']],
       body: [
         [
@@ -157,7 +160,7 @@ export class IntercambioPage implements OnInit {
     }
     );
     autoTable(doc, {
-      theme: 'striped',
+      // theme: 'striped',
       margin: { top: 30 },
       head: [['Grupo de alimentos', 'Raciones', 'Desayuno', 'Merienda', 'Almuerzo', 'Merienda', 'Cena']],
       body: [

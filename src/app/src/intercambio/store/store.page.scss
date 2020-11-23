@@ -17,3 +17,6 @@ table {
   tr:nth-child(even) {
     background-color: #dddddd;
   }
+  th {
+    background-color: var(--ion-color-success);
+  }
