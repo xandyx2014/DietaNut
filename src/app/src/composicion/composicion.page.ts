@@ -31,7 +31,7 @@ export class ComposicionPage implements OnInit {
     const valueStorage: any = await this.storageService.buscarPorUid('composicion', resp.uid);
     console.log(valueStorage);
     doc.setFontSize(16).text('Reporte de dieta: ' + valueStorage.titulo, 15, 10);
-    doc.setFontSize(8).text('Creado en: ' + format(
+    doc.setFontSize(8).text('Creado en la fecha: ' + format(
       new Date(valueStorage.created_at), 'dd/MM/yyyy') , 15, 15);
     doc.setFontSize(8).text('Descripcion: ' + valueStorage.descripcion, 15, 22);
     autoTable(doc, {
@@ -126,7 +126,7 @@ export class ComposicionPage implements OnInit {
       foot: [
         this.setFootSubTotal(valueStorage, 'te'),
         [
-          'Te'
+          'Merienda'
         ],
       ]
     });
@@ -170,8 +170,8 @@ export class ComposicionPage implements OnInit {
       ],
       body: [
         this.setTotalValueRow(valueStorage),
-        this.setTotalReq(valueStorage),
         this.setTotalAdec(valueStorage),
+        this.setTotalReq(valueStorage),
       ],
       footStyles: {
         fontSize: 6,

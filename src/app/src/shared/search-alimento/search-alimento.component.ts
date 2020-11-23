@@ -31,8 +31,9 @@ export class SearchAlimentoComponent implements OnInit {
                                   limitSelection: 20,
                                   lazyLoading: true,
                                   labelKey: 'nombre',
-                                  classes: 'myclass custom-class',
-                                  searchPlaceholderText: 'Buscar'
+                                  classes: 'searchAlimento',
+                                  searchPlaceholderText: 'Buscar',
+                                  maxHeight: 100
                                 };
         this.loadDataFromJson();
     }

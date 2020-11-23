@@ -36,7 +36,7 @@ export class IntercambioPage implements OnInit {
     const valueStorage: any = await this.storageService.buscarPorUid('intercambio', resp.uid);
     console.log(valueStorage);
     doc.setFontSize(16).text('Reporte de dieta: ' + valueStorage.titulo, 15, 10);
-    doc.setFontSize(8).text('Creado en: ' + format(
+    doc.setFontSize(8).text('Creado en la fecha: ' + format(
       new Date(valueStorage.created_at), 'dd/MM/yyyy') , 15, 15);
     doc.setFontSize(8).text('Descripcion: ' + valueStorage.descripcion, 15, 20);
     doc.text(`Gasto energetico: ${valueStorage.calorias.gastoEnergetico}`, 15, 34);
@@ -44,6 +44,9 @@ export class IntercambioPage implements OnInit {
       theme: 'striped',
       margin: { top: 35 },
       head: [['Macronutrientes', '%', 'Calorias', 'Gramos']],
+      headStyles: {
+        fillColor: '#b5baf7'
+      },
       body: [
         [
           'Carbohidrato',
