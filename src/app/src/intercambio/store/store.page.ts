@@ -182,12 +182,13 @@ export class StorePage implements OnInit {
     const totalProteina = this.controlForm('ingesta').get('totalProteina').value;
     const totalLipido = this.controlForm('ingesta').get('totalLipido').value;
     const totalCarbohidrato = this.controlForm('ingesta').get('totalCarbohidrato').value;
+    console.log(this.controlForm('ingesta').get('requerimiento').value.energia);
     this.controlForm('ingesta').get('adecuacion').patchValue({
-      racion: ((this.controlForm('ingesta').get('requerimiento').value.racion / totalRacion) * 100).toFixed(2),
-      energia: ((this.controlForm('ingesta').get('requerimiento').value.energia / totalEnergia) * 100).toFixed(2),
-      proteina: ((this.controlForm('ingesta').get('requerimiento').value.proteina / totalProteina) * 100).toFixed(2),
-      lipido: ((this.controlForm('ingesta').get('requerimiento').value.lipido / totalLipido) * 100).toFixed(2),
-      carbohidrato: ((this.controlForm('ingesta').get('requerimiento').value.carbohidrato / totalCarbohidrato) * 100).toFixed(2),
+      racion: ((  totalRacion / this.controlForm('ingesta').get('requerimiento').value.racion  ) * 100).toFixed(2),
+      energia: (( totalEnergia / this.controlForm('ingesta').get('requerimiento').value.energia ) * 100).toFixed(2),
+      proteina: (( totalProteina / this.controlForm('ingesta').get('requerimiento').value.proteina ) * 100).toFixed(2),
+      lipido: (( totalLipido / this.controlForm('ingesta').get('requerimiento').value.lipido ) * 100).toFixed(2),
+      carbohidrato: (( totalCarbohidrato / this.controlForm('ingesta').get('requerimiento').value.carbohidrato ) * 100).toFixed(2),
     }, { emitEvent: false });
   }
   searchGroupByCaloria() {
@@ -300,6 +301,7 @@ export class StorePage implements OnInit {
         lipido: grasas,
         carbohidrato
       }, { emitEvent: false });
+      this.setTotalAdecuacion();
     });
     this.getTotalIngesta();
   }
