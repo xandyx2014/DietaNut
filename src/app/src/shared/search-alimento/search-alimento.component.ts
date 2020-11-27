@@ -33,7 +33,7 @@ export class SearchAlimentoComponent implements OnInit {
                                   labelKey: 'nombre',
                                   classes: 'searchAlimento',
                                   searchPlaceholderText: 'Buscar',
-                                  maxHeight: 100
+                                  maxHeight: 150
                                 };
         this.loadDataFromJson();
     }

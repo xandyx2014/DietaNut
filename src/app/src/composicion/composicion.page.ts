@@ -35,135 +35,156 @@ export class ComposicionPage implements OnInit {
       new Date(valueStorage.created_at), 'dd/MM/yyyy') , 15, 15);
     doc.setFontSize(8).text('Descripcion: ' + valueStorage.descripcion, 15, 22);
     autoTable(doc, {
-      theme: 'grid',
       margin: { top: 35 },
       headStyles: {
         fontSize: 6,
-        fontStyle: 'bold'
+        textColor: '#000',
+        fontStyle: 'bold',
+        fillColor: '#d8d8d8'
       },
       bodyStyles: {
         fontSize: 6,
+        lineColor: '#000000',
+      },
+      footStyles: {
+        fontSize: 6,
+        fillColor: '#d8d8d8',
+        textColor: '#000',
       },
       head: [
-        this.setHelearPdf()
+        this.setTitleHeader('Desayuno'),
+        this.setHelearPdf(),
+        this.setProperties()
       ],
       body: this.setRowInput(valueStorage, 'desayuno'),
-      footStyles: {
-        fontSize: 6,
-      },
       foot: [
         this.setFootSubTotal(valueStorage, 'desayuno'),
-        [
-          'Desayuno'
-        ],
       ]
     });
     autoTable(doc, {
-      theme: 'grid',
       margin: { top: 30 },
       headStyles: {
         fontSize: 6,
-        fontStyle: 'bold'
+        textColor: '#000',
+        fontStyle: 'bold',
+        fillColor: '#d8d8d8'
       },
       bodyStyles: {
         fontSize: 6,
+        lineColor: '#000000',
+      },
+      footStyles: {
+        fontSize: 6,
+        fillColor: '#d8d8d8',
+        textColor: '#000',
       },
       head: [
-        this.setHelearPdf()
+        this.setTitleHeader('Merienda'),
+        this.setHelearPdf(),
+        this.setProperties()
       ],
       body: this.setRowInput(valueStorage, 'merienda'),
-      footStyles: {
-        fontSize: 6,
-      },
       foot: [
         this.setFootSubTotal(valueStorage, 'merienda'),
-        [
-          'Merienda'
-        ],
       ]
     });
     autoTable(doc, {
-      theme: 'grid',
       margin: { top: 30 },
       headStyles: {
         fontSize: 6,
-        fontStyle: 'bold'
+        textColor: '#000',
+        fontStyle: 'bold',
+        fillColor: '#d8d8d8'
       },
       bodyStyles: {
         fontSize: 6,
+        lineColor: '#000000',
+      },
+      footStyles: {
+        fontSize: 6,
+        fillColor: '#d8d8d8',
+        textColor: '#000',
       },
       head: [
-        this.setHelearPdf()
+        this.setTitleHeader('Almuerzo'),
+        this.setHelearPdf(),
+        this.setProperties()
       ],
       body: this.setRowInput(valueStorage, 'almuerzo'),
-      footStyles: {
-        fontSize: 6,
-      },
       foot: [
         this.setFootSubTotal(valueStorage, 'almuerzo'),
-        [
-          'Almuerzo'
-        ],
       ]
     });
     autoTable(doc, {
-      theme: 'grid',
       margin: { top: 30 },
       headStyles: {
         fontSize: 6,
-        fontStyle: 'bold'
+        textColor: '#000',
+        fontStyle: 'bold',
+        fillColor: '#d8d8d8'
       },
       bodyStyles: {
         fontSize: 6,
+        lineColor: '#000000',
+      },
+      footStyles: {
+        fontSize: 6,
+        fillColor: '#d8d8d8',
+        textColor: '#000',
       },
       head: [
-        this.setHelearPdf()
+        this.setTitleHeader('Merienda'),
+        this.setHelearPdf(),
+        this.setProperties()
       ],
       body: this.setRowInput(valueStorage, 'te'),
-      footStyles: {
-        fontSize: 6,
-      },
       foot: [
         this.setFootSubTotal(valueStorage, 'te'),
-        [
-          'Merienda'
-        ],
       ]
     });
     autoTable(doc, {
-      theme: 'grid',
       margin: { top: 30 },
       headStyles: {
         fontSize: 6,
-        fontStyle: 'bold'
+        textColor: '#000',
+        fontStyle: 'bold',
+        fillColor: '#d8d8d8'
       },
       bodyStyles: {
         fontSize: 6,
+        lineColor: '#000000',
       },
-      head: [
-        this.setHelearPdf()
-      ],
-      body: this.setRowInput(valueStorage, 'cena'),
       footStyles: {
         fontSize: 6,
+        fillColor: '#d8d8d8',
+        textColor: '#000',
       },
+      head: [
+        this.setTitleHeader('Cena'),
+        this.setHelearPdf(),
+        this.setProperties()
+      ],
+      body: this.setRowInput(valueStorage, 'cena'),
       foot: [
         this.setFootSubTotal(valueStorage, 'cena'),
-        [
-          'Cena'
-        ],
       ]
     });
     autoTable(doc, {
-      theme: 'grid',
       margin: { top: 30 },
       headStyles: {
         fontSize: 6,
+        textColor: '#000',
         fontStyle: 'bold',
-        fillColor: '#ffc409'
+        fillColor: '#d8d8d8'
       },
       bodyStyles: {
         fontSize: 6,
+        lineColor: '#000000',
+      },
+      footStyles: {
+        fontSize: 6,
+        fillColor: '#d8d8d8',
+        textColor: '#000',
       },
       head: [
         this.setHelearPdf()
@@ -310,6 +331,64 @@ export class ComposicionPage implements OnInit {
         `${(sumBy(row, (o) => Number(o.zinc)) as number).toFixed(2)}`,
         `${(sumBy(row, (o) => Number(o.vit_b12) as number).toFixed(2))}`
     ];
+  }
+  private setTitleHeader(title: string): string[] {
+    return [
+      `${title}`,
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+    ];
+  }
+  private setProperties(): any[] {
+    return [
+      ``,
+      '',
+      'Kcal',
+      'gr',
+      'gr',
+      'gr',
+      'gr',
+      'gr',
+      'gr',
+      'mg',
+      'mg',
+      'mg',
+      'ug',
+      'mg',
+      'mg',
+      'mg',
+      'mg',
+      'gr',
+      'gr',
+      'gr',
+      'mg',
+      'mg',
+      'mg',
+      'mg',
+      'ug'
+    ]
   }
   private setHelearPdf() {
     return [

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
@@ -29,6 +29,14 @@ export class StorePage implements OnInit {
   ngOnInit() { }
   ionViewWillEnter() {
     this.getQueryParams();
+  }
+  @HostListener('window:beforeunload', ['$event'])
+  handleBeforeUnload(event) {
+    event.preventDefault();
+    event.returnValue = false;
+    // alert('No puedes sali');
+    console.log('No puedes salir');
+    return ';You have unsaved data changes. Are you sure to close the page?';
   }
   private getQueryParams() {
     this.activatedRouter.queryParams.subscribe(async resp => {
@@ -184,11 +192,11 @@ export class StorePage implements OnInit {
     const totalCarbohidrato = this.controlForm('ingesta').get('totalCarbohidrato').value;
     console.log(this.controlForm('ingesta').get('requerimiento').value.energia);
     this.controlForm('ingesta').get('adecuacion').patchValue({
-      racion: ((  totalRacion / this.controlForm('ingesta').get('requerimiento').value.racion  ) * 100).toFixed(2),
-      energia: (( totalEnergia / this.controlForm('ingesta').get('requerimiento').value.energia ) * 100).toFixed(2),
-      proteina: (( totalProteina / this.controlForm('ingesta').get('requerimiento').value.proteina ) * 100).toFixed(2),
-      lipido: (( totalLipido / this.controlForm('ingesta').get('requerimiento').value.lipido ) * 100).toFixed(2),
-      carbohidrato: (( totalCarbohidrato / this.controlForm('ingesta').get('requerimiento').value.carbohidrato ) * 100).toFixed(2),
+      racion: ((totalRacion / this.controlForm('ingesta').get('requerimiento').value.racion) * 100).toFixed(2),
+      energia: ((totalEnergia / this.controlForm('ingesta').get('requerimiento').value.energia) * 100).toFixed(2),
+      proteina: ((totalProteina / this.controlForm('ingesta').get('requerimiento').value.proteina) * 100).toFixed(2),
+      lipido: ((totalLipido / this.controlForm('ingesta').get('requerimiento').value.lipido) * 100).toFixed(2),
+      carbohidrato: ((totalCarbohidrato / this.controlForm('ingesta').get('requerimiento').value.carbohidrato) * 100).toFixed(2),
     }, { emitEvent: false });
   }
   searchGroupByCaloria() {
