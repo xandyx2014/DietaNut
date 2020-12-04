@@ -30,14 +30,6 @@ export class StorePage implements OnInit {
   ionViewWillEnter() {
     this.getQueryParams();
   }
-  @HostListener('window:beforeunload', ['$event'])
-  handleBeforeUnload(event) {
-    event.preventDefault();
-    event.returnValue = false;
-    // alert('No puedes sali');
-    console.log('No puedes salir');
-    return ';You have unsaved data changes. Are you sure to close the page?';
-  }
   private getQueryParams() {
     this.activatedRouter.queryParams.subscribe(async resp => {
       if (Object.keys(resp).length) {

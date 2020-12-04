@@ -364,7 +364,7 @@ export class ComposicionPage implements OnInit {
   private setProperties(): any[] {
     return [
       ``,
-      '',
+      'gr',
       'Kcal',
       'gr',
       'gr',

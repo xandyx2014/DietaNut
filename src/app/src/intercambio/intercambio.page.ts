@@ -43,7 +43,9 @@ export class IntercambioPage implements OnInit {
     autoTable(doc, {
       theme: 'striped',
       margin: { top: 35 },
-      head: [['Macronutrientes', '%', 'Calorias', 'Gramos']],
+      head: [
+        ['Macronutrientes', '%', 'Calorias', 'Gramos']
+      ],
       headStyles: {
         fillColor: '#b5baf7',
         textColor: '#000'
@@ -81,7 +83,9 @@ export class IntercambioPage implements OnInit {
       headStyles: {
         textColor: '#000'
       },
-      head: [['Grupo de alimentos', 'Raciones', 'Energia', 'Proteinas', 'Lipidos', 'Carbohidratos']],
+      head: [
+        ['Ingesta', '', '', '', '', ''],
+        ['Grupo de alimentos', 'Porcion', 'Energia', 'Proteinas', 'Lipidos', 'Carbohidratos']],
       body: [
         [
           'Cereales y derivados',
@@ -172,7 +176,10 @@ export class IntercambioPage implements OnInit {
       headStyles: {
         textColor: '#000'
       },
-      head: [['Grupo de alimentos', 'Raciones', 'Desayuno', 'Merienda', 'Almuerzo', 'Merienda', 'Cena']],
+      head: [
+        ['Distribución de porciones', '', '', '', '', '', ''],
+        ['Grupo de alimentos', 'Porcion', 'Desayuno', 'Merienda', 'Almuerzo', 'Merienda', 'Cena']
+      ],
       body: [
         [
           'Cereales y derivados',
