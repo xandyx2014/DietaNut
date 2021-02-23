@@ -1,4 +1,4 @@
-# Dieta ueb
+# DIETANUT
 ![](./screen/1.png)
 ![](./screen/2.png)
 ![](./screen/3.png)
@@ -8,3 +8,5 @@
 ![](./screen/7.png)
 ![](./screen/8.png)
 ![](./screen/9.png)
+![](./screen/12.png)
+![](./screen/13.png)
