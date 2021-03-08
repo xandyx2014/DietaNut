@@ -8,11 +8,11 @@ import { SubTotalComponent } from './sub-total/sub-total.component';
 import { SubTotalPipe } from './pipe/sub-total.pipe';
 import { AdecComponent } from './adec/adec.component';
 import { ReqPipe } from './pipe/req.pipe';
-
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
     declarations: [SearchAlimentoComponent, SubTotalComponent, SubTotalPipe, AdecComponent, ReqPipe],
-    imports: [ CommonModule, AngularMultiSelectModule, IonicModule, FormsModule ],
+    imports: [ CommonModule, AngularMultiSelectModule, IonicModule, FormsModule, NgSelectModule ],
     exports: [
         SearchAlimentoComponent, SubTotalComponent, SubTotalPipe, AdecComponent
     ],

@@ -10,6 +10,11 @@ import { ComposicionAlimentoService } from 'src/app/services/composicion-aliment
   styleUrls: ['./search-alimento.component.scss'],
 })
 export class SearchAlimentoComponent implements OnInit {
+    photos = [];
+    photosBuffer = [];
+    bufferSize = 50;
+    numberOfItemsFromEndBeforeFetchingMore = 10;
+    // loading = false;
     dropdownList = [];
     selectedItems = [];
     itemSelect: object;
@@ -51,7 +56,7 @@ export class SearchAlimentoComponent implements OnInit {
         this.itemSelect = item;
     }
     OnItemDeSelect(item: any){
-        console.log(this.selectedItems);
+        this.itemSelect = item;
     }
     onSelectAll(items: any){
     }
