@@ -5,13 +5,14 @@ import { AlertController } from '@ionic/angular';
 import { IntercambioService } from 'src/app/services/intercambio.service';
 import { RacionService } from 'src/app/services/racion.service';
 import { StorageService } from 'src/app/services/storage.local.service';
+import { ComponentCanDeactivate } from '../../shared/guard/candDesactive.guard';
 
 @Component({
   selector: 'app-store',
   templateUrl: './store.page.html',
   styleUrls: ['./store.page.scss'],
 })
-export class StorePage implements OnInit {
+export class StorePage implements OnInit, ComponentCanDeactivate {
   public myForm: FormGroup;
   public isRender = false;
   private ingesta = ['cereales', 'verduras', 'frutas', 'leche', 'carne', 'azucarados', 'grasas'];
@@ -29,6 +30,9 @@ export class StorePage implements OnInit {
   ngOnInit() { }
   ionViewWillEnter() {
     this.getQueryParams();
+  }
+  canDeactivate() {
+    return !this.myForm.dirty;
   }
   private getQueryParams() {
     this.activatedRouter.queryParams.subscribe(async resp => {

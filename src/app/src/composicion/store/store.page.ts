@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { AlertOptions } from '@ionic/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { filter, tap } from 'rxjs/operators';
 import { ComposicionAlimentoService } from 'src/app/services/composicion-alimento.service';
 import { StorageService } from 'src/app/services/storage.local.service';
+import { CanDeactivateState, ComponentCanDeactivate } from '../../shared/guard/candDesactive.guard';
 import { SearchAlimentoComponent } from '../../shared/search-alimento/search-alimento.component';
 @Component({
   selector: 'app-store',
   templateUrl: './store.page.html',
   styleUrls: ['./store.page.scss'],
 })
-export class StorePage implements OnInit {
+export class StorePage implements OnInit, ComponentCanDeactivate {
   private unSubscribe = new Subscription();
   private valueUpdate: any = {};
   public myForm: FormGroup;
@@ -27,9 +29,19 @@ export class StorePage implements OnInit {
     public alertController: AlertController,
     private router: Router,
     private activatedRouter: ActivatedRoute
-  ) { }
+  ) {
+    window.onpopstate = () => CanDeactivateState.defendAgainstBrowserBackButton = true;
+    router.events.pipe(
+      filter(e => e instanceof NavigationEnd),
+      tap(() => CanDeactivateState.defendAgainstBrowserBackButton = false)
+    ).subscribe();
+   }
 
   ngOnInit() {
+  }
+
+  canDeactivate() {
+    return !this.myForm.dirty;
   }
   valueUpdateLenght() {
     return Object.keys(this.valueUpdate).length;
