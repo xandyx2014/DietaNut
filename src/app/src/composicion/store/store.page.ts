@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { AlertOptions } from '@ionic/core';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 import { ComposicionAlimentoService } from 'src/app/services/composicion-alimento.service';
 import { StorageService } from 'src/app/services/storage.local.service';

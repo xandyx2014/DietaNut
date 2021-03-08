@@ -8,13 +8,13 @@ import { SubTotalComponent } from './sub-total/sub-total.component';
 import { SubTotalPipe } from './pipe/sub-total.pipe';
 import { AdecComponent } from './adec/adec.component';
 import { ReqPipe } from './pipe/req.pipe';
-import { CanDeactivateGuard } from './guard/candDesactive.guard';
+
 
 @NgModule({
     declarations: [SearchAlimentoComponent, SubTotalComponent, SubTotalPipe, AdecComponent, ReqPipe],
     imports: [ CommonModule, AngularMultiSelectModule, IonicModule, FormsModule ],
     exports: [
-        SearchAlimentoComponent, SubTotalComponent, SubTotalPipe, AdecComponent, CanDeactivateGuard
+        SearchAlimentoComponent, SubTotalComponent, SubTotalPipe, AdecComponent
     ],
     providers: [],
 })

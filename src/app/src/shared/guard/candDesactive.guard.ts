@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Observable, from } from 'rxjs';
-import { tap } from 'rxjs/operators';
-
 export interface ComponentCanDeactivate {
     canDeactivate(): boolean | Observable<boolean>;
 }
