@@ -1,0 +1,285 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Calculo dietetico</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="isOkey">
+    <form [formGroup]="formGroup">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>Escriba los</ion-card-subtitle>
+          <ion-card-title mode="md">Datos del sujeto</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-row>
+            <ion-col size="3">
+              <ion-item>
+                <ion-label position="stacked">Nombre</ion-label>
+                <ion-input formControlName="nombre" placeholder="Escribir nombre"></ion-input>
+                <ion-text *ngIf="formGroup.get('nombre').invalid && formGroup.get('nombre').touched" lines="none"
+                  color="danger" class="form-error">
+                  Este campo es requerido
+                </ion-text>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Edad</ion-label>
+                <ion-input formControlName="edad" type="number" min="0" placeholder="Escribir edad"></ion-input>
+                <ion-text *ngIf="formGroup.get('edad').invalid && formGroup.get('edad').touched" lines="none"
+                  color="danger" class="form-error">
+                  Este campo es requerido
+                </ion-text>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Sexo</ion-label>
+                <ion-select mode="md" formControlName="sexo" placeholder="Escribir Sexo">
+                  <ion-select-option value="MUJER">MUJER</ion-select-option>
+                  <ion-select-option value="HOMBRE">HOMBRE</ion-select-option>
+                </ion-select>
+                <ion-text *ngIf="formGroup.get('sexo').invalid && formGroup.get('sexo').touched" lines="none"
+                  color="danger" class="form-error">
+                  Este campo es requerido
+                </ion-text>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="3">
+              <ion-item>
+                <ion-label position="stacked">Talla</ion-label>
+                <ion-input type="text" formControlName="talla" placeholder="Escribir talla"></ion-input>
+                <ion-text *ngIf="formGroup.get('talla').invalid && formGroup.get('talla').touched" lines="none"
+                  color="danger" class="form-error">
+                  Este campo es requerido
+                </ion-text>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">actividad Fisica</ion-label>
+                <ion-input formControlName="actividadFisica" placeholder="Escribir actividad Fisica"></ion-input>
+                <ion-text *ngIf="formGroup.get('actividadFisica').invalid && formGroup.get('actividadFisica').touched"
+                  lines="none" color="danger" class="form-error">
+                  Este campo es requerido
+                </ion-text>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Nivel de actividad fisica</ion-label>
+                <ion-input formControlName="nivelActividadFisica" placeholder="Escribir actividad Fisica"></ion-input>
+                <ion-text
+                  *ngIf="formGroup.get('nivelActividadFisica').invalid && formGroup.get('nivelActividadFisica').touched"
+                  lines="none" color="danger" class="form-error">
+                  Este campo es requerido
+                </ion-text>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>Escriba los</ion-card-subtitle>
+          <ion-card-title mode="md">Rutina diaria (F.A.F)</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content formGroupName='rutina'>
+          <div style="border-style: dotted; padding: 1rem;">
+            <ion-row class="ion-no-padding ion-no-margin">
+              <ion-col class="ion-no-padding ion-no-margin">
+                <ion-item>
+                  <ion-label><b>Descansar</b> </ion-label>
+                  <ion-input type="number" formControlName="descansar" placeholder="valor"></ion-input>
+                  <ion-text
+                    *ngIf="formGroup.get('rutina').get('descansar').invalid && formGroup.get('rutina').get('descansar').touched"
+                    lines="none" color="danger" class="form-error">
+                    Este campo es requerido
+                  </ion-text>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin">
+                <ion-item>
+                  <ion-label><b>Horas</b></ion-label>
+                  <ion-input type="number" formControlName="descansarHora" placeholder="valor"></ion-input>
+                  <ion-text
+                    *ngIf="formGroup.get('rutina').get('descansarHora').invalid && formGroup.get('rutina').get('descansarHora').touched"
+                    lines="none" color="danger" class="form-error">
+                    Este campo es requerido
+                  </ion-text>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-margin" style="padding-top: 0.8rem;"><b>Promedio :</b>
+                {{getPromedioRutina('descansar')}}</ion-col>
+            </ion-row>
+          </div>
+          <div style="border-style: dotted; padding: 1rem; margin-top: 0.8rem;">
+            <ion-row class="ion-no-padding ion-no-margin">
+              <ion-col class="ion-no-padding ion-no-margin">
+                <ion-item>
+                  <ion-label><b>Reposo</b> </ion-label>
+                  <ion-input formControlName="reposo" type="number" placeholder="valor"></ion-input>
+                  <ion-text
+                    *ngIf="formGroup.get('rutina').get('reposo').invalid && formGroup.get('rutina').get('reposo').touched"
+                    lines="none" color="danger" class="form-error">
+                    Este campo es requerido
+                  </ion-text>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin">
+                <ion-item>
+                  <ion-label style="background-color: beige;"><b>Horas</b> {{getRutinaReposo()}}</ion-label>
+
+                  <ion-text
+                    *ngIf="formGroup.get('rutina').get('reposoHora').invalid && formGroup.get('rutina').get('reposoHora').touched"
+                    lines="none" color="danger" class="form-error">
+                    Este campo es requerido
+                  </ion-text>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-margin" style="padding-top: 0.8rem;"><b>Promedio :</b>
+                {{getPromedioRutina('reposo')}}</ion-col>
+            </ion-row>
+          </div>
+          <div style="border-style: dotted; padding: 1rem; margin-top: 0.8rem;">
+            <ion-row class="ion-no-padding ion-no-margin">
+              <ion-col class="ion-no-padding ion-no-margin">
+                <ion-item>
+                  <ion-label><b>Estudiar</b> </ion-label>
+                  <ion-input formControlName="estudiar" type="number" placeholder="valor"></ion-input>
+                  <ion-text
+                    *ngIf="formGroup.get('rutina').get('estudiar').invalid && formGroup.get('rutina').get('estudiar').touched"
+                    lines="none" color="danger" class="form-error">
+                    Este campo es requerido
+                  </ion-text>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin">
+                <ion-item>
+                  <ion-label><b>Horas</b></ion-label>
+                  <ion-input formControlName="estudiarHora" type="number" placeholder="valor"></ion-input>
+                  <ion-text
+                    *ngIf="formGroup.get('rutina').get('estudiarHora').invalid && formGroup.get('rutina').get('estudiarHora').touched"
+                    lines="none" color="danger" class="form-error">
+                    Este campo es requerido
+                  </ion-text>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-margin" style="padding-top: 0.8rem;"><b>Promedio :</b>
+                {{getPromedioRutina('estudiar')}}</ion-col>
+            </ion-row>
+          </div>
+          <div style="border-style: dotted; padding: 1rem; margin-top: 0.8rem;">
+            <ion-row class="ion-no-padding ion-no-margin">
+              <ion-col class="ion-no-padding ion-no-margin">
+                <ion-item>
+                  <ion-label><b>Caminar</b> </ion-label>
+                  <ion-input formControlName="caminar" type="number" placeholder="valor"></ion-input>
+                  <ion-text
+                    *ngIf="formGroup.get('rutina').get('caminar').invalid && formGroup.get('rutina').get('caminar').touched"
+                    lines="none" color="danger" class="form-error">
+                    Este campo es requerido
+                  </ion-text>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin">
+                <ion-item>
+                  <ion-label><b>Horas</b></ion-label>
+                  <ion-input formControlName="caminarHora" type="number" placeholder="valor"></ion-input>
+                  <ion-text
+                    *ngIf="formGroup.get('rutina').get('caminarHora').invalid && formGroup.get('rutina').get('caminarHora').touched"
+                    lines="none" color="danger" class="form-error">
+                    Este campo es requerido
+                  </ion-text>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-margin" style="padding-top: 0.8rem;"><b>Promedio :</b>
+                {{getPromedioRutina('caminar')}}</ion-col>
+            </ion-row>
+          </div>
+          <div style="border-style: dotted; padding: 1rem; margin-top: 0.8rem;">
+            <ion-row class="ion-no-padding ion-no-margin">
+              <ion-col class="ion-no-padding ion-no-margin">
+                <ion-item>
+                  <ion-label><b>Trabajar</b> </ion-label>
+                  <ion-input formControlName="trabajar" type="number" placeholder="valor"></ion-input>
+                  <ion-text
+                    *ngIf="formGroup.get('rutina').get('trabajar').invalid && formGroup.get('rutina').get('trabajar').touched"
+                    lines="none" color="danger" class="form-error">
+                    Este campo es requerido
+                  </ion-text>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin">
+                <ion-item>
+                  <ion-label><b>Horas</b></ion-label>
+                  <ion-input formControlName="trabajarHora" type="number" placeholder="valor"></ion-input>
+                  <ion-text
+                    *ngIf="formGroup.get('rutina').get('trabajarHora').invalid && formGroup.get('rutina').get('trabajarHora').touched"
+                    lines="none" color="danger" class="form-error">
+                    Este campo es requerido
+                  </ion-text>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-margin" style="padding-top: 0.8rem;"><b>Promedio :</b>
+                {{getPromedioRutina('trabajar')}}</ion-col>
+            </ion-row>
+          </div>
+          <div style="border-style: dotted; padding: 1rem; margin-top: 0.8rem;">
+            <ion-row class="ion-no-padding ion-no-margin">
+              <ion-col class="ion-no-padding ion-no-margin">
+                <ion-item>
+                  <ion-label><b>Entrenar</b> </ion-label>
+                  <ion-input formControlName="entrenar" type="number" placeholder="valor"></ion-input>
+                  <ion-text
+                    *ngIf="formGroup.get('rutina').get('entrenar').invalid && formGroup.get('rutina').get('entrenar').touched"
+                    lines="none" color="danger" class="form-error">
+                    Este campo es requerido
+                  </ion-text>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-padding ion-no-margin">
+                <ion-item>
+                  <ion-label><b>Horas</b></ion-label>
+                  <ion-input formControlName="entrenarHora" type="number" placeholder="valor"></ion-input>
+                  <ion-text
+                    *ngIf="formGroup.get('rutina').get('entrenarHora').invalid && formGroup.get('rutina').get('entrenarHora').touched"
+                    lines="none" color="danger" class="form-error">
+                    Este campo es requerido
+                  </ion-text>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-no-margin" style="padding-top: 0.8rem;"><b>Promedio :</b>
+                {{getPromedioRutina('entrenar')}}</ion-col>
+            </ion-row>
+          </div>
+          <ion-row>
+            <ion-col size="2" offset="4">
+              <ion-label><b>Horas total :</b> {{getRutinaTotal(fieldsHora, 'horasTotal')}}</ion-label>
+            </ion-col>
+            <ion-col size="2">
+              <ion-label><b>Promedio total :</b>{{getRutinaTotal(fieldsPromedio, 'promedioTotal')}}</ion-label>
+            </ion-col>
+            <ion-col size="3">
+              <ion-label><b>Total :</b>{{getRutinaTotalGeneral()}}</ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </form>
+    <ion-button (click)="store()" expand="full">
+      <ion-icon name="save-outline"></ion-icon>
+
+
+
+
+    </ion-button>
+  </ng-container>
+</ion-content>
