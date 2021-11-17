@@ -75,6 +75,19 @@ export class StorePage implements OnInit {
         promedioTotal: [0],
         totalGeneral: [0],
       }),
+      antropometria: this.fb.group({
+        peso: [0, Validators.required],
+        pesoObjectivo: [0, Validators.required],
+        masaMagra: [0, Validators.required],
+        masaGrasa: [0, Validators.required],
+        indiceMusculo: [0, Validators.required],
+        grasaDisminuir: [0, Validators.required],
+        musculoAumentar: [0, Validators.required],
+        sumaPliegues: [0, Validators.required],
+        sumaPlieguesObjectivo: [0, Validators.required],
+        grasa: [0, Validators.required],
+        grasaDeseado: [0, Validators.required],
+      }),
     });
     this.formGroup.valueChanges.subscribe((e) => {
       console.log(e);

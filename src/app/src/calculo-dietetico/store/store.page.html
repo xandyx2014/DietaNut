@@ -7,6 +7,7 @@
 <ion-content>
   <ng-container *ngIf="isOkey">
     <form [formGroup]="formGroup">
+
       <ion-card>
         <ion-card-header>
           <ion-card-subtitle>Escriba los</ion-card-subtitle>
@@ -269,6 +270,133 @@
             </ion-col>
             <ion-col size="3">
               <ion-label><b>Total :</b>{{getRutinaTotalGeneral()}}</ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          
+          <ion-card-title mode="md">Antropometría (Datos del ISAK)</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content formGroupName='antropometria'>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Peso (kg)</ion-label>
+                <ion-input formControlName="peso" type="number" placeholder="Escribir peso"></ion-input>
+                <ion-text *ngIf="formGroup.get('antropometria').get('peso').invalid && formGroup.get('antropometria').get('peso').touched" lines="none"
+                  color="danger" class="form-error">
+                  Este campo es requerido
+                </ion-text>
+              </ion-item>
+            </ion-col>
+            <ion-col >
+              <ion-item>
+                <ion-label position="stacked">Peso Objetivo (kg)</ion-label>
+                <ion-input formControlName="pesoObjectivo" type="number" placeholder="Escribir peso objectivo"></ion-input>
+                <ion-text *ngIf="formGroup.get('antropometria').get('pesoObjectivo').invalid && formGroup.get('antropometria').get('pesoObjectivo').touched" lines="none"
+                  color="danger" class="form-error">
+                  Este campo es requerido
+                </ion-text>
+              </ion-item>
+            </ion-col>
+            <ion-col >
+              <ion-item>
+                <ion-label position="stacked">Kg. Masa magra (D y W)</ion-label>
+                <ion-input formControlName="masaMagra" type="number" placeholder="Escribir Kg. Masa magra"></ion-input>
+                <ion-text *ngIf="formGroup.get('antropometria').get('masaMagra').invalid && formGroup.get('antropometria').get('masaMagra').touched" lines="none"
+                  color="danger" class="form-error">
+                  Este campo es requerido
+                </ion-text>
+              </ion-item>
+            </ion-col>
+            <ion-col >
+              <ion-item>
+                <ion-label position="stacked">Kg. Masa grasa (D y W)</ion-label>
+                <ion-input formControlName="masaGrasa" type="number" placeholder="Escribir Kg. Masa grasa"></ion-input>
+                <ion-text *ngIf="formGroup.get('antropometria').get('masaGrasa').invalid && formGroup.get('antropometria').get('masaGrasa').touched" lines="none"
+                  color="danger" class="form-error">
+                  Este campo es requerido
+                </ion-text>
+              </ion-item>
+            </ion-col>
+            <ion-col >
+              <ion-item>
+                <ion-label position="stacked">Indice músculo/óseo</ion-label>
+                <ion-input formControlName="indiceMusculo" type="number" placeholder="Escribir peso objectivo"></ion-input>
+                <ion-text *ngIf="formGroup.get('antropometria').get('indiceMusculo').invalid && formGroup.get('antropometria').get('indiceMusculo').touched" lines="none"
+                  color="danger" class="form-error">
+                  Este campo es requerido
+                </ion-text>
+              </ion-item>
+            </ion-col>
+            
+          </ion-row>
+          <ion-row>
+            <ion-col >
+              <ion-item>
+                <ion-label position="stacked">Kg. Grasa a disminuir</ion-label>
+                <ion-input formControlName="grasaDisminuir" type="number" placeholder="Escribir Kg. Grasa a disminuir"></ion-input>
+                <ion-text *ngIf="formGroup.get('antropometria').get('grasaDisminuir').invalid && formGroup.get('antropometria').get('grasaDisminuir').touched" lines="none"
+                  color="danger" class="form-error">
+                  Este campo es requerido
+                </ion-text>
+              </ion-item>
+            </ion-col>
+            <ion-col >
+              <ion-item>
+                <ion-label position="stacked">Kg. Músculo para aumentar</ion-label>
+                <ion-input formControlName="musculoAumentar" type="number" placeholder="Escribir Kg. Músculo para aumentar"></ion-input>
+                <ion-text *ngIf="formGroup.get('antropometria').get('musculoAumentar').invalid && formGroup.get('antropometria').get('musculoAumentar').touched" lines="none"
+                  color="danger" class="form-error">
+                  Este campo es requerido
+                </ion-text>
+              </ion-item>
+            </ion-col>
+            <ion-col >
+              <ion-item>
+                <ion-label position="stacked">Suma 6 pliegues</ion-label>
+                <ion-input formControlName="sumaPliegues" type="number" placeholder="Escribir pliegues"></ion-input>
+                <ion-text *ngIf="formGroup.get('antropometria').get('sumaPliegues').invalid && formGroup.get('antropometria').get('sumaPliegues').touched" lines="none"
+                  color="danger" class="form-error">
+                  Este campo es requerido
+                </ion-text>
+              </ion-item>
+            </ion-col>
+            <ion-col >
+              <ion-item>
+                <ion-label position="stacked">Suma 6 pliegues objetivo</ion-label>
+                <ion-input formControlName="sumaPlieguesObjectivo" type="number" placeholder="Escribir suma Pliegues Objectivo"></ion-input>
+                <ion-text *ngIf="formGroup.get('antropometria').get('sumaPlieguesObjectivo').invalid && formGroup.get('antropometria').get('sumaPlieguesObjectivo').touched" lines="none"
+                  color="danger" class="form-error">
+                  Este campo es requerido
+                </ion-text>
+              </ion-item>
+            </ion-col>
+            <ion-col >
+              <ion-item>
+                <ion-label position="stacked">% Grasa(D y W)</ion-label>
+                <ion-input formControlName="grasa" type="number" placeholder="Escribir % Grasa(D y W)"></ion-input>
+                <ion-text *ngIf="formGroup.get('antropometria').get('grasa').invalid && formGroup.get('antropometria').get('grasa').touched" lines="none"
+                  color="danger" class="form-error">
+                  Este campo es requerido
+                </ion-text>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col [size]="2.5" >
+              <ion-item>
+                <ion-label position="stacked">% Grasa deseado (D y W)</ion-label>
+                <ion-input formControlName="grasa" type="number" placeholder="Escribir % Grasa deseado (D y W)"></ion-input>
+                <ion-text *ngIf="formGroup.get('antropometria').get('grasa').invalid && formGroup.get('antropometria').get('grasa').touched" lines="none"
+                  color="danger" class="form-error">
+                  Este campo es requerido
+                </ion-text>
+              </ion-item>
             </ion-col>
           </ion-row>
         </ion-card-content>
