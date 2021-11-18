@@ -48,8 +48,8 @@ export class StorePage implements OnInit {
       nombre: ["", Validators.required],
       edad: [0, Validators.required],
       sexo: ["HOMBRE", Validators.required],
-      talla: ["", Validators.required],
-      actividadFisica: ["", Validators.required],
+      talla: [0, Validators.required],
+      actividadFisica: [0, Validators.required],
       nivelActividadFisica: [0, Validators.required],
       fecha: [new Date().toISOString(), Validators.required],
       rutina: this.fb.group({
@@ -86,7 +86,20 @@ export class StorePage implements OnInit {
         sumaPliegues: [0, Validators.required],
         sumaPlieguesObjectivo: [0, Validators.required],
         grasa: [0, Validators.required],
-        grasaDeseado: [0, Validators.required],
+        grasaDeseado: [0],
+      }),
+      caloriaDiaria: this.fb.group({
+        geb: [0],
+        eta: [0],
+        etaPorcentaje: [5],
+        get: [0],
+        caloriaFaf: [0],
+        deficitCaloria: [0],
+        deficit: [0],
+        superavitCaloria: [0],
+        superavit: [0],
+        reserva: [0],
+        caloriaDiariaElegida: [0],
       }),
     });
     this.formGroup.valueChanges.subscribe((e) => {
@@ -156,6 +169,122 @@ export class StorePage implements OnInit {
       { emitEvent: false }
     );
     return Number(totalGeneral).toFixed(2);
+  }
+  getAntropometriaPesoObjectivo() {
+    const peso = Number(this.formGroup.get("antropometria").value["peso"]);
+    const musculoAumentar = Number(
+      this.formGroup.get("antropometria").value["musculoAumentar"]
+    );
+    const grasaDisminuir = Number(
+      this.formGroup.get("antropometria").value["grasaDisminuir"]
+    );
+    const pesoObjectivo = peso + musculoAumentar - grasaDisminuir;
+    this.formGroup.get("antropometria").patchValue(
+      {
+        ["pesoObjectivo"]: Number(pesoObjectivo).toFixed(2),
+      },
+      { emitEvent: false }
+    );
+    return pesoObjectivo.toFixed(2);
+  }
+  getCaloriaDiariaGeb() {
+    const peso = Number(this.formGroup.get("antropometria").value["peso"]);
+    const talla = Number(this.formGroup.value["talla"]);
+    const edad = Number(this.formGroup.value["edad"]);
+    const sexo = this.formGroup.value["sexo"] === "HOMBRE" ? 5 : -161;
+    const geb = 10 * peso + 6.25 * talla - 5 * edad + sexo;
+    this.formGroup.get("caloriaDiaria").patchValue(
+      {
+        ["geb"]: Number(geb).toFixed(2),
+      },
+      { emitEvent: false }
+    );
+    return geb.toFixed(2);
+  }
+  getCaloriaDiariaEta() {
+    const geb = Number(this.formGroup.get("caloriaDiaria").value["geb"]);
+    const etaPorcentaje = Number(
+      this.formGroup.get("caloriaDiaria").value["etaPorcentaje"]
+    );
+    const eta = geb + geb * (etaPorcentaje / 100);
+    this.formGroup.get("caloriaDiaria").patchValue(
+      {
+        ["eta"]: Number(eta).toFixed(2),
+      },
+      { emitEvent: false }
+    );
+    return eta.toFixed(2);
+  }
+  getCaloriaDiariaGet() {
+    const eta = Number(this.formGroup.get("caloriaDiaria").value["eta"]);
+    const actividadFisica = Number(this.formGroup.value["actividadFisica"]);
+    const get = eta * actividadFisica;
+    this.formGroup.get("caloriaDiaria").patchValue(
+      {
+        ["get"]: Number(get).toFixed(2),
+      },
+      { emitEvent: false }
+    );
+    return get.toFixed(2);
+  }
+  getCaloriaDiariaFaf() {
+    const get = Number(this.formGroup.get("caloriaDiaria").value["get"]);
+    const eta = Number(this.formGroup.get("caloriaDiaria").value["eta"]);
+    const faf = get - eta;
+    this.formGroup.get("caloriaDiaria").patchValue(
+      {
+        ["caloriaFaf"]: Number(faf).toFixed(2),
+      },
+      { emitEvent: false }
+    );
+    return faf.toFixed(2);
+  }
+  getCaloriaDiariaDeficit() {
+    const get = Number(this.formGroup.get("caloriaDiaria").value["get"]);
+    const caloria = Number(
+      this.formGroup.get("caloriaDiaria").value["deficitCaloria"]
+    );
+    const valueCaloria = isNaN(caloria) ? 0 : caloria;
+    const deficit = get - valueCaloria;
+    this.formGroup.get("caloriaDiaria").patchValue(
+      {
+        ["deficit"]: Number(deficit).toFixed(2),
+      },
+      { emitEvent: false }
+    );
+    return deficit.toFixed(2);
+  }
+  getCaloriaDiariaSuperavit() {
+    const get = Number(this.formGroup.get("caloriaDiaria").value["get"]);
+    const caloria = Number(
+      this.formGroup.get("caloriaDiaria").value["superavitCaloria"]
+    );
+    const valueCaloria = isNaN(caloria) ? 0 : caloria;
+    const deficit = get + valueCaloria;
+    this.formGroup.get("caloriaDiaria").patchValue(
+      {
+        ["superavit"]: Number(deficit).toFixed(2),
+      },
+      { emitEvent: false }
+    );
+    return deficit.toFixed(2);
+  }
+  getCaloriaDiaraReserva() {
+    const masaMagra = Number(
+      this.formGroup.get("antropometria").value["masaMagra"]
+    );
+    const masaMagraValue = isNaN(masaMagra) ? 1 : masaMagra;
+    const caloriaFaf = Number(
+      this.formGroup.get("caloriaDiaria").value["caloriaFaf"]
+    );
+    const reserva = masaMagraValue * 30 + caloriaFaf;
+    this.formGroup.get("caloriaDiaria").patchValue(
+      {
+        ["reserva"]: Number(reserva).toFixed(2),
+      },
+      { emitEvent: false }
+    );
+    return reserva.toFixed(2);
   }
   store() {
     console.log(this.formGroup.value);
