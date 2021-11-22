@@ -428,16 +428,16 @@
             <ion-col size="2.5">
               <ion-item>
                 <ion-label position="stacked">GEB</ion-label>
-               <b>{{getCaloriaDiariaGeb()}}</b> 
+                <b>{{getCaloriaDiariaGeb()}}</b>
               </ion-item>
             </ion-col>
           </ion-row>
           <ion-row>
-            
+
             <ion-col size="2.5">
               <ion-item>
                 <ion-label position="stacked">ETA</ion-label>
-               <b>{{getCaloriaDiariaEta()}}</b> 
+                <b>{{getCaloriaDiariaEta()}}</b>
               </ion-item>
             </ion-col>
             <ion-col size="2.5">
@@ -455,7 +455,7 @@
             <ion-col size="2.5">
               <ion-item>
                 <ion-label position="stacked">GET</ion-label>
-               <b>{{getCaloriaDiariaGet()}}</b> 
+                <b>{{getCaloriaDiariaGet()}}</b>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -463,7 +463,7 @@
             <ion-col size="2.5">
               <ion-item>
                 <ion-label position="stacked">Calorias FAF</ion-label>
-               <b>{{getCaloriaDiariaFaf()}}</b> 
+                <b>{{getCaloriaDiariaFaf()}}</b>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -471,7 +471,7 @@
             <ion-col size="2.5">
               <ion-item>
                 <ion-label position="stacked">Déficit</ion-label>
-               <b>{{getCaloriaDiariaDeficit()}}</b> 
+                <b>{{getCaloriaDiariaDeficit()}}</b>
               </ion-item>
             </ion-col>
             <ion-col size="2.5">
@@ -486,7 +486,7 @@
             <ion-col size="2.5">
               <ion-item>
                 <ion-label position="stacked">Superávit</ion-label>
-               <b>{{getCaloriaDiariaSuperavit()}}</b> 
+                <b>{{getCaloriaDiariaSuperavit()}}</b>
               </ion-item>
             </ion-col>
             <ion-col size="2.5">
@@ -501,20 +501,141 @@
             <ion-col size="2.5">
               <ion-item>
                 <ion-label position="stacked">Reserva</ion-label>
-               <b>{{getCaloriaDiaraReserva()}}</b> 
+                <b>{{getCaloriaDiaraReserva()}}</b>
               </ion-item>
             </ion-col>
-            
+
           </ion-row>
           <ion-row>
             <ion-col size="2.5">
               <ion-item>
                 <ion-label position="stacked">CALORIAS DIARIAS ELEGIDAS</ion-label>
-                <ion-input formControlName="caloriaDiariaElegida" type="number" placeholder="Seleccione caloria"></ion-input>
+                <ion-input formControlName="caloriaDiariaElegida" type="number" placeholder="Seleccione caloria">
+                </ion-input>
               </ion-item>
             </ion-col>
-            
+
           </ion-row>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>Escribe los datos aqui</ion-card-subtitle>
+          <ion-card-title mode="md">Distribución molécula calórica</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content >
+          <ion-row>
+            <ion-col size="3">
+              <div formGroupName='distribucion'>
+                  <ion-row class="ion-no-padding ion-no-margin">
+                    <ion-col  class="ion-no-padding ion-no-margin">
+                      <ion-item>
+                        <ion-label position="stacked"><b>Proteinas %</b> </ion-label>
+                        <ion-input formControlName='proteina' type="number" placeholder="valor"></ion-input>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="ion-no-padding ion-no-margin">
+                    <ion-col  class="ion-no-padding ion-no-margin">
+                      <ion-item>
+                        <ion-label position="stacked"><b>Carbohidratos %</b> </ion-label>
+                        <ion-input formControlName='carbohidratos' type="number" placeholder="valor"></ion-input>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="ion-no-padding ion-no-margin">
+                    <ion-col  class="ion-no-padding ion-no-margin">
+                      <ion-item>
+                        <ion-label position="stacked"><b>Grasas %</b> </ion-label>
+                        <ion-input formControlName='grasas' type="number" placeholder="valor"></ion-input>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="ion-no-padding ion-no-margin">
+                    <ion-col  class="ion-no-padding ion-no-margin">
+                      <ion-item>
+                        <ion-label position="stacked"><b>Total  %</b> </ion-label>
+                        {{getDistribucionTotalPorcentaje()}}
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+        
+              </div>
+             
+            </ion-col>
+            <ion-col >
+              <div formGroupName='distribucion'>
+                <ion-row class="ion-no-padding ion-no-margin">
+                  <ion-col size="2.5" class="ion-no-padding ion-no-margin">
+                    <ion-item>
+                      <ion-label position="stacked"><b>Calorias Totales</b> </ion-label>
+                      {{getCaloriaTotal('proteina', 'proteinaTotal')}}
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="2.5" class="ion-no-padding ion-no-margin">
+                    <ion-item>
+                      <ion-label position="stacked"><b>Gramos total</b> </ion-label>
+                      {{  (formGroup.get('distribucion').get('proteinaTotal').value / 4 ).toFixed(2)}}
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="2.5" class="ion-no-padding ion-no-margin">
+                    <ion-item>
+                      <ion-label position="stacked"><b>Gramos/Kg (Peso actual)</b> </ion-label>
+                      {{ (formGroup.get('distribucion').get('proteinaTotal').value / 4 / formGroup.get('antropometria').get('peso').value ).toFixed(2)  }}
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-no-padding ion-no-margin">
+                  <ion-col size="2.5" class="ion-no-padding ion-no-margin">
+                    <ion-item>
+                      {{getCaloriaTotal('carbohidratos', 'carbohidratosTotal')}}
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="2.5" class="ion-no-padding ion-no-margin">
+                    <ion-item>
+                      {{ ( formGroup.get('distribucion').get('carbohidratosTotal').value / 4).toFixed(2) }}
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="2.5" class="ion-no-padding ion-no-margin">
+                    <ion-item>
+                      {{ (formGroup.get('distribucion').get('carbohidratosTotal').value / 4 / formGroup.get('antropometria').get('peso').value ).toFixed(2)  }}
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-no-padding ion-no-margin">
+                  <ion-col size="2.5" class="ion-no-padding ion-no-margin">
+                    <ion-item>
+                      {{getCaloriaTotal('grasas', 'grasasTotal')}}
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="2.5" class="ion-no-padding ion-no-margin">
+                    <ion-item>
+                      {{ (formGroup.get('distribucion').get('grasasTotal').value / 9).toFixed(2) }}
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="2.5" class="ion-no-padding ion-no-margin">
+                    <ion-item>
+                      {{ (formGroup.get('distribucion').get('grasasTotal').value / 9 / formGroup.get('antropometria').get('peso').value ).toFixed(2)  }}
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  
+                  <ion-col size="2.5" class="ion-no-padding ion-no-margin">
+                    <ion-item>
+                      {{getTotalGeneralCalorias()}}
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-content >
+          
         </ion-card-content>
       </ion-card>
     </form>

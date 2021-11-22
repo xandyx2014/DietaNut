@@ -101,6 +101,16 @@ export class StorePage implements OnInit {
         reserva: [0],
         caloriaDiariaElegida: [0],
       }),
+      distribucion: this.fb.group({
+        proteina: [0],
+        proteinaTotal: [0],
+        carbohidratos: [0],
+        carbohidratosTotal: [0],
+        grasas: [0],
+        grasasTotal: [0],
+        totalPorcentaje: [0],
+        totalGeneral: [0],
+      }),
     });
     this.formGroup.valueChanges.subscribe((e) => {
       console.log(e);
@@ -285,6 +295,57 @@ export class StorePage implements OnInit {
       { emitEvent: false }
     );
     return reserva.toFixed(2);
+  }
+  getDistribucionTotalPorcentaje() {
+    const proteina = Number(
+      this.formGroup.get("distribucion").value["proteina"]
+    );
+    const carbohidratos = Number(
+      this.formGroup.get("distribucion").value["carbohidratos"]
+    );
+    const grasas = Number(this.formGroup.get("distribucion").value["grasas"]);
+    const total = proteina + carbohidratos + grasas;
+    this.formGroup.get("distribucion").patchValue(
+      {
+        ["totalPorcentaje"]: Number(total).toFixed(2),
+      },
+      { emitEvent: false }
+    );
+    return total.toFixed(2);
+  }
+  getCaloriaTotal(type: string, total: string) {
+    const typeValue = Number(this.formGroup.get("distribucion").value[type]);
+    const caloriaDiariaElegida = Number(
+      this.formGroup.get("caloriaDiaria").value["caloriaDiariaElegida"]
+    );
+    const totalCaloria = (typeValue * caloriaDiariaElegida) / 100;
+    this.formGroup.get("distribucion").patchValue(
+      {
+        [total]: Number(totalCaloria).toFixed(2),
+      },
+      { emitEvent: false }
+    );
+    return totalCaloria.toFixed(2);
+  }
+  getTotalGeneralCalorias() {
+    const proteinaTotal = Number(
+      this.formGroup.get("distribucion").value["proteinaTotal"]
+    );
+    const carbohidratosTotal = Number(
+      this.formGroup.get("distribucion").value["carbohidratosTotal"]
+    );
+    const grasasTotal = Number(
+      this.formGroup.get("distribucion").value["grasasTotal"]
+    );
+    const totalGeneralCalorias =
+      proteinaTotal + carbohidratosTotal + grasasTotal;
+    this.formGroup.get("distribucion").patchValue(
+      {
+        ["totalGeneral"]: Number(totalGeneralCalorias).toFixed(2),
+      },
+      { emitEvent: false }
+    );
+    return totalGeneralCalorias.toFixed(2);
   }
   store() {
     console.log(this.formGroup.value);
