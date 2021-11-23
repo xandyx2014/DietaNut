@@ -27,8 +27,8 @@
             <ion-item *ngFor="let dieta of dietas" class="ion-activatable ripple-parent" (click)="presentActionSheet(dieta)">
               <ion-icon name="chevron-forward-outline"></ion-icon>
               <ion-label>
-                <h2>{{ dieta.titulo | titlecase}}</h2>
-                <h3>{{ dieta.created_at| date: 'dd/MM/yyyy'}}</h3>
+                <p><b>Nombre Paciente</b> {{ dieta.nombre | titlecase}}</p>
+                <p><b>Fecha creada:</b>{{ dieta.created_at| date: 'dd/MM/yyyy'}}</p>
                 <p *ngIf="dieta.descripcion.length; else elseDescripcionString"> {{dieta.descripcion }} </p>
                 <ng-template #elseDescripcionString><p> Sin descripcion...</p></ng-template>
                 

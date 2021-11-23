@@ -1,4 +1,5 @@
-import { ActivatedRoute } from "@angular/router";
+import { AlertController } from "@ionic/angular";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
 import { Actions } from "../actions.enum";
 import {
@@ -7,6 +8,8 @@ import {
   FormGroup,
   Validators,
 } from "@angular/forms";
+import { StorageService } from "src/app/services/storage.local.service";
+import { AlertOptions } from "@ionic/core";
 const fieldsHora = [
   "descansarHora",
   "reposoHora",
@@ -33,88 +36,112 @@ export class StorePage implements OnInit {
   formGroup: FormGroup;
   fieldsHora = fieldsHora;
   fieldsPromedio = fieldsPromedio;
+  private valueUpdate: any = {};
   public isOkey = false;
-  constructor(private route: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private alertController: AlertController,
+    private storageLocal: StorageService,
+    private router: Router
+  ) {}
 
   ngOnInit() {}
   ionViewDidEnter() {
-    this.route.queryParams.subscribe((params) => {
-      this.action = Actions[params["action"]];
+    this.route.queryParams.subscribe(async (params) => {
+      this.action = Number(params.action) === 1 ? Actions.edit : Actions.create;
+      if (this.action === Actions.edit) {
+        this.valueUpdate = await this.storageLocal.buscarPorUid(
+          "calculo-dietetico",
+          params.uid
+        );
+      }
       this.createData();
     });
   }
   createData() {
     this.formGroup = this.fb.group({
-      nombre: ["", Validators.required],
-      edad: [0, Validators.required],
-      sexo: ["HOMBRE", Validators.required],
-      talla: [0, Validators.required],
-      actividadFisica: [0, Validators.required],
-      nivelActividadFisica: [0, Validators.required],
-      fecha: [new Date().toISOString(), Validators.required],
+      uid: [
+        this.valueUpdate.uid ??
+          `${Date.now().toString()}-${Date.now().toString(32)}`,
+      ],
+      descripcion: [this.valueUpdate.descripcion ?? ""],
+      created_at: [this.valueUpdate.created_at ?? new Date().toString()],
+      nombre: [this.valueUpdate.nombre ?? "", Validators.required],
+      edad: [this.valueUpdate.edad ?? 0, Validators.required],
+      sexo: [this.valueUpdate.sexo ?? "HOMBRE", Validators.required],
+      talla: [this.valueUpdate.talla ?? 0, Validators.required],
+      actividadFisica: [
+        this.valueUpdate.actividadFisica ?? 0,
+        Validators.required,
+      ],
+      nivelActividadFisica: [
+        this.valueUpdate.nivelActividadFisica ?? 0,
+        Validators.required,
+      ],
       rutina: this.fb.group({
-        descansar: [0, Validators.required],
-        descansarHora: [1, Validators.required],
-        descansarPromedio: [0],
-        reposo: [0, Validators.required],
-        reposoHora: [1, Validators.required],
-        reposoPromedio: [0],
-        estudiar: [0, Validators.required],
-        estudiarHora: [1, Validators.required],
-        estudiarPromedio: [0],
-        caminar: [0, Validators.required],
-        caminarHora: [1, Validators.required],
-        caminarPromedio: [0],
-        trabajar: [0, Validators.required],
-        trabajarHora: [1, Validators.required],
-        trabajarPromedio: [0],
-        entrenar: [0, Validators.required],
-        entrenarHora: [1, Validators.required],
-        entrenarPromedio: [0],
-        horasTotal: [0],
-        promedioTotal: [0],
-        totalGeneral: [0],
+        descansar: [this.valueUpdate.descansar ?? 0],
+        descansarHora: [this.valueUpdate.descansarHora ?? 1],
+        descansarPromedio: [this.valueUpdate.descansarPromedio ?? 0],
+        reposo: [this.valueUpdate.reposo ?? 0],
+        reposoHora: [this.valueUpdate.reposoHora ?? 1],
+        reposoPromedio: [this.valueUpdate.reposoPromedio ?? 0],
+        estudiar: [this.valueUpdate.estudiar ?? 0],
+        estudiarHora: [this.valueUpdate.estudiarHora ?? 1],
+        estudiarPromedio: [this.valueUpdate.estudiarPromedio ?? 0],
+        caminar: [this.valueUpdate.caminar ?? 0],
+        caminarHora: [this.valueUpdate.caminarHora ?? 1],
+        caminarPromedio: [this.valueUpdate.caminarPromedio ?? 0],
+        trabajar: [this.valueUpdate.trabajar ?? 0],
+        trabajarHora: [this.valueUpdate.trabajarHora ?? 1],
+        trabajarPromedio: [this.valueUpdate.trabajarPromedio ?? 0],
+        entrenar: [this.valueUpdate.entrenar ?? 0],
+        entrenarHora: [this.valueUpdate.entrenarHora ?? 1],
+        entrenarPromedio: [this.valueUpdate.entrenarPromedio ?? 0],
+        horasTotal: [this.valueUpdate.horasTotal ?? 0],
+        promedioTotal: [this.valueUpdate.promedioTotal ?? 0],
+        totalGeneral: [this.valueUpdate.totalGeneral ?? 0],
       }),
       antropometria: this.fb.group({
-        peso: [0, Validators.required],
-        pesoObjectivo: [0, Validators.required],
-        masaMagra: [0, Validators.required],
-        masaGrasa: [0, Validators.required],
-        indiceMusculo: [0, Validators.required],
-        grasaDisminuir: [0, Validators.required],
-        musculoAumentar: [0, Validators.required],
-        sumaPliegues: [0, Validators.required],
-        sumaPlieguesObjectivo: [0, Validators.required],
-        grasa: [0, Validators.required],
-        grasaDeseado: [0],
+        peso: [this.valueUpdate.peso ?? 1],
+        pesoObjectivo: [this.valueUpdate.pesoObjectivo ?? 0],
+        masaMagra: [this.valueUpdate.masaMagra ?? 0],
+        masaGrasa: [this.valueUpdate.masaGrasa ?? 0],
+        indiceMusculo: [this.valueUpdate.indiceMusculo ?? 0],
+        grasaDisminuir: [this.valueUpdate.grasaDisminuir ?? 0],
+        musculoAumentar: [this.valueUpdate.musculoAumentar ?? 0],
+        sumaPliegues: [this.valueUpdate.sumaPliegues ?? 0],
+        sumaPlieguesObjectivo: [this.valueUpdate.sumaPlieguesObjectivo ?? 0],
+        grasa: [this.valueUpdate.grasa ?? 0],
+        grasaDeseado: [this.valueUpdate.grasaDeseado ?? 0],
       }),
       caloriaDiaria: this.fb.group({
-        geb: [0],
-        eta: [0],
-        etaPorcentaje: [5],
-        get: [0],
-        caloriaFaf: [0],
-        deficitCaloria: [0],
-        deficit: [0],
-        superavitCaloria: [0],
-        superavit: [0],
-        reserva: [0],
-        caloriaDiariaElegida: [0],
+        geb: [this.valueUpdate.geb ?? 0],
+        eta: [this.valueUpdate.eta ?? 0],
+        etaPorcentaje: [this.valueUpdate.etaPorcentaje ?? 5],
+        get: [this.valueUpdate.get ?? 0],
+        caloriaFaf: [this.valueUpdate.caloriaFaf ?? 0],
+        deficitCaloria: [this.valueUpdate.deficitCaloria ?? 0],
+        deficit: [this.valueUpdate.deficit ?? 0],
+        superavitCaloria: [this.valueUpdate.superavitCaloria ?? 0],
+        superavit: [this.valueUpdate.superavit ?? 0],
+        reserva: [this.valueUpdate.reserva ?? 0],
+        caloriaDiariaElegida: [this.valueUpdate.caloriaDiariaElegida ?? 0],
       }),
       distribucion: this.fb.group({
-        proteina: [0],
-        proteinaTotal: [0],
-        carbohidratos: [0],
-        carbohidratosTotal: [0],
-        grasas: [0],
-        grasasTotal: [0],
-        totalPorcentaje: [0],
-        totalGeneral: [0],
+        proteina: [this.valueUpdate.proteina ?? 0],
+        proteinaTotal: [this.valueUpdate.proteinaTotal ?? 0],
+        carbohidratos: [this.valueUpdate.carbohidratos ?? 0],
+        carbohidratosTotal: [this.valueUpdate.carbohidratosTotal ?? 0],
+        grasas: [this.valueUpdate.grasas ?? 0],
+        grasasTotal: [this.valueUpdate.grasasTotal ?? 0],
+        totalPorcentaje: [this.valueUpdate.totalPorcentaje ?? 0],
+        totalGeneral: [this.valueUpdate.totalGeneral ?? 0],
       }),
     });
-    this.formGroup.valueChanges.subscribe((e) => {
+    /*  this.formGroup.valueChanges.subscribe((e) => {
       console.log(e);
-    });
+    }); */
     this.isOkey = true;
   }
   getPromedioRutina(modelForm) {
@@ -347,7 +374,54 @@ export class StorePage implements OnInit {
     );
     return totalGeneralCalorias.toFixed(2);
   }
-  store() {
-    console.log(this.formGroup.value);
+  private async alertMessage(el) {
+    if (this.formGroup.invalid) {
+      this.formGroup.markAsDirty();
+      this.formGroup.markAllAsTouched();
+      window.scroll(0, 0);
+      el.scrollIntoView();
+      const alertError = await this.alertController.create({
+        header: "Alerta",
+        mode: "md",
+        subHeader: "Falta un titulo a la dieta",
+        buttons: ["Aceptar"],
+      });
+      await alertError.present();
+      return true;
+    }
+    return false;
+  }
+  private async successTask(opts: AlertOptions) {
+    await this.router.navigate(["/home"]);
+    const alertSuccesStorage = await this.alertController.create({ ...opts });
+    return await alertSuccesStorage.present();
+  }
+  async store(el: HTMLElement) {
+    const respMessage = await this.alertMessage(el);
+    if (respMessage) {
+      return;
+    }
+    const value = this.formGroup.value;
+    if (this.action === Actions.create) {
+      await this.storageLocal.guardarDatos({
+        dato: value,
+        referencia: "calculo-dietetico",
+      });
+    }
+    if (this.action === Actions.edit) {
+      await this.storageLocal.actualizarDato(
+        value.uid,
+        value,
+        "calculo-dietetico"
+      );
+    }
+
+    await this.successTask({
+      header: "Exito",
+      mode: "md",
+      subHeader: "Se ha guardado tu calculo correctamente",
+      message: "Puedes revisarlo en tu lista de calculos dieteticos",
+      buttons: ["Aceptar"],
+    });
   }
 }

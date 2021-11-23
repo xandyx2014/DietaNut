@@ -5,11 +5,13 @@ import {
   AlertController,
   ToastController,
 } from "@ionic/angular";
+import { format } from "date-fns";
+import autoTable from "jspdf-autotable";
 import { Observable } from "rxjs";
 import { DietaService } from "src/app/services/dieta.service";
 import { StorageService } from "src/app/services/storage.local.service";
 import { Actions } from "./actions.enum";
-
+import { jsPDF } from "jspdf";
 @Component({
   selector: "app-calculo-dietetico",
   templateUrl: "./calculo-dietetico.page.html",
@@ -48,9 +50,55 @@ export class CalculoDieteticoPage implements OnInit {
       },
     });
   }
-  async presentActionSheet(dieta: any) {
+  public async downloadAsPDF(resp) {
+    const doc = new jsPDF("landscape");
+    const valueStorage: any = await this.storageService.buscarPorUid(
+      "calculo-dietetico",
+      resp.uid
+    );
+    doc
+      .setFontSize(16)
+      .text("Reporte de dieta: " + "andy jesus macias gomez", 15, 10);
+    doc
+      .setFontSize(8)
+      .text(
+        "Creado en la fecha: " +
+          format(new Date(valueStorage.created_at), "dd/MM/yyyy"),
+        15,
+        15
+      );
+    doc.setFontSize(8).text("Descripcion: " + valueStorage.descripcion, 15, 22);
+    autoTable(doc, {
+      margin: { top: 30 },
+      headStyles: {
+        fontSize: 6,
+        textColor: "#000",
+        fontStyle: "bold",
+        fillColor: "#d8d8d8",
+      },
+      bodyStyles: {
+        fontSize: 6,
+        lineColor: "#000000",
+      },
+      footStyles: {
+        fontSize: 6,
+        fillColor: "#d8d8d8",
+        textColor: "#000",
+      },
+      head: [["Name", "Email", "Country"]],
+      body: [
+        ["David", "david@example.com", "Sweden"],
+        ["Castille", "castille@example.com", "Spain"],
+        // ...
+      ],
+      // foot: [],
+    });
+
+    doc.save(`calculo-dietetico-${Date.now().toString(32)}.pdf`);
+  }
+  async presentActionSheet(data: any) {
     const actionSheet = await this.actionSheetController.create({
-      header: dieta.titulo,
+      header: "Calculo dietetico",
       mode: "md",
       cssClass: "my-custom-class",
       buttons: [
@@ -59,19 +107,19 @@ export class CalculoDieteticoPage implements OnInit {
           role: "destructive",
           icon: "trash",
           handler: async () => {
-            this.presentAlertConfirm(dieta);
+            this.presentAlertConfirm(data);
           },
         },
         {
           text: "Ver o Editar",
           icon: "book-outline",
           handler: async () => {
-            this.router.navigate(["/composicion/store"], {
-              queryParams: { edit: true, uid: dieta.uid },
+            this.router.navigate(["/calculo-dietetico/store"], {
+              queryParams: { action: Actions.edit, uid: data.uid },
             });
             const valueStorage = await this.storageService.buscarPorUid(
-              "composicion",
-              dieta.uid
+              "calculo-dietetico",
+              data.uid
             );
           },
         },
@@ -79,7 +127,7 @@ export class CalculoDieteticoPage implements OnInit {
           text: "Exportar",
           icon: "share-social-outline",
           handler: () => {
-            // this.downloadAsPDF(dieta);
+            this.downloadAsPDF(data);
           },
         },
         {
@@ -94,10 +142,10 @@ export class CalculoDieteticoPage implements OnInit {
     });
     await actionSheet.present();
   }
-  async presentAlertConfirm(dieta) {
+  async presentAlertConfirm(data) {
     const alert = await this.alertController.create({
       header: "Confirmar!",
-      message: "Estas seguro de <strong>eliminar</strong> esta receta!!!",
+      message: "Estas seguro de <strong>eliminar</strong> este calculo!!!",
       mode: "md",
       buttons: [
         {
@@ -109,9 +157,12 @@ export class CalculoDieteticoPage implements OnInit {
         {
           text: "Aceptar",
           handler: async () => {
-            await this.storageService.eliminarDato(dieta.uid, "composicion");
+            await this.storageService.eliminarDato(
+              data.uid,
+              "calculo-dietetico"
+            );
             this.getAllData();
-            await this.presentToast(`Eliminado ${dieta.titulo}`);
+            await this.presentToast(`Eliminado correctamente`);
           },
         },
       ],

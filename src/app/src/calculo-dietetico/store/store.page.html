@@ -6,7 +6,7 @@
 
 <ion-content>
   <ng-container *ngIf="isOkey">
-    <form [formGroup]="formGroup">
+    <form [formGroup]="formGroup" #title>
 
       <ion-card>
         <ion-card-header>
@@ -80,6 +80,15 @@
                   lines="none" color="danger" class="form-error">
                   Este campo es requerido
                 </ion-text>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Descripcion</ion-label>
+                <ion-textarea formControlName='descripcion' placeholder="Escriba una descripcion aqui...">
+                </ion-textarea>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -639,9 +648,9 @@
         </ion-card-content>
       </ion-card>
     </form>
-    <ion-button (click)="store()" expand="full">
+    <ion-button (click)="store(title)" expand="full">
       <ion-icon name="save-outline"></ion-icon>
-
+      Guardar
 
 
 
