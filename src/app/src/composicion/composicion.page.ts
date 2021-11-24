@@ -11,7 +11,7 @@ import { StorageService } from "src/app/services/storage.local.service";
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 import * as sumBy from "lodash.sumby";
-import { format, parseISO } from "date-fns";
+import { format } from "date-fns";
 @Component({
   selector: "app-composicion",
   templateUrl: "./composicion.page.html",

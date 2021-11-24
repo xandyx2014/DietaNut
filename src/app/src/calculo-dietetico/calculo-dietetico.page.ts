@@ -58,7 +58,7 @@ export class CalculoDieteticoPage implements OnInit {
     );
     doc
       .setFontSize(16)
-      .text("Reporte de dieta: " + "andy jesus macias gomez", 15, 10);
+      .text("Reporte de calculo dietetico: " + valueStorage.nombre, 15, 10);
     doc
       .setFontSize(8)
       .text(
@@ -69,7 +69,8 @@ export class CalculoDieteticoPage implements OnInit {
       );
     doc.setFontSize(8).text("Descripcion: " + valueStorage.descripcion, 15, 22);
     autoTable(doc, {
-      margin: { top: 30 },
+      margin: { top: 25 },
+      tableWidth: "wrap",
       headStyles: {
         fontSize: 6,
         textColor: "#000",
@@ -77,7 +78,7 @@ export class CalculoDieteticoPage implements OnInit {
         fillColor: "#d8d8d8",
       },
       bodyStyles: {
-        fontSize: 6,
+        fontSize: 4.5,
         lineColor: "#000000",
       },
       footStyles: {
@@ -85,15 +86,196 @@ export class CalculoDieteticoPage implements OnInit {
         fillColor: "#d8d8d8",
         textColor: "#000",
       },
-      head: [["Name", "Email", "Country"]],
+      head: [["Datos del sujeto", ""]],
       body: [
-        ["David", "david@example.com", "Sweden"],
-        ["Castille", "castille@example.com", "Spain"],
+        ["Nombre: ", valueStorage.nombre],
+        ["Edad: ", valueStorage.edad],
+        ["Sexo: ", valueStorage.sexo],
+        ["Talla (cm): ", valueStorage.talla],
+        ["Nivel de Actividad física: ", valueStorage.nivelActividadFisica],
+        ["Actividad Física:: ", valueStorage.actividadFisica],
         // ...
       ],
       // foot: [],
     });
+    autoTable(doc, {
+      margin: { left: 55 },
+      startY: 25,
+      tableWidth: "wrap",
+      headStyles: {
+        fontSize: 5,
+        textColor: "#000",
+        fontStyle: "bold",
+        fillColor: "#d8d8d8",
+      },
+      bodyStyles: {
+        fontSize: 4.5,
+        lineColor: "#000000",
+        minCellHeight: 2,
+      },
+      footStyles: {
+        fontSize: 6,
+        fillColor: "#d8d8d8",
+        textColor: "#000",
+      },
+      head: [["Rutina diaria (F.A.F)", "Horas", "Promedio", ""]],
+      body: [
+        [
+          "Descansar: ",
+          valueStorage.rutina.descansar,
+          valueStorage.rutina.descansarPromedio,
+        ],
+        [
+          "Reposo: ",
+          valueStorage.rutina.reposo,
+          valueStorage.rutina.reposoPromedio,
+        ],
+        [
+          "Estudiar: ",
+          valueStorage.rutina.estudiar,
+          valueStorage.rutina.estudiarPromedio,
+        ],
+        [
+          "Caminar: ",
+          valueStorage.rutina.caminar,
+          valueStorage.rutina.caminarPromedio,
+        ],
+        [
+          "Trabajar : ",
+          valueStorage.rutina.trabajar,
+          valueStorage.rutina.trabajarPromedio,
+        ],
+        [
+          "Entrenar: ",
+          valueStorage.rutina.entrenar,
+          valueStorage.rutina.entrenarPromedio,
+        ],
+        [
+          "",
+          valueStorage.rutina.horasTotal,
+          valueStorage.rutina.promedioTotal,
+          valueStorage.rutina.totalGeneral,
+        ],
 
+        // ...
+      ],
+      // foot: [],
+    });
+    autoTable(doc, {
+      margin: { top: 15 },
+      tableWidth: "wrap",
+      headStyles: {
+        fontSize: 6,
+        textColor: "#000",
+        fontStyle: "bold",
+        fillColor: "#d8d8d8",
+      },
+      bodyStyles: {
+        fontSize: 4.5,
+        lineColor: "#000000",
+      },
+      footStyles: {
+        fontSize: 6,
+        fillColor: "#d8d8d8",
+        textColor: "#000",
+      },
+      head: [["Antropometría (Datos del ISAK)", ""]],
+      body: [
+        ["Peso (kg): ", valueStorage.antropometria.peso],
+        ["Peso Objetivo (kg): ", valueStorage.antropometria.pesoObjectivo],
+        ["Kg. Masa magra (D y W): ", valueStorage.antropometria.masaMagra],
+        ["Kg. Masa grasa (D y W): ", valueStorage.antropometria.masaGrasa],
+        ["Indice músculo/óseo: ", valueStorage.antropometria.indiceMusculo],
+        ["Kg. Grasa a disminuir: ", valueStorage.antropometria.grasaDisminuir],
+        [
+          "Kg. Músculo para aumentar: ",
+          valueStorage.antropometria.musculoAumentar,
+        ],
+        ["Suma 6 pliegues: ", valueStorage.antropometria.sumaPliegues],
+        [
+          "Suma 6 pliegues objetivo: ",
+          valueStorage.antropometria.sumaPlieguesObjectivo,
+        ],
+        ["% Grasa(D y W): ", valueStorage.antropometria.grasa],
+        ["% Grasa deseado (D y W): ", valueStorage.antropometria.grasaDeseado],
+
+        // ...
+      ],
+      // foot: [],
+    });
+    autoTable(doc, {
+      margin: { left: 60 },
+      startY: 75,
+      tableWidth: "wrap",
+      headStyles: {
+        fontSize: 5,
+        textColor: "#000",
+        fontStyle: "bold",
+        fillColor: "#d8d8d8",
+      },
+      bodyStyles: {
+        fontSize: 4.5,
+        lineColor: "#000000",
+        minCellHeight: 2,
+      },
+      footStyles: {
+        fontSize: 6,
+        fillColor: "#d8d8d8",
+        textColor: "#000",
+      },
+      head: [["Calorías diarias (Harris Benedict 1990)", "", ""]],
+      body: [
+        ["GEB: ", valueStorage.caloriaDiaria.geb],
+        ["ETA: ", valueStorage.caloriaDiaria.eta],
+        ["GET: ", valueStorage.caloriaDiaria.get],
+        ["Calorías FAF: ", valueStorage.caloriaDiaria.caloriaFaf],
+        [
+          "Déficit: ",
+          valueStorage.caloriaDiaria.deficit,
+          "Calorias: " + valueStorage.caloriaDiaria.deficitCaloria,
+        ],
+        [
+          "Superávit: ",
+          valueStorage.caloriaDiaria.superavit,
+          "Calorias: " + valueStorage.caloriaDiaria.superavitCaloria,
+        ],
+        ["Reserva: ", valueStorage.caloriaDiaria.reserva],
+        [
+          "Calorías diarias elegidas: ",
+          valueStorage.caloriaDiaria.caloriaDiariaElegida,
+        ],
+      ],
+      // foot: [],
+    });
+    autoTable(doc, {
+      // margin: { top: 45 },
+      startY: 145,
+      tableWidth: "wrap",
+      headStyles: {
+        fontSize: 6,
+        textColor: "#000",
+        fontStyle: "bold",
+        fillColor: "#d8d8d8",
+      },
+      bodyStyles: {
+        fontSize: 4.5,
+        lineColor: "#000000",
+      },
+      footStyles: {
+        fontSize: 6,
+        fillColor: "#d8d8d8",
+        textColor: "#000",
+      },
+      head: [["Distribución molécula calórica", "%"]],
+      body: [
+        ["Proteínas: ", valueStorage.distribucion.proteina + " %"],
+        ["Carbohidratos: ", valueStorage.distribucion.carbohidratos + " %"],
+        ["Grasas: ", valueStorage.distribucion.grasas + " %"],
+        ["Total: ", valueStorage.distribucion.totalPorcentaje + " %"],
+        // ...
+      ],
+      // foot: [],
+    });
     doc.save(`calculo-dietetico-${Date.now().toString(32)}.pdf`);
   }
   async presentActionSheet(data: any) {
