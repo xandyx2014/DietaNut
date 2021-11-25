@@ -87,7 +87,7 @@
             <ion-col>
               <ion-item>
                 <ion-label position="stacked">Descripcion</ion-label>
-                <ion-textarea formControlName='descripcion' placeholder="Escriba una descripcion aqui...">
+                <ion-textarea formControlName='descripcion' maxlength="80" rows='2'   placeholder="Escriba una descripcion aqui...">
                 </ion-textarea>
               </ion-item>
             </ion-col>
@@ -218,13 +218,12 @@
             <ion-row class="ion-no-padding ion-no-margin">
               <ion-col class="ion-no-padding ion-no-margin">
                 <ion-item>
-                  <ion-label><b>Trabajar</b> </ion-label>
-                  <ion-input formControlName="trabajar" type="number" placeholder="valor"></ion-input>
-                  <ion-text
-                    *ngIf="formGroup.get('rutina').get('trabajar').invalid && formGroup.get('rutina').get('trabajar').touched"
-                    lines="none" color="danger" class="form-error">
-                    Este campo es requerido
-                  </ion-text>
+                  <ion-label ><b>Trabajar</b></ion-label>
+                  <ion-select mode="md" formControlName="trabajar" placeholder="Escribir Sexo">
+                    <ion-select-option [value]="2">2</ion-select-option>
+                    <ion-select-option [value]="3">3</ion-select-option>
+                    <ion-select-option [value]="4">4</ion-select-option>
+                  </ion-select>
                 </ion-item>
               </ion-col>
               <ion-col class="ion-no-padding ion-no-margin">
@@ -245,14 +244,14 @@
           <div style="border-style: dotted; padding: 1rem; margin-top: 0.8rem;">
             <ion-row class="ion-no-padding ion-no-margin">
               <ion-col class="ion-no-padding ion-no-margin">
+                
                 <ion-item>
-                  <ion-label><b>Entrenar</b> </ion-label>
-                  <ion-input formControlName="entrenar" type="number" placeholder="valor"></ion-input>
-                  <ion-text
-                    *ngIf="formGroup.get('rutina').get('entrenar').invalid && formGroup.get('rutina').get('entrenar').touched"
-                    lines="none" color="danger" class="form-error">
-                    Este campo es requerido
-                  </ion-text>
+                  <ion-label ><b>Entrenar</b></ion-label>
+                  <ion-select mode="md" formControlName="entrenar" placeholder="Entrenar">
+                    <ion-select-option [value]="5">5</ion-select-option>
+                    <ion-select-option [value]="6">6</ion-select-option>
+                    <ion-select-option [value]="7">7</ion-select-option>
+                  </ion-select>
                 </ion-item>
               </ion-col>
               <ion-col class="ion-no-padding ion-no-margin">

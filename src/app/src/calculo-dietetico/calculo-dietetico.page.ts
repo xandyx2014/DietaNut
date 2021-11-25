@@ -56,9 +56,7 @@ export class CalculoDieteticoPage implements OnInit {
       "calculo-dietetico",
       resp.uid
     );
-    doc
-      .setFontSize(16)
-      .text("Reporte de calculo dietetico: " + valueStorage.nombre, 15, 10);
+    doc.setFontSize(14).text("Reporte de calculo dietetico: ", 15, 10);
     doc
       .setFontSize(8)
       .text(
@@ -67,7 +65,9 @@ export class CalculoDieteticoPage implements OnInit {
         15,
         15
       );
-    doc.setFontSize(8).text("Descripcion: " + valueStorage.descripcion, 15, 22);
+    doc
+      .setFontSize(8)
+      .text("Descripcion: " + valueStorage.descripcion, 15, 18.5);
     autoTable(doc, {
       margin: { top: 25 },
       tableWidth: "wrap",
@@ -272,6 +272,55 @@ export class CalculoDieteticoPage implements OnInit {
         ["Carbohidratos: ", valueStorage.distribucion.carbohidratos + " %"],
         ["Grasas: ", valueStorage.distribucion.grasas + " %"],
         ["Total: ", valueStorage.distribucion.totalPorcentaje + " %"],
+        // ...
+      ],
+      // foot: [],
+    });
+    const peso = Number(valueStorage.antropometria.peso);
+    autoTable(doc, {
+      margin: { left: 65 },
+      startY: 145,
+      tableWidth: "wrap",
+      headStyles: {
+        fontSize: 6,
+        textColor: "#000",
+        fontStyle: "bold",
+        fillColor: "#d8d8d8",
+      },
+      bodyStyles: {
+        fontSize: 4.5,
+        lineColor: "#000000",
+        halign: "center",
+      },
+      footStyles: {
+        fontSize: 6,
+        fillColor: "#d8d8d8",
+        textColor: "#000",
+      },
+      head: [["Calorías Totales", "Gramos total", "Gramos/Kg (Peso actual)"]],
+      body: [
+        [
+          valueStorage.distribucion.proteinaTotal,
+          Number(valueStorage.distribucion.proteinaTotal) / 4,
+          (Number(valueStorage.distribucion.proteinaTotal) / 4 / peso).toFixed(
+            2
+          ),
+        ],
+        [
+          valueStorage.distribucion.carbohidratosTotal,
+          Number(valueStorage.distribucion.carbohidratosTotal) / 4,
+          (
+            Number(valueStorage.distribucion.carbohidratosTotal) /
+            4 /
+            peso
+          ).toFixed(2),
+        ],
+        [
+          valueStorage.distribucion.grasasTotal,
+          Number(valueStorage.distribucion.grasasTotal) / 4,
+          (Number(valueStorage.distribucion.grasasTotal) / 4 / peso).toFixed(2),
+        ],
+        [valueStorage.distribucion.totalGeneral],
         // ...
       ],
       // foot: [],
