@@ -103,7 +103,7 @@ export class CalculoDieteticoPage implements OnInit {
       // foot: [],
     });
     autoTable(doc, {
-      margin: { left: 55 },
+      margin: { left: 65 },
       startY: 25,
       tableWidth: "wrap",
       headStyles: {
