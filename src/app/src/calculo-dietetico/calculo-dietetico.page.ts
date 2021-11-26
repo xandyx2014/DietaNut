@@ -12,6 +12,7 @@ import { DietaService } from "src/app/services/dieta.service";
 import { StorageService } from "src/app/services/storage.local.service";
 import { Actions } from "./actions.enum";
 import { jsPDF } from "jspdf";
+import { logoBase64 } from "../shared/img/img";
 @Component({
   selector: "app-calculo-dietetico",
   templateUrl: "./calculo-dietetico.page.html",
@@ -52,10 +53,13 @@ export class CalculoDieteticoPage implements OnInit {
   }
   public async downloadAsPDF(resp) {
     const doc = new jsPDF("landscape");
+
     const valueStorage: any = await this.storageService.buscarPorUid(
       "calculo-dietetico",
       resp.uid
     );
+    const imageBase64 = logoBase64;
+    doc.addImage(imageBase64, "JPEG", 260, 1, 20, 20);
     doc.setFontSize(14).text("Reporte de calculo dietetico: ", 15, 10);
     doc
       .setFontSize(8)

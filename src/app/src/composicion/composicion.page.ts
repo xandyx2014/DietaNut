@@ -12,6 +12,7 @@ import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 import * as sumBy from "lodash.sumby";
 import { format } from "date-fns";
+import { logoBase64 } from "../shared/img/img";
 @Component({
   selector: "app-composicion",
   templateUrl: "./composicion.page.html",
@@ -35,6 +36,8 @@ export class ComposicionPage implements OnInit {
       "composicion",
       resp.uid
     );
+    const imageBase64 = logoBase64;
+    doc.addImage(imageBase64, "JPEG", 260, 1, 20, 20);
     doc
       .setFontSize(16)
       .text("Reporte de dieta: " + valueStorage.titulo, 15, 10);
