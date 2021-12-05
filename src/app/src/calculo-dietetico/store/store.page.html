@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Calculo dietetico</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/calculo-dietetico" text="Atras"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -107,7 +110,7 @@
               <ion-col class="ion-no-padding ion-no-margin">
                 <ion-item>
                   <ion-label><b>Descansar</b> </ion-label>
-                  <ion-input type="number" formControlName="descansar" placeholder="valor"></ion-input>
+                  <ion-input type="number" formControlName="descansar" disabled placeholder="valor"></ion-input>
                   <ion-text
                     *ngIf="formGroup.get('rutina').get('descansar').invalid && formGroup.get('rutina').get('descansar').touched"
                     lines="none" color="danger" class="form-error">
@@ -135,7 +138,7 @@
               <ion-col class="ion-no-padding ion-no-margin">
                 <ion-item>
                   <ion-label><b>Reposo</b> </ion-label>
-                  <ion-input formControlName="reposo" type="number" placeholder="valor"></ion-input>
+                  <ion-input formControlName="reposo" disabled type="number" placeholder="valor"></ion-input>
                   <ion-text
                     *ngIf="formGroup.get('rutina').get('reposo').invalid && formGroup.get('rutina').get('reposo').touched"
                     lines="none" color="danger" class="form-error">
@@ -163,7 +166,7 @@
               <ion-col class="ion-no-padding ion-no-margin">
                 <ion-item>
                   <ion-label><b>Estudiar</b> </ion-label>
-                  <ion-input formControlName="estudiar" type="number" placeholder="valor"></ion-input>
+                  <ion-input formControlName="estudiar" disabled type="number" placeholder="valor"></ion-input>
                   <ion-text
                     *ngIf="formGroup.get('rutina').get('estudiar').invalid && formGroup.get('rutina').get('estudiar').touched"
                     lines="none" color="danger" class="form-error">
@@ -191,7 +194,7 @@
               <ion-col class="ion-no-padding ion-no-margin">
                 <ion-item>
                   <ion-label><b>Caminar</b> </ion-label>
-                  <ion-input formControlName="caminar" type="number" placeholder="valor"></ion-input>
+                  <ion-input formControlName="caminar" disabled  type="number" placeholder="valor"></ion-input>
                   <ion-text
                     *ngIf="formGroup.get('rutina').get('caminar').invalid && formGroup.get('rutina').get('caminar').touched"
                     lines="none" color="danger" class="form-error">
@@ -220,9 +223,9 @@
                 <ion-item>
                   <ion-label ><b>Trabajar</b></ion-label>
                   <ion-select mode="md" formControlName="trabajar" placeholder="Escribir Sexo">
-                    <ion-select-option [value]="2">2</ion-select-option>
-                    <ion-select-option [value]="3">3</ion-select-option>
-                    <ion-select-option [value]="4">4</ion-select-option>
+                    <ion-select-option [value]="2">Leve</ion-select-option>
+                    <ion-select-option [value]="3">Moderado</ion-select-option>
+                    <ion-select-option [value]="4">Intenso</ion-select-option>
                   </ion-select>
                 </ion-item>
               </ion-col>
@@ -248,9 +251,9 @@
                 <ion-item>
                   <ion-label ><b>Entrenar</b></ion-label>
                   <ion-select mode="md" formControlName="entrenar" placeholder="Entrenar">
-                    <ion-select-option [value]="5">5</ion-select-option>
-                    <ion-select-option [value]="6">6</ion-select-option>
-                    <ion-select-option [value]="7">7</ion-select-option>
+                    <ion-select-option [value]="5">Leve</ion-select-option>
+                    <ion-select-option [value]="6">Moderado</ion-select-option>
+                    <ion-select-option [value]="7">Intenso</ion-select-option>
                   </ion-select>
                 </ion-item>
               </ion-col>
