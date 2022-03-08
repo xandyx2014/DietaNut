@@ -81,18 +81,18 @@
               {{ controlForm('calorias').get('total').value }}
             </td>
             <td>
-              {{  controlForm('calorias').get('totalCaloria').value }}
+              {{ controlForm('calorias').get('totalCaloria').value }}
             </td>
             <td>
-              {{  controlForm('calorias').get('totalGramo').value }}
+              {{ controlForm('calorias').get('totalGramo').value }}
             </td>
           </tr>
         </table>
       </div>
       <div>
         <ion-item>
-          <ion-label color="dark"> 
-            <b>Intercambio</b> 
+          <ion-label color="dark">
+            <b>Intercambio</b>
           </ion-label>
         </ion-item>
         <table>
@@ -101,67 +101,137 @@
             <th>Porción</th>
             <th>Energia</th>
             <th>Proteinas</th>
-            <th>Lipidos</th>
             <th>Carbohidratos</th>
+            <th>Lipidos</th>
           </thead>
           <tbody formGroupName="ingesta">
             <tr formGroupName="cereales">
               <td>Cereales y derivados, tubérculos y leguminosas</td>
-              <td><ion-input formControlName="racion" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="energia" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="proteina" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="carbohidrato" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="lipido" placeholder="Racion"></ion-input></td>
+              <td>
+                <ion-input formControlName="racion" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="energia" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="proteina" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="carbohidrato" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="lipido" placeholder="Racion"></ion-input>
+              </td>
             </tr>
             <tr formGroupName="verduras">
               <td>Verduras</td>
-              <td><ion-input formControlName="racion" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="energia" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="proteina" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="carbohidrato" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="lipido" placeholder="Racion"></ion-input></td>
+              <td>
+                <ion-input formControlName="racion" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="energia" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="proteina" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="carbohidrato" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="lipido" placeholder="Racion"></ion-input>
+              </td>
             </tr>
             <tr formGroupName="frutas">
               <td>Frutas</td>
-              <td><ion-input formControlName="racion" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="energia" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="proteina" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="carbohidrato" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="lipido" placeholder="Racion"></ion-input></td>
+              <td>
+                <ion-input formControlName="racion" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="energia" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="proteina" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="carbohidrato" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="lipido" placeholder="Racion"></ion-input>
+              </td>
             </tr>
             <tr formGroupName="leche">
               <td>Leche y derivados</td>
-              <td><ion-input formControlName="racion" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="energia" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="proteina" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="carbohidrato" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="lipido" placeholder="Racion"></ion-input></td>
+              <td>
+                <ion-input formControlName="racion" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="energia" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="proteina" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="carbohidrato" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="lipido" placeholder="Racion"></ion-input>
+              </td>
             </tr>
             <tr formGroupName="carne">
               <td>Carnes, pescado y huevos</td>
-              <td><ion-input formControlName="racion" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="energia" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="proteina" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="carbohidrato" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="lipido" placeholder="Racion"></ion-input></td>
+              <td>
+                <ion-input formControlName="racion" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="energia" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="proteina" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="carbohidrato" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="lipido" placeholder="Racion"></ion-input>
+              </td>
             </tr>
             <tr formGroupName="azucarados">
               <td>Productos azucarados</td>
-              <td><ion-input formControlName="racion" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="energia" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="proteina" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="carbohidrato" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="lipido" placeholder="Racion"></ion-input></td>
+              <td>
+                <ion-input formControlName="racion" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="energia" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="proteina" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="carbohidrato" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="lipido" placeholder="Racion"></ion-input>
+              </td>
             </tr>
             <tr formGroupName="grasas">
               <td>Lipidos</td>
-              <td><ion-input formControlName="racion" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="energia" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="proteina" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="carbohidrato" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="lipido" placeholder="Racion"></ion-input></td>
+              <td>
+                <ion-input formControlName="racion" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="energia" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="proteina" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="carbohidrato" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="lipido" placeholder="Racion"></ion-input>
+              </td>
             </tr>
-            <tr >
+            <tr>
               <td>Total</td>
               <td>{{ this.controlForm('ingesta').get('totalRacion').value }}</td>
               <td>{{ this.controlForm('ingesta').get('totalEnergia').value }}</td>
@@ -171,11 +241,21 @@
             </tr>
             <tr formGroupName="requerimiento">
               <td>Requerimiento</td>
-              <td><ion-input formControlName="racion" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="energia" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="proteina" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="lipido" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="carbohidrato" placeholder="Racion"></ion-input></td>
+              <td>
+                <ion-input formControlName="racion" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="energia" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="proteina" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="lipido" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="carbohidrato" placeholder="Racion"></ion-input>
+              </td>
             </tr>
             <tr formGroupName="adecuacion">
               <td>% adecuacion</td>
@@ -188,8 +268,8 @@
           </tbody>
         </table>
         <ion-item>
-          <ion-label color="dark"> 
-            <b>Distribuye tus porciones</b> 
+          <ion-label color="dark">
+            <b>Distribuye tus porciones</b>
           </ion-label>
         </ion-item>
         <table>
@@ -209,71 +289,155 @@
                 <!-- <ion-text *ngIf="controlForm('distribucion').get('cereales').get('racion').value == 3" color="warning">
                   Estas sobrepasando la racion 
                 </ion-text> -->
-                
+
               </td>
-              <td><ion-input formControlName="racion" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="desayuno" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="merienda" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="almuerzo" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="merienda" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="cena" placeholder="Racion"></ion-input></td>
+              <td>
+                <ion-input formControlName="racion" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="desayuno" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="merienda" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="almuerzo" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="merienda" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="cena" placeholder="Racion"></ion-input>
+              </td>
             </tr>
             <tr formGroupName="verduras">
               <td>Verduras</td>
-              <td><ion-input formControlName="racion" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="desayuno" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="merienda" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="almuerzo" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="merienda" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="cena" placeholder="Racion"></ion-input></td>
+              <td>
+                <ion-input formControlName="racion" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="desayuno" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="merienda" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="almuerzo" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="merienda" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="cena" placeholder="Racion"></ion-input>
+              </td>
             </tr>
             <tr formGroupName="frutas">
               <td>Frutas</td>
-              <td><ion-input formControlName="racion" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="desayuno" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="merienda" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="almuerzo" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="merienda" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="cena" placeholder="Racion"></ion-input></td>
+              <td>
+                <ion-input formControlName="racion" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="desayuno" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="merienda" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="almuerzo" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="merienda" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="cena" placeholder="Racion"></ion-input>
+              </td>
             </tr>
             <tr formGroupName="leche">
               <td>Leche y derivados</td>
-              <td><ion-input formControlName="racion" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="desayuno" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="merienda" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="almuerzo" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="merienda" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="cena" placeholder="Racion"></ion-input></td>
+              <td>
+                <ion-input formControlName="racion" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="desayuno" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="merienda" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="almuerzo" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="merienda" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="cena" placeholder="Racion"></ion-input>
+              </td>
             </tr>
             <tr formGroupName="carne">
               <td>Carne, pescado y huevos</td>
-              <td><ion-input formControlName="racion" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="desayuno" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="merienda" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="almuerzo" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="merienda" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="cena" placeholder="Racion"></ion-input></td>
+              <td>
+                <ion-input formControlName="racion" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="desayuno" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="merienda" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="almuerzo" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="merienda" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="cena" placeholder="Racion"></ion-input>
+              </td>
             </tr>
             <tr formGroupName="azucarados">
               <td>Azucarados</td>
-              <td><ion-input formControlName="racion" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="desayuno" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="merienda" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="almuerzo" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="merienda" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="cena" placeholder="Racion"></ion-input></td>
+              <td>
+                <ion-input formControlName="racion" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="desayuno" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="merienda" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="almuerzo" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="merienda" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="cena" placeholder="Racion"></ion-input>
+              </td>
             </tr>
             <tr formGroupName="grasas">
               <td>Lipidos</td>
-              <td><ion-input formControlName="racion" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="desayuno" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="merienda" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="almuerzo" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="merienda" placeholder="Racion"></ion-input></td>
-              <td><ion-input formControlName="cena" placeholder="Racion"></ion-input></td>
+              <td>
+                <ion-input formControlName="racion" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="desayuno" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="merienda" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="almuerzo" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="merienda" placeholder="Racion"></ion-input>
+              </td>
+              <td>
+                <ion-input formControlName="cena" placeholder="Racion"></ion-input>
+              </td>
             </tr>
           </tbody>
-          </table>
+        </table>
       </div>
       <ion-button (click)="store(title)" expand="full" class="ion-margin-top">
         <ion-icon name="save-outline"></ion-icon>
